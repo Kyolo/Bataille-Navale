@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core
+QT       += core network
 
 QT       -= gui
 
@@ -25,7 +25,5 @@ HEADERS += \
     bateau.h \
     game.h \
     connexion.h \
-    joueur.h
-
-RESOURCES += \
-    qsdf.qrc
+    joueur.h \
+    Constantes.h

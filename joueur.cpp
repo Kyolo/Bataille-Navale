@@ -32,3 +32,9 @@ int Joueur::getNbDestroyedBoat(){
     }
     return false;
 }
+
+void Joueur::giveUp(){
+    for(int i=0;i<nbBoat;i++){
+        lstBoat[i].destroy();
+    }
+}

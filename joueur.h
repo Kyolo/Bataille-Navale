@@ -14,6 +14,7 @@ public:
     bool attack(uchar x, uchar y);
     bool isAllBoatDestroyed();
     int getNbDestroyedBoat();
+    void giveUp();
 
 private:
     Bateau * lstBoat;

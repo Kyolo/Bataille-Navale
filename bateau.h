@@ -14,6 +14,7 @@ public:
     bool isHorizontal();
     bool hit(uchar x, uchar y);
     uchar getPV();
+    void destroy();
 private:
     uchar bTaille;
     uchar bX;

@@ -61,6 +61,13 @@ bool Bateau::hit(uchar x, uchar y){
 }
 
 
+/**
+ * @brief Bateau::destroy : Détruit le bateau, seules utilisation : couroux vengeur de l'admin ou abandon du joueur
+ */
+void Bateau::destroy(){
+    for(int i = 0;i<bTaille;i++)
+        statut[i]=false;
+}
 
 
 
