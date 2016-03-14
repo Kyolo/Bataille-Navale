@@ -1,16 +1,10 @@
 #include "joueur.h"
 
-Joueur::Joueur(Bateau *bateau, QString name, int nbBateau)
-{
+Joueur::Joueur(Bateau *bateau, QString name, int nbBateau){
     this->lstBoat = bateau;
     this->nbBoat = nbBateau;
     this->pseudo = name;
 }
-
-/**
- * @brief Joueur::Joueur : à ne pas utiliser !!
- */
-Joueur::Joueur(){}
 
 bool Joueur::attack(uchar x, uchar y){
     for(int i = 0;i<this->nbBoat;i++){
@@ -37,4 +31,8 @@ void Joueur::giveUp(){
     for(int i=0;i<nbBoat;i++){
         lstBoat[i].destroy();
     }
+}
+
+QString Joueur::getName(){
+    return pseudo;
 }

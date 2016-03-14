@@ -16,11 +16,13 @@ public:
     Game(uchar nbPlr = 2);
     void start();
     void loop();
-    void traiterInfo();
+    Joueur getPlayerByName(QString name);
 
 private:
     Joueur * lstJoueur;
-    int nbJoueur;
+    int nbJoueurMax;
+    int nbJoueurCo;
+    int nbJoueurEnLice;
     Connexion * co;
     ~Game();
 
@@ -34,6 +36,7 @@ signals:
     void gameStarted();
     void attackResult(QString,uchar,uchar,bool);
     void playerLost(QString);
+    void gameFinished(QString);
 };
 
 #endif // GAME_H

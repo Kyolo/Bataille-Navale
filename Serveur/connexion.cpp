@@ -5,6 +5,7 @@
 #include <QHostAddress>
 #include <QNetworkInterface>
 #include <QTcpSocket>
+#include <QDataStream>
 
 #include <stdio.h>
 #include <iostream>
@@ -61,6 +62,11 @@ void Connexion::attackResult(QString who, uchar wherex, uchar wherey, bool in_th
 }
 
 void Connexion::playerLost(QString who)
+{
+
+}
+
+void Connexion::playerWon(QString winner)
 {
 
 }
