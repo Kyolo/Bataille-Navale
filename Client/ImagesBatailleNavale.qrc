@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icone fenetre.png</file>
+        <file>Images/icone fenetre.png</file>
+        <file>Images/iconeFenetre.png</file>
+    </qresource>
+</RCC>
