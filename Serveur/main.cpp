@@ -13,5 +13,4 @@ int main(int argc, char *argv[]){
 
     gme->start();
     gme->loop();
-
 }
