@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QtWidgets/QInputDialog>
 
 
 namespace Ui {
@@ -19,10 +20,12 @@ public:
 public slots:
  void on_actionQuitter_triggered ();
  void on_pushButtonOKChat_clicked ();
- void on_actionNomDuJoueur_triggered ();
+ void on_actionNewGame_triggered ();
+ void on_actionAbandon_triggered ();
 
 private:
     Ui::MainWindow *ui;
+    QString nomJoueur = "Joueur 1";
 };
 
 #endif // MAINWINDOW_H

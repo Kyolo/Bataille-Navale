@@ -1,5 +1,4 @@
 #include "mainwindow.h"
-#include "QMessageBox"
 #include <QApplication>
 
 int main(int argc, char *argv[])
@@ -9,6 +8,4 @@ int main(int argc, char *argv[])
     w.show();
 
     return a.exec();
-
-    QMessageBox::information(this,"Information","texte de la fenêtre");
 }

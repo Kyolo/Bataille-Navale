@@ -3,6 +3,9 @@
 #include "mainwindow.h"
 #include "QString"
 #include "QDebug"
+#include <QMessageBox>
+#include <QInputDialog>
+#include <QDir>
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -28,19 +31,34 @@ void MainWindow::on_actionQuitter_triggered ()
     }
 
 //**********Entrer du texte dans le chat*******************************
-    QString nomJoueur = "Joueur 1";
 void MainWindow::on_pushButtonOKChat_clicked ()
-   {
-    ui->textChat->setText(ui->textChat->toPlainText()+nomJoueur+" : "+ui->lineEditChat->text()+"\n");
+   {ui->textChat->append(nomJoueur+" : "+ui->lineEditChat->text());
     ui->lineEditChat->setText("");
    }
 
 
-//*************Reglage du  nom du joueur*******************************
+//*************Nouvelle partie*******************************
 
 
 
-void MainWindow::on_actionNomDuJoueur_triggered()
+void MainWindow::on_actionNewGame_triggered()
     {
+    bool ok;
+    nomJoueur = QInputDialog::getText(this, tr("Nom du joueur"), tr("User name:"), QLineEdit::Normal,QDir::home().dirName(), &ok);
+    ui->actionNewGame->setEnabled(false);
 
+
+
+
+    }
+
+
+
+
+
+
+
+void MainWindow::on_actionAbandon_triggered()
+    {
+     ui->actionNewGame->setEnabled(true);
     }

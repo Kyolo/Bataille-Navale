@@ -931,7 +931,7 @@
      </palette>
     </property>
     <property name="frameShape">
-     <enum>QFrame::Panel</enum>
+     <enum>QFrame::NoFrame</enum>
     </property>
     <property name="verticalScrollBarPolicy">
      <enum>Qt::ScrollBarAsNeeded</enum>
@@ -1880,7 +1880,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>31</height>
+     <height>30</height>
     </rect>
    </property>
    <property name="palette">
@@ -2736,9 +2736,10 @@
     <property name="title">
      <string>Jeu</string>
     </property>
-    <addaction name="actionQuitter"/>
+    <addaction name="actionNewGame"/>
+    <addaction name="actionAbandon"/>
     <addaction name="separator"/>
-    <addaction name="actionNomDuJoueur"/>
+    <addaction name="actionQuitter"/>
    </widget>
    <addaction name="menuJeu"/>
   </widget>
@@ -2799,9 +2800,17 @@
     <string>Quitter</string>
    </property>
   </action>
-  <action name="actionNomDuJoueur">
+  <action name="actionNewGame">
    <property name="text">
-    <string>Nom du joueur</string>
+    <string>Nouvelle partie</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="actionAbandon">
+   <property name="text">
+    <string>Abandon de la partie</string>
    </property>
   </action>
  </widget>
