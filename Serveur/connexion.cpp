@@ -50,26 +50,6 @@ QString Connexion::getIPaddress()
     return "Adresse Introuvable";//Le serveur n'est pas dans le même réseau peut-être
 }
 
-//**********************************Public Slots***********************************************************************
-void Connexion::gameStarted()
-{
-
-}
-
-void Connexion::attackResult(QString who, uchar wherex, uchar wherey, bool in_the_water)
-{
-
-}
-
-void Connexion::playerLost(QString who)
-{
-
-}
-
-void Connexion::playerWon(QString winner)
-{
-
-}
 //************** Procedure de connexion ***************************************************************************
 
 void Connexion::connexion()
@@ -137,3 +117,44 @@ string Connexion::sendtoclient(const QString &message)
        return "Message sent successfully";
    }
 
+//************************************Slots de redirection des signaux****************************************************
+
+void Connexion::SconnexionNvJoueur(Joueur player)
+{
+    emit connexionNvJoueur(player);
+}
+
+void Connexion::Sattaque(QString from, QString to, uchar posx, uchar posy)
+{
+    emit attaque(from,to,posx,posy);
+}
+
+void Connexion::SplayerGiveUp(QString player)
+{
+    emit playerGiveUp(player);
+}
+
+//**********************************Public Slots***********************************************************************
+void Connexion::gameStarted()
+{
+
+}
+
+void Connexion::attackResult(QString who, uchar wherex, uchar wherey, bool in_the_water)
+{
+
+}
+
+void Connexion::playerLost(QString who)
+{
+
+}
+
+void Connexion::playerWon(QString winner)
+{
+
+}
+void Connexion::tchat(QString message)
+{
+    this->sendtoclient(message);
+}

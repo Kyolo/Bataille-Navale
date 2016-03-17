@@ -24,6 +24,11 @@ private slots:  //les slots de gestion des évènements
     void getdata();
     void deconnexion();
     QString getIPaddress();
+    //slots de gestion de messages
+    void SconnexionNvJoueur(Joueur player);
+    void Sattaque(QString from,QString to,uchar posx,uchar posy);
+    void SplayerGiveUp(QString player);
+    void tchat(QString message);
 
 private:
     QTcpServer *server;

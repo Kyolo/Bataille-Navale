@@ -19,11 +19,13 @@ SOURCES += main.cpp \
     bateau.cpp \
     game.cpp \
     connexion.cpp \
-    joueur.cpp
+    joueur.cpp \
+    messagegestion.cpp
 
 HEADERS += \
     bateau.h \
     game.h \
     connexion.h \
     joueur.h \
-    Constantes.h
+    Constantes.h \
+    messagegestion.h

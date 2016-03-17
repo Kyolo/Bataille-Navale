@@ -16,15 +16,15 @@ Game::Game(uchar nbPlr){
     QObject::connect(this,SIGNAL(attackResult(QString,uchar,uchar,bool)),co,SLOT(attackResult(QString,uchar,uchar,bool)));
     QObject::connect(this,SIGNAL(playerLost(QString)),co,SLOT(playerLost(QString)));
     QObject::connect(co,SIGNAL(playerGiveUp(QString)),this,SLOT(giveUp(QString)));
+    QObject::connect(this,SIGNAL(gameFinished(QString)),co,SLOT(playerWon(QString)));
 }
 
 void Game::start(){
     cout<<"En attente de "<<this->nbJoueurMax<<" joueurs"<<endl;
-
 }
 
 void Game::loop(){
-
+    //Ici viendra la
 
 }
 
@@ -75,7 +75,7 @@ void Game::onAttack(QString from, QString to, uchar x, uchar y){
             if(!lstJoueur[i].isAllBoatDestroyed())//Par définition c'est celui qui n'a pas tout ses bateaux de détruits
                 winner=lstJoueur[i].getName();
         }
-
+        //Et on préviens les autres qu'on a finit
         emit gameFinished(winner);
     }
 
