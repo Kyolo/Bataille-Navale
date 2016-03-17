@@ -2,6 +2,9 @@
 
 #include <iostream>
 #include <stdio.h>
+#include <string.h>
+
+#include <command.h>
 
 using namespace std;
 
@@ -24,7 +27,15 @@ void Game::start(){
 }
 
 void Game::loop(){
-    //Ici viendra la
+    //Ici viens la gestion des commandes
+    bool run = true;
+    while(run){
+        string command;
+        getLine(cin,command);
+        Command::doCommand(QString(command),new QString());
+        
+        
+    }
 
 }
 
