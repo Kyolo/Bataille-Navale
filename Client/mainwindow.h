@@ -19,9 +19,10 @@ public:
 
 public slots:
  void on_actionQuitter_triggered ();
- void on_pushButtonOKChat_clicked ();
+ void on_pushButtonOKTchat_clicked ();
  void on_actionNewGame_triggered ();
  void on_actionAbandon_triggered ();
+ void on_actionTchatClear_triggered ();
 
 private:
     Ui::MainWindow *ui;
