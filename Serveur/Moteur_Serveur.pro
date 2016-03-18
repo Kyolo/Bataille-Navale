@@ -20,7 +20,8 @@ SOURCES += main.cpp \
     game.cpp \
     connexion.cpp \
     joueur.cpp \
-    messagegestion.cpp
+    messagegestion.cpp \
+    command.cpp
 
 HEADERS += \
     bateau.h \
@@ -28,4 +29,5 @@ HEADERS += \
     connexion.h \
     joueur.h \
     Constantes.h \
-    messagegestion.h
+    messagegestion.h \
+    command.h
