@@ -23,4 +23,5 @@ RESOURCES += \
     Images/Images.qrc
 
 DISTFILES += \
-    Sons/sonchat.wav
+    Sons/sonchat.wav \
+    Images/mer.gif

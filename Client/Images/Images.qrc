@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>iconeFenetre.png</file>
+        <file>mer.gif</file>
     </qresource>
 </RCC>

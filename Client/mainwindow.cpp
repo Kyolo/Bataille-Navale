@@ -54,6 +54,7 @@ void MainWindow::on_actionNewGame_triggered()
 void MainWindow::on_actionAbandon_triggered()
     {
      ui->actionNewGame->setEnabled(true);
+     ui->actionAbandon->setEnabled(false);
     }
 //********************************************************************
 
