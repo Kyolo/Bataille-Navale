@@ -1,5 +1,8 @@
 #include  <command.h>
 
-Command::doCommand(QString command, QString * args ){
 
+void Command::doCommand(QString command, QStringList args ){
+    if(command=="stop"){
+
+    }
 }

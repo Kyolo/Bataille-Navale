@@ -31,10 +31,15 @@ void Game::loop(){
     bool run = true;
     while(run){
         string command;
-        getLine(cin,command);
-        Command::doCommand(QString(command),new QString());
-        
-        
+        getline(cin,command);
+
+        QStringList div = QString(command.c_str()).split(" ");
+
+        QString com = div[0];
+        div.removeAt(0);
+
+        Command::doCommand(com,div);
+
     }
 
 }
