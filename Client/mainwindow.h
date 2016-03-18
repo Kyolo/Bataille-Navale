@@ -23,6 +23,7 @@ public slots:
  void on_actionNewGame_triggered ();
  void on_actionAbandon_triggered ();
  void on_actionTchatDisable_triggered ();
+ void on_actionConnexion_triggered ();
 
 private:
     Ui::MainWindow *ui;

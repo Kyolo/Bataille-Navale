@@ -3301,6 +3301,8 @@
     <addaction name="actionNewGame"/>
     <addaction name="actionAbandon"/>
     <addaction name="separator"/>
+    <addaction name="actionConnexion"/>
+    <addaction name="separator"/>
     <addaction name="actionTchatDisable"/>
     <addaction name="separator"/>
     <addaction name="actionQuitter"/>
@@ -3351,7 +3353,7 @@
     <string>Quitter</string>
    </property>
    <property name="shortcut">
-    <string>Alt+X</string>
+    <string>Ctrl+W</string>
    </property>
   </action>
   <action name="actionJeu">
@@ -3383,6 +3385,14 @@
   <action name="actionTchatDisable">
    <property name="text">
     <string>Désactiver le tchat</string>
+   </property>
+  </action>
+  <action name="actionConnexion">
+   <property name="text">
+    <string>Connexion</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+C</string>
    </property>
   </action>
  </widget>
