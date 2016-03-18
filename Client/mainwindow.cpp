@@ -27,7 +27,7 @@ MainWindow::~MainWindow()
 //*****Quitter*********************************************************
 void MainWindow::on_actionQuitter_triggered ()
     {
-    int reponseQuitter = QMessageBox::question(this, "Fermeture du programme", "Voulez vous fermer le programme et quitter la partie en cours?", QMessageBox::Yes | QMessageBox::No);
+    int reponseQuitter = QMessageBox::information(this, "Fermeture du programme", "Voulez vous fermer le programme et quitter la partie en cours?", QMessageBox::Yes | QMessageBox::No);
        if (reponseQuitter == QMessageBox::Yes)
        { close();
        }
@@ -53,8 +53,16 @@ void MainWindow::on_actionNewGame_triggered()
 //*************Abandon de la partie********************************
 void MainWindow::on_actionAbandon_triggered()
     {
-     ui->actionNewGame->setEnabled(true);
-     ui->actionAbandon->setEnabled(false);
+    int reponseAbandon = QMessageBox::information(this, "Abandon de la partie ?", "Voulez vraiment abandonner la partie en cours? Toutes vos données seront perdues.", QMessageBox::Yes | QMessageBox::No);
+       if (reponseAbandon == QMessageBox::Yes)
+       { ui->actionNewGame->setEnabled(true);
+         ui->actionAbandon->setEnabled(false);
+         QMessageBox::information(this, "Fin de la partie", "Vous avez abandonné la partie");
+       }
+       else if (reponseAbandon == QMessageBox::No)
+       {
+       }
+
     }
 //********************************************************************
 
@@ -66,7 +74,12 @@ void MainWindow::on_pushButtonOKTchat_clicked ()
 //************************************************************************
 
 //********* Vider le tchat **********************************************
-void MainWindow::on_actionTchatClear_triggered()
+void MainWindow::on_actionTchatDisable_triggered()
 {ui->textChat->setText("");
+ ui->textChat->setEnabled(false);
+ ui->lineEditChat->setText("");
+ ui->lineEditChat->setEnabled(false);
+ ui->pushButtonOKTchat->setEnabled(false);
+ ui->labelTchatDisable->setText("Tchat désactivé !");
 }
 //**************************************************************************

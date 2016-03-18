@@ -22,7 +22,7 @@ public slots:
  void on_pushButtonOKTchat_clicked ();
  void on_actionNewGame_triggered ();
  void on_actionAbandon_triggered ();
- void on_actionTchatClear_triggered ();
+ void on_actionTchatDisable_triggered ();
 
 private:
     Ui::MainWindow *ui;
