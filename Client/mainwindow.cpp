@@ -85,7 +85,7 @@ void MainWindow::on_pushButtonOKTchat_clicked ()
    }
 //************************************************************************
 
-//********* Vider le tchat **********************************************
+//********* Désactiver le Tchat **********************************************
 void MainWindow::on_actionTchatDisable_triggered()
 {ui->textChat->setText("");
  ui->textChat->setEnabled(false);
@@ -93,5 +93,21 @@ void MainWindow::on_actionTchatDisable_triggered()
  ui->lineEditChat->setEnabled(false);
  ui->pushButtonOKTchat->setEnabled(false);
  ui->labelTchatDisable->setText("Tchat désactivé !");
+ ui->actionRactiveTchat->setEnabled(true);
+ ui->actionTchatDisable->setEnabled(false);
 }
 //**************************************************************************
+
+//****************** Réactiver le tchat*************************************
+void MainWindow::on_actionRactiveTchat_triggered()
+{   ui->textChat->setText("");
+    ui->textChat->setEnabled(true);
+    ui->lineEditChat->setText("");
+    ui->lineEditChat->setEnabled(true);
+    ui->pushButtonOKTchat->setEnabled(true);
+    ui->labelTchatDisable->setText("");
+    ui->actionRactiveTchat->setEnabled(false);
+    ui->actionTchatDisable->setEnabled(true);
+}
+
+//*************************************************************************

@@ -24,6 +24,7 @@ public slots:
  void on_actionAbandon_triggered ();
  void on_actionTchatDisable_triggered ();
  void on_actionConnexion_triggered ();
+ void on_actionRactiveTchat_triggered ();
 
 private:
     Ui::MainWindow *ui;

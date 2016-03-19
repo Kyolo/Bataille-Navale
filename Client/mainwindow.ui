@@ -3304,6 +3304,7 @@
     <addaction name="actionConnexion"/>
     <addaction name="separator"/>
     <addaction name="actionTchatDisable"/>
+    <addaction name="actionRactiveTchat"/>
     <addaction name="separator"/>
     <addaction name="actionQuitter"/>
    </widget>
@@ -3393,6 +3394,14 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+C</string>
+   </property>
+  </action>
+  <action name="actionRactiveTchat">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Réactiver le tchat</string>
    </property>
   </action>
  </widget>
