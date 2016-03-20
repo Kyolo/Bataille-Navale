@@ -943,7 +943,7 @@
        </colorrole>
        <colorrole role="Base">
         <brush brushstyle="SolidPattern">
-         <color alpha="255">
+         <color alpha="150">
           <red>142</red>
           <green>180</green>
           <blue>227</blue>
@@ -1053,7 +1053,7 @@
        </colorrole>
        <colorrole role="Base">
         <brush brushstyle="SolidPattern">
-         <color alpha="255">
+         <color alpha="150">
           <red>142</red>
           <green>180</green>
           <blue>227</blue>
@@ -1341,7 +1341,7 @@
        </colorrole>
        <colorrole role="Base">
         <brush brushstyle="SolidPattern">
-         <color alpha="255">
+         <color alpha="200">
           <red>255</red>
           <green>255</green>
           <blue>255</blue>
@@ -1514,7 +1514,7 @@
        </colorrole>
        <colorrole role="Base">
         <brush brushstyle="SolidPattern">
-         <color alpha="255">
+         <color alpha="200">
           <red>255</red>
           <green>255</green>
           <blue>255</blue>
@@ -2425,16 +2425,70 @@
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QGraphicsView" name="graphicsView">
+   <widget class="QLabel" name="labelImageFond">
     <property name="geometry">
      <rect>
-      <x>120</x>
-      <y>180</y>
-      <width>431</width>
-      <height>341</height>
+      <x>0</x>
+      <y>0</y>
+      <width>811</width>
+      <height>551</height>
      </rect>
     </property>
+    <property name="palette">
+     <palette>
+      <active>
+       <colorrole role="Base">
+        <brush brushstyle="SolidPattern">
+         <color alpha="200">
+          <red>255</red>
+          <green>255</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </active>
+      <inactive>
+       <colorrole role="Base">
+        <brush brushstyle="SolidPattern">
+         <color alpha="200">
+          <red>255</red>
+          <green>255</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </inactive>
+      <disabled>
+       <colorrole role="Base">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>255</red>
+          <green>255</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </disabled>
+     </palette>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="Images/Images.qrc">:/carteFondFlou.jpg</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
    </widget>
+   <zorder>labelImageFond</zorder>
+   <zorder>textChat</zorder>
+   <zorder>lineEditChat</zorder>
+   <zorder>pushButtonOKTchat</zorder>
+   <zorder>labelTchatDisable</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

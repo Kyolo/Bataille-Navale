@@ -24,4 +24,6 @@ RESOURCES += \
 
 DISTFILES += \
     Sons/sonchat.wav \
-    Images/mer.gif
+    Images/mer.gif \
+    Images/carteFond.jpg \
+    Images/carteFondFlou.jpg

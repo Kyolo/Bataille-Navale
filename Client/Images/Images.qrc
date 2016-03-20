@@ -2,5 +2,7 @@
     <qresource prefix="/">
         <file>iconeFenetre.png</file>
         <file>mer.gif</file>
+        <file>carteFond.jpg</file>
+        <file>carteFondFlou.jpg</file>
     </qresource>
 </RCC>

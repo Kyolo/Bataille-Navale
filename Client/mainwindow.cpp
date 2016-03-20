@@ -6,6 +6,8 @@
 #include <QMessageBox>
 #include <QInputDialog>
 #include <QDir>
+#include <QMovie>
+
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -42,7 +44,7 @@ void MainWindow::on_actionQuitter_triggered ()
 void MainWindow::on_actionNewGame_triggered()
     {
     bool ok;
-    nomJoueur = QInputDialog::getText(this, tr("Nom du joueur"), tr("User name:"), QLineEdit::Normal,QDir::home().dirName(), &ok);
+    nomJoueur = QInputDialog::getText(this, tr("Nom du joueur"), tr("Votre nom :"), QLineEdit::Normal,QDir::home().dirName(), &ok);
     ui->actionNewGame->setEnabled(false);
     ui->actionAbandon->setEnabled(true);
     }
