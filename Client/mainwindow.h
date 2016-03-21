@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <QtWidgets/QInputDialog>
+#include <QGraphicsScene>
+#include <QMouseEvent>
 
 
 namespace Ui {
@@ -27,8 +29,12 @@ public slots:
  void on_actionRactiveTchat_triggered ();
 
 private:
+
     Ui::MainWindow *ui;
+      QGraphicsScene *scene;
+      QGraphicsPixmapItem *fond;
     QString nomJoueur = "Joueur 1";
 };
+
 
 #endif // MAINWINDOW_H

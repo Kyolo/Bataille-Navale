@@ -7,6 +7,8 @@
 #include <QInputDialog>
 #include <QDir>
 #include <QMovie>
+#include <QGraphicsScene>
+#include <QMouseEvent>
 
 
 
@@ -15,6 +17,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
      ui->setupUi(this);
+     ui->labelImageFond->setPixmap(QPixmap (":/carteFondFlou.jpg"));
+     scene = new QGraphicsScene(this);
+        scene->setSceneRect(QRectF(0,0,483,483));
+        ui->graphicsView->setScene(scene);
+       // fond = scene->addPixmap(QPixmap(":/Damiereau.jpg"));
+
 }
 MainWindow::~MainWindow()
 {
@@ -47,6 +55,8 @@ void MainWindow::on_actionNewGame_triggered()
     nomJoueur = QInputDialog::getText(this, tr("Nom du joueur"), tr("Votre nom :"), QLineEdit::Normal,QDir::home().dirName(), &ok);
     ui->actionNewGame->setEnabled(false);
     ui->actionAbandon->setEnabled(true);
+    ui->graphicsView->setEnabled(true);
+    fond = scene->addPixmap(QPixmap(":/Damiereau.jpg"));
     }
 
 //**************************************************************
@@ -63,6 +73,8 @@ void MainWindow::on_actionAbandon_triggered()
        else if (reponseAbandon == QMessageBox::No)
        {
        }
+    ui->graphicsView->setEnabled(false);
+    fond = scene->addPixmap(QPixmap(":/mer.gif"));
 
     }
 //********************************************************************
@@ -77,6 +89,7 @@ void MainWindow::on_actionConnexion_triggered ()
     portConnexion.toStdString();
     qDebug()<<portConnexion;
     ui->actionConnexion->setEnabled(false);
+    statusBar()->showMessage("Connecté !",0);
 }
 //***********************************************************************
 

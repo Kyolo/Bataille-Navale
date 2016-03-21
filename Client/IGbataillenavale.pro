@@ -26,4 +26,6 @@ DISTFILES += \
     Sons/sonchat.wav \
     Images/mer.gif \
     Images/carteFond.jpg \
-    Images/carteFondFlou.jpg
+    Images/carteFondFlou.jpg \
+    Images/Damiereau.jpg \
+    Images/imageTransparente.png
