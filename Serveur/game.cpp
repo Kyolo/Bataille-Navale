@@ -6,6 +6,8 @@
 
 #include <command.h>
 
+Game * Game::instance=NULL;
+
 using namespace std;
 
 Game::Game(uchar nbPlr){
@@ -20,30 +22,42 @@ Game::Game(uchar nbPlr){
     QObject::connect(this,SIGNAL(playerLost(QString)),co,SLOT(playerLost(QString)));
     QObject::connect(co,SIGNAL(playerGiveUp(QString)),this,SLOT(giveUp(QString)));
     QObject::connect(this,SIGNAL(gameFinished(QString)),co,SLOT(playerWon(QString)));
+    run = true;
 }
 
 void Game::start(){
     cout<<"En attente de "<<this->nbJoueurMax<<" joueurs"<<endl;
 }
 
+/**
+ * @brief Game::loop : la boucle qui gère la lecture et l'utilisation des commandes
+ */
 void Game::loop(){
     //Ici viens la gestion des commandes
-    bool run = true;
     while(run){
+
         string command;
+
+        //On lit la commande dans cin
         getline(cin,command);
 
+        //On sépare la commande de ses arguments
         QStringList div = QString(command.c_str()).split(" ");
-
         QString com = div[0];
         div.removeAt(0);
 
+        //Et on les envoie pour traitement
         Command::doCommand(com,div);
 
     }
 
 }
 
+/**
+ * @brief Game::getPlayerByName : Permet d'obtenir un joueur en fonction de son pseudo, évite une répétition de code
+ * @param name : Le nom du joueur
+ * @return l'objet joueur correspondant ou NULL le cas échéant.
+ */
 Joueur Game::getPlayerByName(QString name){
     for(int i = 0;i<nbJoueurCo;i++){
         if(lstJoueur[i].getName()==name)
@@ -53,11 +67,38 @@ Joueur Game::getPlayerByName(QString name){
     return NULL;
 }
 
+/**
+ * @brief Game::forceQuit : Force l'arrêt du serveur et envoie un signal d'abandon pour tout les joueurs
+ */
+void Game::forceQuit(){
+    for(int i = 0;i<nbJoueurCo;i++){
+        lstJoueur[i].giveUp();
+        emit playerLost(lstJoueur[i].getName());
+    }
+    run=false;
+}
+
+void Game::sendToChat(QString msg){
+    co->sendtoclient(msg);
+}
+
 Game::~Game(){
     delete co;
 }
 
+void Game::setInstance(Game *gme){
+    Game::instance=gme;
+}
+
+Game *Game::getInstance(){
+    return Game::instance;
+}
+
 //****************************************Slots************************************************************
+/**
+ * @brief Game::newPlayer : Gère l'ajout d'un nouveau joueur
+ * @param j : l'objet joueur correspondant
+ */
 void Game::newPlayer(Joueur j){
     this->lstJoueur[nbJoueurCo]=j;
     cout<<j.getName().toStdString().c_str()<<" vient de se connecter. Il faut encore "<<nbJoueurMax-nbJoueurCo<<" joueurs avant le début de la partie."<<endl;
@@ -69,6 +110,13 @@ void Game::newPlayer(Joueur j){
     }
 }
 
+/**
+ * @brief Game::onAttack : gère l'attaque d'un joueur contre un autre
+ * @param from : L'attaquant
+ * @param to : Le défenseur
+ * @param x : la coordonée x
+ * @param y : la coordonée y
+ */
 void Game::onAttack(QString from, QString to, uchar x, uchar y){
     //On attaque le joueur correspondant à la case correspondante
     bool hit = this->getPlayerByName(to).attack(x,y);
@@ -78,7 +126,7 @@ void Game::onAttack(QString from, QString to, uchar x, uchar y){
     emit attackResult(from,x,y,hit);
 
     //Si le joueur attaqué a perdu
-    if(this->getPlayerByName(to).isAllBoatDestroyed()){
+    if(this->getPlayerByName(to).areAllBoatsDestroyed()){
         emit playerLost(to);//On prévient les autres joueurs
         nbJoueurEnLice--;//Et on décrémente le nombre de joueur en lice
     }
@@ -88,7 +136,7 @@ void Game::onAttack(QString from, QString to, uchar x, uchar y){
         QString winner;
 
         for(int i=0;i<nbJoueurMax;i++){
-            if(!lstJoueur[i].isAllBoatDestroyed())//Par définition c'est celui qui n'a pas tout ses bateaux de détruits
+            if(!lstJoueur[i].areAllBoatsDestroyed())//Par définition c'est celui qui n'a pas tout ses bateaux de détruits
                 winner=lstJoueur[i].getName();
         }
         //Et on préviens les autres qu'on a finit
@@ -97,6 +145,10 @@ void Game::onAttack(QString from, QString to, uchar x, uchar y){
 
 }
 
+/**
+ * @brief Game::giveUp : gère l'abandon d'un joueur
+ * @param who : le couard qui abandonne
+ */
 void Game::giveUp(QString who){
     this->getPlayerByName(who).giveUp();
     emit playerLost(who);

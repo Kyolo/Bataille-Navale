@@ -17,6 +17,13 @@ public:
     void start();
     void loop();
     Joueur getPlayerByName(QString name);
+    void forceQuit();
+    void sendToChat(QString msg);
+    ~Game();
+
+    static void setInstance(Game * gme);
+    static Game *getInstance();
+    static Game * instance;
 
 private:
     Joueur * lstJoueur;
@@ -24,7 +31,7 @@ private:
     int nbJoueurCo;
     int nbJoueurEnLice;
     Connexion * co;
-    ~Game();
+    bool run;
 
 
 private slots:

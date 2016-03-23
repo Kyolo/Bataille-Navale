@@ -3,7 +3,9 @@
 
 #include <QString>
 #include <QStringList>
+
 #include <game.h>
+#include <connexion.h>
 
 class Command
 {
