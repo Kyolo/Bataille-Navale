@@ -4,19 +4,16 @@
 
 using namespace std;
 
-client::client()
+client::client(string addr, quint16 port)
 {
     socket = new QTcpSocket(this); //créé l'instance de QTcpSocket
-    inth = new ThreadCin();
-    inth->start();
 
          connect(socket, SIGNAL(readyRead()), this, SLOT(getserverdata()));//gestion de la donnée serveur
          connect(socket, SIGNAL(connected()), this, SLOT(connecte())); //gestion de signal de connexion
          connect(socket, SIGNAL(disconnected()), this, SLOT(deconnecte())); //gestion de signal de déconnexion
-         connect(inth, SIGNAL(entreeClavier()), this, SLOT(cinMessage()));
          connect(socket, SIGNAL(error(QAbstractSocket::SocketError)), this,SLOT(erreurSocket(QAbstractSocket::SocketError)));//gestion de signal d'erreur
          tailleMessage = 0;
-         this->connexion();
+         this->connexion(addr, port);
 
 }
 
@@ -26,17 +23,10 @@ void client::connecte()
     cout<<"Connexion reussie !"<<endl;
 }
 
-void client::connexion()
+void client::connexion(string addr, quint16 port)
 {//l'utilisateur a cliqué sur le bouton de connexion
-    string cinAddr;
-    quint16 port;
-    cout<<"Connexion au serveur"<<endl<<"Adresse IP :";
-    cin>> cinAddr;
-    cout<<"Numero de port :";
-    cin>>port;
-    cout<<"Tentative de connexion ! "<<endl; //on ecrit ce qui se passe
     socket->abort(); //on désactive les connexions précédentes
-    QHostAddress IpAdress(QString::fromStdString(cinAddr));
+    QHostAddress IpAdress(QString::fromStdString(addr));
     socket->connectToHost(IpAdress, port);
 }
 
@@ -94,18 +84,3 @@ void client::send(QString DonneesAEnvoyer)
     socket->write(paquet); //on écrit la donnée sur le socket
 }
 
-void client::cinMessage()
-{
-    string message;
-    while(kbhit())
-    {
-        getch();
-    }
-    cout<<"message :";
-    getline(cin,message);
-    send(QString::fromStdString(message));
-    while(kbhit())
-    {
-        getch();
-    }
-}

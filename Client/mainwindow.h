@@ -5,6 +5,7 @@
 #include <QtWidgets/QInputDialog>
 #include <QGraphicsScene>
 #include <QMouseEvent>
+#include "client.h"
 
 
 namespace Ui {
@@ -34,6 +35,7 @@ private:
       QGraphicsScene *scene;
       QGraphicsPixmapItem *fond;
     QString nomJoueur = "Joueur 1";
+    client *connexion;
 };
 
 

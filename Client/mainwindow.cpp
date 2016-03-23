@@ -83,13 +83,11 @@ void MainWindow::on_actionAbandon_triggered()
 void MainWindow::on_actionConnexion_triggered ()
 {
     QString adresseIP = QInputDialog::getText(this, tr("Adresse IP de connexion"), tr("Veuillez entrer l'adresse IP pour vous connecter : "), QLineEdit::Normal);
-    adresseIP.toStdString();
     qDebug()<<adresseIP;
     QString portConnexion = QInputDialog::getText(this, tr("Port de connexion"), tr("Veuillez entrer le port pour vous connecter : "), QLineEdit::Normal);
-    portConnexion.toStdString();
     qDebug()<<portConnexion;
+    connexion = new client(adresseIP.toStdString(), portConnexion.toInt());
     ui->actionConnexion->setEnabled(false);
-    statusBar()->showMessage("Connecté !",0);
 }
 //***********************************************************************
 
