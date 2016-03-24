@@ -101,6 +101,7 @@ void MainWindow::on_actionConnexion_triggered ()
     connexion = new client(adresseIP.toStdString(), portConnexion.toInt());
     ui->actionConnexion->setEnabled(false);
     connect(connexion, SIGNAL(serverError(QString)), this,SLOT(serverError(QString)));
+    connect(connexion, SIGNAL(tchatRecive(QString)), this , SLOT(writeInTchat(QString)));
 }
 //***********************************************************************
 
@@ -111,6 +112,10 @@ void MainWindow::on_pushButtonOKTchat_clicked ()
     ui->lineEditChat->setText("");
    }
 //************************************************************************
+void MainWindow::writeInTchat(QString message)
+{
+    ui->textChat->append(message);
+}
 
 //********* Désactiver le Tchat **********************************************
 void MainWindow::on_actionTchatDisable_triggered()

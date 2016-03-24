@@ -19,6 +19,7 @@ private:
     void connexion(std::string addr, quint16 port);
     QTcpSocket *socket;
     quint16 tailleMessage;
+    void msgGestion(QString message);
 private slots:
     void connecte();
     void erreurSocket(QAbstractSocket::SocketError erreur);

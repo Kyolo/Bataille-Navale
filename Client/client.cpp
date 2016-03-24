@@ -67,9 +67,6 @@ void client::getserverdata()
        // On a toutes les infos nécessaires pour le message
        QString message;
        in >> message;
-       // On affiche le message chez le client
-       cout<<message.toStdString()<<endl;
-       // On remet la taille du message à 0 pour pouvoir recevoir de futurs messages
        tailleMessage = 0;
 }
 
@@ -84,3 +81,10 @@ void client::send(QString DonneesAEnvoyer)
     socket->write(paquet); //on écrit la donnée sur le socket
 }
 
+void msgGestion(QString message)
+{
+    if(message[0]==0x01)
+    {
+
+    }
+}
