@@ -11,10 +11,11 @@ class Joueur
 public:
     Joueur(Bateau * bateau,QString name = "none", int nbBateau = 7);
     bool attack(uchar x, uchar y);
-    bool isAllBoatDestroyed();
+    bool areAllBoatsDestroyed();
     int getNbDestroyedBoat();
     void giveUp();
     QString getName();
+    char getStatusAt(uchar x, uchar y);
 
 private:
     Bateau * lstBoat;

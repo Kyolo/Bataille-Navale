@@ -1,5 +1,8 @@
 #include "joueur.h"
 
+#include <QStringList>
+#include <QChar>
+
 Joueur::Joueur(Bateau *bateau, QString name, int nbBateau){
     this->lstBoat = bateau;
     this->nbBoat = nbBateau;
@@ -14,7 +17,7 @@ bool Joueur::attack(uchar x, uchar y){
     return false;
 }
 
-bool Joueur::isAllBoatDestroyed(){
+bool Joueur::areAllBoatsDestroyed(){
     return this->getNbDestroyedBoat()==nbBoat;
 }
 
@@ -35,4 +38,20 @@ void Joueur::giveUp(){
 
 QString Joueur::getName(){
     return pseudo;
+}
+
+char Joueur::getStatusAt(uchar x, uchar y){
+    QStringList lst = QStringList();//On crée une liste
+
+    for(int i=0;i<nbBoat;i++){
+        lst.push_back(QString(QChar(lstBoat->getStatusAt(x,y))));//On y ajoute le statut de tout les bateaux
+    }
+
+    lst.removeDuplicates();//On enlève les doublons, car il y aura forcement plein d'espaces
+
+    if(lst.length()==0)
+        return Bateau::NONE;
+
+    return lst.at(0);
+
 }

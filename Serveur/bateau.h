@@ -7,7 +7,6 @@ class Bateau
 {
 public:
     Bateau(uchar taille, uchar posx, uchar posy, bool hori);
-    Bateau();
     bool isDestroyed();
     uchar getPositionX();
     uchar getPositionY();
@@ -15,6 +14,12 @@ public:
     bool hit(uchar x, uchar y);
     uchar getPV();
     void destroy();
+    char getStatusAt(uchar x, uchar y);
+
+    static const char SAFE = 'B';
+    static const char NONE = ' ';
+    static const char DESTROYED = '*';
+
 private:
     uchar bTaille;
     uchar bX;

@@ -12,13 +12,6 @@ Bateau::Bateau(uchar taille, uchar posx, uchar posy, bool hori){
         statut[i]=true;
     }
 }
-/**
- * @brief Bateau::Bateau : à ne pas utiliser
- */
-Bateau::Bateau()
-{
-
-}
 
 
 //******************************************état du bateau***********************************
@@ -67,6 +60,29 @@ bool Bateau::hit(uchar x, uchar y){
 void Bateau::destroy(){
     for(int i = 0;i<bTaille;i++)
         statut[i]=false;
+}
+
+char Bateau::getStatusAt(uchar x, uchar y){
+    if(!this->bHorizontal){
+        for(uchar i=0;i<bTaille;i++){
+            if((x==this->bX+i)){
+                if(statut[i])
+                    return SAFE;
+                else
+                    return DESTROYED;
+            }
+        }
+    } else {
+        for(uchar i=0;i<bTaille;i++){
+            if((y==this->bY+i)){
+                if(statut[i])
+                    return SAFE;
+                else
+                    return DESTROYED;
+            }
+        }
+    }
+    return NONE;
 }
 
 

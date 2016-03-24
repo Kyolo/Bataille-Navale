@@ -28,6 +28,5 @@ HEADERS += \
     game.h \
     connexion.h \
     joueur.h \
-    Constantes.h \
     messagegestion.h \
     command.h

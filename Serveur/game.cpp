@@ -23,10 +23,12 @@ Game::Game(uchar nbPlr){
     QObject::connect(co,SIGNAL(playerGiveUp(QString)),this,SLOT(giveUp(QString)));
     QObject::connect(this,SIGNAL(gameFinished(QString)),co,SLOT(playerWon(QString)));
     run = true;
+    Game::instance=this;
 }
 
 void Game::start(){
     cout<<"En attente de "<<this->nbJoueurMax<<" joueurs"<<endl;
+
 }
 
 /**
