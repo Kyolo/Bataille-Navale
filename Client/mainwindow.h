@@ -36,6 +36,12 @@ private:
       QGraphicsPixmapItem *fond;
     QString nomJoueur = "Joueur 1";
     client *connexion;
+
+protected:
+    void closeEvent(QCloseEvent *event);
+
+private slots:
+    void serverError(QString);
 };
 
 

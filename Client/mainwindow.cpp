@@ -22,7 +22,6 @@ MainWindow::MainWindow(QWidget *parent) :
         scene->setSceneRect(QRectF(0,0,483,483));
         ui->graphicsView->setScene(scene);
        // fond = scene->addPixmap(QPixmap(":/Damiereau.jpg"));
-
 }
 MainWindow::~MainWindow()
 {
@@ -34,6 +33,7 @@ MainWindow::~MainWindow()
 
 
 //*****Quitter*********************************************************
+//A partir du menu
 void MainWindow::on_actionQuitter_triggered ()
     {
     int reponseQuitter = QMessageBox::information(this, "Fermeture du programme", "Voulez vous fermer le programme et quitter la partie en cours?", QMessageBox::Yes | QMessageBox::No);
@@ -44,6 +44,18 @@ void MainWindow::on_actionQuitter_triggered ()
        {
        }
     }
+//Depuis la croix
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    int reponseQuitter = QMessageBox::information(this, "Fermeture du programme", "Voulez vous fermer le programme et quitter la partie en cours?", QMessageBox::Yes | QMessageBox::No);
+       if (reponseQuitter == QMessageBox::Yes)
+       { event->accept();
+       }
+       else if (reponseQuitter == QMessageBox::No)
+       {event->ignore();
+       }
+}
+
 //********************************************************************
 //*************Nouvelle partie*******************************
 
@@ -88,12 +100,14 @@ void MainWindow::on_actionConnexion_triggered ()
     qDebug()<<portConnexion;
     connexion = new client(adresseIP.toStdString(), portConnexion.toInt());
     ui->actionConnexion->setEnabled(false);
+    connect(connexion, SIGNAL(serverError(QString)), this,SLOT(serverError(QString)));
 }
 //***********************************************************************
 
 //**********Entrer du texte dans le tchat*******************************
 void MainWindow::on_pushButtonOKTchat_clicked ()
    {ui->textChat->append(nomJoueur+" : "+ui->lineEditChat->text());
+    connexion->send(nomJoueur+" : "+ui->lineEditChat->text());
     ui->lineEditChat->setText("");
    }
 //************************************************************************
@@ -124,3 +138,8 @@ void MainWindow::on_actionRactiveTchat_triggered()
 }
 
 //*************************************************************************
+//Gestion des erreurs de communication Reseau
+void MainWindow::serverError(QString error)
+{
+    QMessageBox::critical(this, "Erreur",error, QMessageBox::Ok);
+}

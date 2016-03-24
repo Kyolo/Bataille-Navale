@@ -24,6 +24,9 @@ private slots:
     void erreurSocket(QAbstractSocket::SocketError erreur);
     void deconnecte();
     void getserverdata();
+signals:
+    void tchatRecive(QString);
+    void serverError(QString);
 };
 
 #endif // CLIENT_H
