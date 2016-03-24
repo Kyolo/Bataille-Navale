@@ -28,7 +28,7 @@ Connexion::Connexion()
             cout<<"Le serveur demarre:"<<endl<< "adresse: "<<getIPaddress().toStdString()<<endl<<
                    "port: "<<server->serverPort()<<endl;
             //on autorise la connexion d'un client. S'il ne doit y avoir qu'un seul client il faudra modifier cette ligne
-            connect(server, SIGNAL(newConnection()),this,SLOT(connexion()));
+            connect(server, SIGNAL(newConnection()),this, SLOT(connexion()));
         }
         tailleMessage = 0;//comme il n'y a pas encore eu de message la taille du message est nulle
     }
@@ -41,7 +41,7 @@ QString Connexion::getIPaddress()
     foreach(QHostAddress address, QNetworkInterface::allAddresses())
 //allAddresses rend toutes les adresses IP. Il faut filtrer
     {
-        if (address.isInSubnet(QHostAddress::parseSubnet("10.129.0.0/16")))
+        if (address.isInSubnet(QHostAddress::parseSubnet("192.168.0.0/16")))
         {
             resultat = address.toString();
            return resultat;
