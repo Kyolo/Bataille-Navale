@@ -37,6 +37,8 @@ private:
     QString nomJoueur = "Joueur 1";
     client *connexion;
 
+    bool isClosed=false;
+
 protected:
     void closeEvent(QCloseEvent *event);
 

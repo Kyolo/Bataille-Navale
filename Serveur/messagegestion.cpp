@@ -2,10 +2,27 @@
 
 #include <QString>
 
+#include "communicationconstants.h"
+
+
+using namespace std;
+
+messageGestion::messageGestion()
+{
+
+}
+
 void messageGestion::inputMessage(QString message)
 {
-    if(message[0]==0x1)
+    if(message[0]==MessageHeader)
     {
-
+        emit tchat(message);
+    }
+    else if (message[0]==GiveUpHeader)
+    {
+        cout << "le joueur"<< playerName.toStdString() <<"a quitte le jeu"<<endl;
+        QString playerName;
+        playerName=message.remove(0,1);
+        emit playerGiveUp(playerName);
     }
 }

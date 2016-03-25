@@ -1,0 +1,7 @@
+#ifndef COMUNICATIONCONSTANTS_H
+#define COMUNICATIONCONSTANTS_H
+
+#define MessageHeader 0x01
+#define GiveUpHeader 0x02
+
+#endif // COMUNICATIONCONSTANTS_H

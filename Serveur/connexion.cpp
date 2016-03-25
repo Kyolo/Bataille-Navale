@@ -29,6 +29,7 @@ Connexion::Connexion()
                    "port: "<<server->serverPort()<<endl;
             //on autorise la connexion d'un client. S'il ne doit y avoir qu'un seul client il faudra modifier cette ligne
             connect(server, SIGNAL(newConnection()),this, SLOT(connexion()));
+            msgGest= new messageGestion();
         }
         tailleMessage = 0;//comme il n'y a pas encore eu de message la taille du message est nulle
     }
@@ -61,6 +62,7 @@ void Connexion::connexion()
     client << nouveauClient;
     connect(nouveauClient, SIGNAL(readyRead()), this, SLOT(getdata()));
     connect(nouveauClient, SIGNAL(disconnected()), this, SLOT(deconnexion()));
+    connect(msgGest, SIGNAL(tchat(QString)),this, SLOT(tchat(QString)));
 }
 
 //************** Procedure de récupération du message*******************************************************
@@ -82,8 +84,7 @@ void Connexion::getdata()
         return; //on n'a pas tout recu on ne peut pas traiter l'info. On quitte
     QString message;
     in>>message;
-    sendtoclient(message); //on envoie le message au(x) client en echo (option bien sûr)
-    cout<<"message transféré"<<endl;
+    msgGest->inputMessage(message);//on renvoie le message vers la gestion des messages
     tailleMessage=0;     //on remet la variable de taille à 0
 }
 

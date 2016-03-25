@@ -10,6 +10,8 @@
 
 #include <string.h>
 
+#include "messagegestion.h"
+
 typedef unsigned char uchar;
 
 class Connexion: public QObject
@@ -34,6 +36,7 @@ private:
     QTcpServer *server;
     QList<QTcpSocket *> client;
     quint16 tailleMessage;
+    messageGestion *msgGest;
 
 signals:
     void connexionNvJoueur(Joueur);

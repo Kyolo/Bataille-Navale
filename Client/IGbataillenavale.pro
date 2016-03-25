@@ -17,7 +17,8 @@ SOURCES += main.cpp\
     client.cpp
 
 HEADERS  += mainwindow.h \
-    client.h
+    client.h \
+    comunicationconstants.h
 
 FORMS    += mainwindow.ui
 

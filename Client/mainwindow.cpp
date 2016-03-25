@@ -10,6 +10,7 @@
 #include <QGraphicsScene>
 #include <QMouseEvent>
 
+#include "comunicationconstants.h"
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -38,7 +39,9 @@ void MainWindow::on_actionQuitter_triggered ()
     {
     int reponseQuitter = QMessageBox::information(this, "Fermeture du programme", "Voulez vous fermer le programme et quitter la partie en cours?", QMessageBox::Yes | QMessageBox::No);
        if (reponseQuitter == QMessageBox::Yes)
-       { close();
+       {
+           isClosed=true;
+        close();
        }
        else if (reponseQuitter == QMessageBox::No)
        {
@@ -47,13 +50,23 @@ void MainWindow::on_actionQuitter_triggered ()
 //Depuis la croix
 void MainWindow::closeEvent(QCloseEvent *event)
 {
-    int reponseQuitter = QMessageBox::information(this, "Fermeture du programme", "Voulez vous fermer le programme et quitter la partie en cours?", QMessageBox::Yes | QMessageBox::No);
-       if (reponseQuitter == QMessageBox::Yes)
-       { event->accept();
-       }
-       else if (reponseQuitter == QMessageBox::No)
-       {event->ignore();
-       }
+    if(isClosed==false)
+    {
+        int reponseQuitter = QMessageBox::information(this, "Fermeture du programme", "Voulez vous fermer le programme et quitter la partie en cours?", QMessageBox::Yes | QMessageBox::No);
+           if (reponseQuitter == QMessageBox::Yes)
+           {
+               event->accept();
+
+           }
+           else if (reponseQuitter == QMessageBox::No)
+           {event->ignore();
+               close();
+           }
+    }
+   if(isClosed==true)
+   {
+       event->accept();
+   }
 }
 
 //********************************************************************
@@ -89,8 +102,6 @@ void MainWindow::on_actionAbandon_triggered()
     fond = scene->addPixmap(QPixmap(":/mer.gif"));
 
     }
-//********************************************************************
-
 //**********Connexion************************************************
 void MainWindow::on_actionConnexion_triggered ()
 {
@@ -108,7 +119,7 @@ void MainWindow::on_actionConnexion_triggered ()
 //**********Entrer du texte dans le tchat*******************************
 void MainWindow::on_pushButtonOKTchat_clicked ()
    {
-    connexion->send(0x01+nomJoueur+" : "+ui->lineEditChat->text());
+    connexion->send(MessageHeader+nomJoueur+" : "+ui->lineEditChat->text());
     ui->lineEditChat->setText("");
    }
 //*******************Ecriture des messages dans le tchat*****************************************************
@@ -119,7 +130,8 @@ void MainWindow::writeInTchat(QString message)
 
 //********* Désactiver le Tchat **********************************************
 void MainWindow::on_actionTchatDisable_triggered()
-{ui->textChat->setText("");
+{
+    ui->textChat->setText("");
  ui->textChat->setEnabled(false);
  ui->lineEditChat->setText("");
  ui->lineEditChat->setEnabled(false);
@@ -132,7 +144,8 @@ void MainWindow::on_actionTchatDisable_triggered()
 
 //****************** Réactiver le tchat*************************************
 void MainWindow::on_actionRactiveTchat_triggered()
-{   ui->textChat->setText("");
+{
+    ui->textChat->setText("");
     ui->textChat->setEnabled(true);
     ui->lineEditChat->setText("");
     ui->lineEditChat->setEnabled(true);

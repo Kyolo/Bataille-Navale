@@ -3,12 +3,19 @@
 
 #include <QString>
 #include <QObject>
+
+#include <stdio.h>
+#include <iostream>
+
 #include "joueur.h"
+
+
 
 class messageGestion : public QObject
 {
     Q_OBJECT
 public:
+    messageGestion();
     void inputMessage(QString message);
 signals:
     void connexionNvJoueur(Joueur);

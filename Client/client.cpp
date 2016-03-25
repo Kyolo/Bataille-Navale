@@ -2,6 +2,8 @@
 #include <iostream>
 #include <stdio.h>
 
+#include "comunicationconstants.h"
+
 using namespace std;
 
 client::client(string addr, quint16 port)
@@ -84,7 +86,7 @@ void client::send(QString DonneesAEnvoyer)
 
 void client::msgGestion(QString message)
 {
-    if(message[0]==0x01)
+    if(message[0]==MessageHeader)
     {
         message.remove(0,1);
         emit tchatRecive(message);
