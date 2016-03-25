@@ -82,8 +82,8 @@ void Connexion::getdata()
         return; //on n'a pas tout recu on ne peut pas traiter l'info. On quitte
     QString message;
     in>>message;
-    sendtoclient(message); //on envoie le message au(x) client en echo (option bien sûr)   //on affiche le message sur la fenêtre du serveur
-
+    sendtoclient(message); //on envoie le message au(x) client en echo (option bien sûr)
+    cout<<"message transféré"<<endl;
     tailleMessage=0;     //on remet la variable de taille à 0
 }
 

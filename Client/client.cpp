@@ -67,6 +67,7 @@ void client::getserverdata()
        // On a toutes les infos nécessaires pour le message
        QString message;
        in >> message;
+       this->msgGestion(message);
        tailleMessage = 0;
 }
 
@@ -81,10 +82,11 @@ void client::send(QString DonneesAEnvoyer)
     socket->write(paquet); //on écrit la donnée sur le socket
 }
 
-void msgGestion(QString message)
+void client::msgGestion(QString message)
 {
     if(message[0]==0x01)
     {
-
+        message.remove(0,1);
+        emit tchatRecive(message);
     }
 }

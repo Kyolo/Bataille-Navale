@@ -107,11 +107,11 @@ void MainWindow::on_actionConnexion_triggered ()
 
 //**********Entrer du texte dans le tchat*******************************
 void MainWindow::on_pushButtonOKTchat_clicked ()
-   {ui->textChat->append(nomJoueur+" : "+ui->lineEditChat->text());
-    connexion->send(nomJoueur+" : "+ui->lineEditChat->text());
+   {
+    connexion->send(0x01+nomJoueur+" : "+ui->lineEditChat->text());
     ui->lineEditChat->setText("");
    }
-//************************************************************************
+//*******************Ecriture des messages dans le tchat*****************************************************
 void MainWindow::writeInTchat(QString message)
 {
     ui->textChat->append(message);

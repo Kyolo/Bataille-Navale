@@ -5,11 +5,8 @@
 #include <QObject>
 #include <string>
 
- void comthread(QString message);
-
 class client: public QObject
 {
-
     Q_OBJECT
 public:
     client(std::string addr, quint16 port);
