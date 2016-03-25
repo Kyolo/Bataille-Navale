@@ -52,6 +52,6 @@ char Joueur::getStatusAt(uchar x, uchar y){
     if(lst.length()==0)
         return Bateau::NONE;
 
-    return lst.at(0);
+    return lst.at(0)[0];
 
 }
