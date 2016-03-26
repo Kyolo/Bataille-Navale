@@ -3,6 +3,7 @@
 
 #include <joueur.h>
 #include <connexion.h>
+#include <command.h>
 
 #include <QObject>
 #include <QString>
@@ -31,7 +32,7 @@ private:
     int nbJoueurCo;
     int nbJoueurEnLice;
     Connexion * co;
-    bool run;
+    CommandManager * comManager;
 
 
 private slots:
