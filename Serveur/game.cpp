@@ -12,7 +12,7 @@ Game * Game::instance=NULL;
 
 using namespace std;
 
-Game::Game(uchar nbPlr){
+Game::Game(int nbPlr){
     setParent(QCoreApplication::instance());
     nbJoueurMax=nbPlr;
     nbJoueurCo=0;
