@@ -2988,7 +2988,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>31</height>
+     <height>30</height>
     </rect>
    </property>
    <property name="palette">
@@ -3847,7 +3847,6 @@
     <addaction name="actionNewGame"/>
     <addaction name="actionAbandon"/>
     <addaction name="separator"/>
-    <addaction name="actionConnexion"/>
     <addaction name="separator"/>
     <addaction name="actionTchatDisable"/>
     <addaction name="actionRactiveTchat"/>

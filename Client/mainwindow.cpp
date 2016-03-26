@@ -89,6 +89,21 @@ void MainWindow::on_actionNewGame_triggered()
     ui->actionAbandon->setEnabled(true);
     ui->graphicsView->setEnabled(true);
     fond = scene->addPixmap(QPixmap(":/Damiereau.jpg"));
+    QString adresseIP = QInputDialog::getText(this, tr("Adresse IP de connexion"), tr("Veuillez entrer l'adresse IP pour vous connecter : "), QLineEdit::Normal);
+    qDebug()<<adresseIP;
+    QString portConnexion = QInputDialog::getText(this, tr("Port de connexion"), tr("Veuillez entrer le port pour vous connecter : "), QLineEdit::Normal);
+    qDebug()<<portConnexion;
+    connexion = new client(adresseIP.toStdString(), portConnexion.toInt());
+    ui->actionConnexion->setEnabled(false);
+    connect(connexion, SIGNAL(serverError(QString)), this,SLOT(serverError(QString)));
+    connect(connexion, SIGNAL(tchatRecive(QString)), this , SLOT(writeInTchat(QString)));
+    connecte=1;
+    ui->textChat->setText("");
+    ui->textChat->setEnabled(true);
+    ui->lineEditChat->setText("");
+    ui->lineEditChat->setEnabled(true);
+    ui->pushButtonOKTchat->setEnabled(true);
+    ui->labelTchatDisable->setText("");
     }
 
 //**************************************************************
@@ -109,28 +124,6 @@ void MainWindow::on_actionAbandon_triggered()
     fond = scene->addPixmap(QPixmap(":/mer.gif"));
 
     }
-//**********Connexion************************************************
-void MainWindow::on_actionConnexion_triggered ()
-{
-    QString adresseIP = QInputDialog::getText(this, tr("Adresse IP de connexion"), tr("Veuillez entrer l'adresse IP pour vous connecter : "), QLineEdit::Normal);
-    qDebug()<<adresseIP;
-    QString portConnexion = QInputDialog::getText(this, tr("Port de connexion"), tr("Veuillez entrer le port pour vous connecter : "), QLineEdit::Normal);
-    qDebug()<<portConnexion;
-    connexion = new client(adresseIP.toStdString(), portConnexion.toInt());
-    ui->actionConnexion->setEnabled(false);
-    connect(connexion, SIGNAL(serverError(QString)), this,SLOT(serverError(QString)));
-    connect(connexion, SIGNAL(tchatRecive(QString)), this , SLOT(writeInTchat(QString)));
-    connecte=1;
-    ui->textChat->setText("");
-    ui->textChat->setEnabled(true);
-    ui->lineEditChat->setText("");
-    ui->lineEditChat->setEnabled(true);
-    ui->pushButtonOKTchat->setEnabled(true);
-    ui->labelTchatDisable->setText("");
-
-}
-//***********************************************************************
-
 //**********Entrer du texte dans le tchat*******************************
 void MainWindow::on_pushButtonOKTchat_clicked ()
    {
@@ -145,27 +138,21 @@ void MainWindow::writeInTchat(QString message)
 
 //********* Désactiver le Tchat **********************************************
 void MainWindow::on_actionTchatDisable_triggered()
-{ if (connecte==1){
-
-    ui->textChat->setText("");
- ui->textChat->setEnabled(false);
- ui->lineEditChat->setText("");
- ui->lineEditChat->setEnabled(false);
- ui->pushButtonOKTchat->setEnabled(false);
- ui->labelTchatDisable->setText("Tchat désactivé !");
- ui->actionRactiveTchat->setEnabled(true);
- ui->actionTchatDisable->setEnabled(false);
-    }
-    else {
-         }
+{
+     ui->textChat->setText("");
+     ui->textChat->setEnabled(false);
+     ui->lineEditChat->setText("");
+     ui->lineEditChat->setEnabled(false);
+     ui->pushButtonOKTchat->setEnabled(false);
+     ui->labelTchatDisable->setText("Tchat désactivé !");
+     ui->actionRactiveTchat->setEnabled(true);
+     ui->actionTchatDisable->setEnabled(false);
 }
 //**************************************************************************
 
 //****************** Réactiver le tchat*************************************
 void MainWindow::on_actionRactiveTchat_triggered()
-{ if (connecte==1)
-    {
-
+{
     ui->textChat->setText("");
     ui->textChat->setEnabled(true);
     ui->lineEditChat->setText("");
@@ -174,9 +161,6 @@ void MainWindow::on_actionRactiveTchat_triggered()
     ui->labelTchatDisable->setText("");
     ui->actionRactiveTchat->setEnabled(false);
     ui->actionTchatDisable->setEnabled(true);
-    }
-    else {
-         }
 }
 
 //*************************************************************************
