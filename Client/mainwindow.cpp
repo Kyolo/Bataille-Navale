@@ -23,6 +23,13 @@ MainWindow::MainWindow(QWidget *parent) :
         scene->setSceneRect(QRectF(0,0,483,483));
         ui->graphicsView->setScene(scene);
        // fond = scene->addPixmap(QPixmap(":/Damiereau.jpg"));
+        ui->textChat->setText(""); // descativation du chat tant que pas connecté
+     ui->textChat->setEnabled(false);
+     ui->lineEditChat->setText("");
+     ui->lineEditChat->setEnabled(false);
+     ui->pushButtonOKTchat->setEnabled(false);
+     ui->labelTchatDisable->setText("Tchat désactivé! \n \n Veuillez d'abord \n vous connecter !");
+   // descativation du chat tant que pas connecté
 }
 MainWindow::~MainWindow()
 {
@@ -31,7 +38,7 @@ MainWindow::~MainWindow()
 //**********************************************************************************
 //**********************************************************************************
 //**********************************************************************************
-
+int connecte=0;
 
 //*****Quitter*********************************************************
 //A partir du menu
@@ -113,6 +120,14 @@ void MainWindow::on_actionConnexion_triggered ()
     ui->actionConnexion->setEnabled(false);
     connect(connexion, SIGNAL(serverError(QString)), this,SLOT(serverError(QString)));
     connect(connexion, SIGNAL(tchatRecive(QString)), this , SLOT(writeInTchat(QString)));
+    connecte=1;
+    ui->textChat->setText("");
+    ui->textChat->setEnabled(true);
+    ui->lineEditChat->setText("");
+    ui->lineEditChat->setEnabled(true);
+    ui->pushButtonOKTchat->setEnabled(true);
+    ui->labelTchatDisable->setText("");
+
 }
 //***********************************************************************
 
@@ -130,7 +145,8 @@ void MainWindow::writeInTchat(QString message)
 
 //********* Désactiver le Tchat **********************************************
 void MainWindow::on_actionTchatDisable_triggered()
-{
+{ if (connecte==1){
+
     ui->textChat->setText("");
  ui->textChat->setEnabled(false);
  ui->lineEditChat->setText("");
@@ -139,12 +155,17 @@ void MainWindow::on_actionTchatDisable_triggered()
  ui->labelTchatDisable->setText("Tchat désactivé !");
  ui->actionRactiveTchat->setEnabled(true);
  ui->actionTchatDisable->setEnabled(false);
+    }
+    else {
+         }
 }
 //**************************************************************************
 
 //****************** Réactiver le tchat*************************************
 void MainWindow::on_actionRactiveTchat_triggered()
-{
+{ if (connecte==1)
+    {
+
     ui->textChat->setText("");
     ui->textChat->setEnabled(true);
     ui->lineEditChat->setText("");
@@ -153,6 +174,9 @@ void MainWindow::on_actionRactiveTchat_triggered()
     ui->labelTchatDisable->setText("");
     ui->actionRactiveTchat->setEnabled(false);
     ui->actionTchatDisable->setEnabled(true);
+    }
+    else {
+         }
 }
 
 //*************************************************************************
