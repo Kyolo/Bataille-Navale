@@ -3,14 +3,23 @@
 
 #include <QString>
 #include <QStringList>
+#include <QThread>
 
-#include <game.h>
 #include <connexion.h>
 
-class Command
+class CommandManager: public QThread
 {
+    Q_OBJECT
 public:
-    static void doCommand(QString command, QStringList args);
+    CommandManager();
+
+public slots:
+    void useCommand(QString command, QStringList args);
+
+private:
+    void run();
+signals:
+    void commandDetected(QString,QStringList);
 };
 
 #endif // COMMAND_H

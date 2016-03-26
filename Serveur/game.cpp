@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#include <QCoreApplication>
+
 #include <command.h>
 
 Game * Game::instance=NULL;
@@ -11,10 +13,13 @@ Game * Game::instance=NULL;
 using namespace std;
 
 Game::Game(uchar nbPlr){
+    setParent(QCoreApplication::instance());
     nbJoueurMax=nbPlr;
     nbJoueurCo=0;
     nbJoueurEnLice=0;
     co = new Connexion();
+    comManager = new CommandManager();
+    //****************************On relie le moteur au systeme de connexion***************************************
     QObject::connect(co,SIGNAL(connexionNvJoueur(Joueur)),this,SLOT(newPlayer(Joueur)));
     QObject::connect(this,SIGNAL(gameStarted()),co,SLOT(gameStarted()));
     QObject::connect(co,SIGNAL(attaque(QString,QString,uchar,uchar)),this,SLOT(onAttack(QString,QString,uchar,uchar)));
@@ -22,37 +27,17 @@ Game::Game(uchar nbPlr){
     QObject::connect(this,SIGNAL(playerLost(QString)),co,SLOT(playerLost(QString)));
     QObject::connect(co,SIGNAL(playerGiveUp(QString)),this,SLOT(giveUp(QString)));
     QObject::connect(this,SIGNAL(gameFinished(QString)),co,SLOT(playerWon(QString)));
-    run = true;
+    //**************************Ce connect peut paraitre étrange, mais il permet d'éviter des problèmes de thread avec QTcpNotifier
+    QObject::connect(comManager,SIGNAL(commandDetected(QString,QStringList)),comManager,SLOT(useCommand(QString,QStringList)));
     Game::instance=this;
 }
 
+/**
+ * @brief Game::start : Démarre la gestion des commandes
+ */
 void Game::start(){
     cout<<"En attente de "<<this->nbJoueurMax<<" joueurs"<<endl;
-
-}
-
-/**
- * @brief Game::loop : la boucle qui gère la lecture et l'utilisation des commandes
- */
-void Game::loop(){
-    //Ici viens la gestion des commandes
-    while(run){
-
-        string command;
-
-        //On lit la commande dans cin
-        getline(cin,command);
-
-        //On sépare la commande de ses arguments
-        QStringList div = QString(command.c_str()).split(" ");
-        QString com = div[0];
-        div.removeAt(0);
-
-        //Et on les envoie pour traitement
-        Command::doCommand(com,div);
-
-    }
-
+    comManager->start();
 }
 
 /**
@@ -77,11 +62,16 @@ void Game::forceQuit(){
         lstJoueur[i].giveUp();
         emit playerLost(lstJoueur[i].getName());
     }
-    run=false;
+    comManager->terminate();
 }
 
+
+/**
+ * @brief Game::sendToChat : Envoie un message au client, tout simplement
+ * @param msg : le message
+ */
 void Game::sendToChat(QString msg){
-    co->sendtoclient(msg);
+    co->sendtoclient(QString((char*)0x01).append(msg));
 }
 
 Game::~Game(){

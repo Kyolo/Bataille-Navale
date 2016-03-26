@@ -3,6 +3,7 @@
 
 #include <joueur.h>
 #include <connexion.h>
+#include <command.h>
 
 #include <QObject>
 #include <QString>
@@ -15,7 +16,6 @@ class Game: public QObject
 public:
     Game(uchar nbPlr = 2);
     void start();
-    void loop();
     Joueur getPlayerByName(QString name);
     void forceQuit();
     void sendToChat(QString msg);
@@ -31,7 +31,7 @@ private:
     int nbJoueurCo;
     int nbJoueurEnLice;
     Connexion * co;
-    bool run;
+    CommandManager * comManager;
 
 
 private slots:

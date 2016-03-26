@@ -1,13 +1,22 @@
-#include  <command.h>
+#include <command.h>
 
 #include <iostream>
 #include <stdio.h>
+#include <string.h>
+
+#include <QCoreApplication>
 
 #include <joueur.h>
+#include <game.h>
 
 using namespace std;
 
-void Command::doCommand(QString command, QStringList args ){
+CommandManager::CommandManager()
+{
+    setParent(QCoreApplication::instance());
+}
+
+void CommandManager::useCommand(QString command, QStringList args ){
     if(command=="stop"){
         Game::getInstance()->sendToChat("Arret du serveur");
         Game::getInstance()->forceQuit();
@@ -36,5 +45,24 @@ void Command::doCommand(QString command, QStringList args ){
             }
             cout<<"+"<<QString(16,'-').toStdString()<<"+"<<endl;
         }
+    }
+}
+
+void CommandManager::run()
+{
+    forever{
+        string command;
+
+        //On lit la commande dans cin
+        getline(cin,command);
+
+        //On sépare la commande de ses arguments
+        QStringList div = QString(command.c_str()).split(" ");
+        QString com = div[0];
+        div.removeAt(0);
+
+        //Et on les emets pour traitement dans un thread à part
+        emit commandDetected(com,div);
+
     }
 }
