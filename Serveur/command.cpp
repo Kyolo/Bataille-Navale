@@ -26,7 +26,7 @@ void CommandManager::useCommand(QString command, QStringList args ){
         Game::getInstance()->forceQuit();
         return;
     }else if(command=="say"){
-        Game::getInstance()->sendToChat(args.join(" "));
+        Game::getInstance()->sendToChat("Serveur : "+args.join(" "));
         return;
     } else if(command=="help"){
         if(args.length()==0){
