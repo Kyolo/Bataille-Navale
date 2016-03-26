@@ -9,7 +9,7 @@ typedef unsigned char uchar;
 class Joueur
 {
 public:
-    Joueur(Bateau * bateau,QString name = "none", int nbBateau = 7);
+    Joueur(Bateau * bateau=NULL,QString name = "none", int nbBateau = 7);
     bool attack(uchar x, uchar y);
     bool areAllBoatsDestroyed();
     int getNbDestroyedBoat();

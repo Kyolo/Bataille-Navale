@@ -17,6 +17,7 @@ public:
     Game(uchar nbPlr = 2);
     void start();
     Joueur getPlayerByName(QString name);
+    Joueur *getAllPlayer(int * number);
     void forceQuit();
     void sendToChat(QString msg);
     ~Game();

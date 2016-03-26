@@ -17,6 +17,7 @@ Game::Game(uchar nbPlr){
     nbJoueurMax=nbPlr;
     nbJoueurCo=0;
     nbJoueurEnLice=0;
+    lstJoueur = new Joueur[nbPlr];
     co = new Connexion();
     comManager = new CommandManager();
     //****************************On relie le moteur au systeme de connexion***************************************
@@ -55,6 +56,16 @@ Joueur Game::getPlayerByName(QString name){
 }
 
 /**
+ * @brief Game::getAllPlayer : Permet de récuperer la liste des joueurs
+ * @param number : un pointeur vers un entier qui contiendra le nombre de joueur
+ * @return La liste des joueurs sous forme de tableau dynamique
+ */
+Joueur *Game::getAllPlayer(int *number){
+    number=&(this->nbJoueurCo);
+    return lstJoueur;
+}
+
+/**
  * @brief Game::forceQuit : Force l'arrêt du serveur et envoie un signal d'abandon pour tout les joueurs
  */
 void Game::forceQuit(){
@@ -63,6 +74,7 @@ void Game::forceQuit(){
         emit playerLost(lstJoueur[i].getName());
     }
     comManager->terminate();
+    QCoreApplication::instance()->exit(0);
 }
 
 
@@ -71,7 +83,7 @@ void Game::forceQuit(){
  * @param msg : le message
  */
 void Game::sendToChat(QString msg){
-    co->sendtoclient(QString((char*)0x01).append(msg));
+    co->sendtoclient(0x01+msg);
 }
 
 Game::~Game(){
