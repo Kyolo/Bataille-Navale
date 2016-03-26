@@ -3,20 +3,14 @@
 
 #include <QString>
 #include <QStringList>
-#include <QThread>
 
+#include <game.h>
 #include <connexion.h>
 
-class CommandManager: public QThread
+class Command
 {
 public:
-    CommandManager();
-    static void activateCommand(QString command, QStringList args);
-
-private:
-    void run();
-    bool continuer;
-
+    static void doCommand(QString command, QStringList args);
 };
 
 #endif // COMMAND_H

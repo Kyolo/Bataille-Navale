@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#include <command.h>
+
 Game * Game::instance=NULL;
 
 using namespace std;
@@ -13,7 +15,6 @@ Game::Game(uchar nbPlr){
     nbJoueurCo=0;
     nbJoueurEnLice=0;
     co = new Connexion();
-    comManager = new CommandManager();
     QObject::connect(co,SIGNAL(connexionNvJoueur(Joueur)),this,SLOT(newPlayer(Joueur)));
     QObject::connect(this,SIGNAL(gameStarted()),co,SLOT(gameStarted()));
     QObject::connect(co,SIGNAL(attaque(QString,QString,uchar,uchar)),this,SLOT(onAttack(QString,QString,uchar,uchar)));
@@ -21,20 +22,36 @@ Game::Game(uchar nbPlr){
     QObject::connect(this,SIGNAL(playerLost(QString)),co,SLOT(playerLost(QString)));
     QObject::connect(co,SIGNAL(playerGiveUp(QString)),this,SLOT(giveUp(QString)));
     QObject::connect(this,SIGNAL(gameFinished(QString)),co,SLOT(playerWon(QString)));
+    run = true;
     Game::instance=this;
 }
 
 void Game::start(){
     cout<<"En attente de "<<this->nbJoueurMax<<" joueurs"<<endl;
-    comManager->start();
+
 }
 
 /**
  * @brief Game::loop : la boucle qui gère la lecture et l'utilisation des commandes
  */
 void Game::loop(){
-    //On attend juste patiemment que le thread gerant les commandes soit terminé, ce qui signifie que le serveur doit s'arreter
-    comManager->wait();
+    //Ici viens la gestion des commandes
+    while(run){
+
+        string command;
+
+        //On lit la commande dans cin
+        getline(cin,command);
+
+        //On sépare la commande de ses arguments
+        QStringList div = QString(command.c_str()).split(" ");
+        QString com = div[0];
+        div.removeAt(0);
+
+        //Et on les envoie pour traitement
+        Command::doCommand(com,div);
+
+    }
 
 }
 
@@ -60,7 +77,7 @@ void Game::forceQuit(){
         lstJoueur[i].giveUp();
         emit playerLost(lstJoueur[i].getName());
     }
-    comManager->terminate();
+    run=false;
 }
 
 void Game::sendToChat(QString msg){
@@ -69,7 +86,6 @@ void Game::sendToChat(QString msg){
 
 Game::~Game(){
     delete co;
-    delete comManager;
 }
 
 void Game::setInstance(Game *gme){

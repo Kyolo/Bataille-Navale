@@ -4,15 +4,10 @@
 #include <stdio.h>
 
 #include <joueur.h>
-#include <game.h>
 
 using namespace std;
 
-CommandManager::CommandManager(){
-    continuer=true;
-}
-
-void CommandManager::activateCommand(QString command, QStringList args ){
+void Command::doCommand(QString command, QStringList args ){
     if(command=="stop"){
         Game::getInstance()->sendToChat("Arret du serveur");
         Game::getInstance()->forceQuit();
@@ -41,25 +36,5 @@ void CommandManager::activateCommand(QString command, QStringList args ){
             }
             cout<<"+"<<QString(16,'-').toStdString()<<"+"<<endl;
         }
-    }
-}
-
-void CommandManager::run()
-{
-    while(continuer){
-
-        string command;
-
-        //On lit la commande dans cin
-        getline(cin,command);
-
-        //On sépare la commande de ses arguments
-        QStringList div = QString(command.c_str()).split(" ");
-        QString com = div[0];
-        div.removeAt(0);
-
-        //Et on les envoie pour traitement
-        CommandManager::activateCommand(com,div);
-
     }
 }
