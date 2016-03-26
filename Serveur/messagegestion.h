@@ -8,6 +8,7 @@
 #include <iostream>
 
 #include "joueur.h"
+#include "bateau.h"
 
 
 

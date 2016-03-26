@@ -30,6 +30,7 @@ Connexion::Connexion()
             //on autorise la connexion d'un client. S'il ne doit y avoir qu'un seul client il faudra modifier cette ligne
             connect(server, SIGNAL(newConnection()),this, SLOT(connexion()));
             msgGest= new messageGestion();
+            connect(msgGest, SIGNAL(tchat(QString)),this, SLOT(tchat(QString)));
         }
         tailleMessage = 0;//comme il n'y a pas encore eu de message la taille du message est nulle
     }
@@ -62,7 +63,7 @@ void Connexion::connexion()
     client << nouveauClient;
     connect(nouveauClient, SIGNAL(readyRead()), this, SLOT(getdata()));
     connect(nouveauClient, SIGNAL(disconnected()), this, SLOT(deconnexion()));
-    connect(msgGest, SIGNAL(tchat(QString)),this, SLOT(tchat(QString)));
+
 }
 
 //************** Procedure de récupération du message*******************************************************

@@ -47,6 +47,7 @@ void MainWindow::on_actionQuitter_triggered ()
     int reponseQuitter = QMessageBox::information(this, "Fermeture du programme", "Voulez vous fermer le programme et quitter la partie en cours?", QMessageBox::Yes | QMessageBox::No);
        if (reponseQuitter == QMessageBox::Yes)
        {
+           connexion->send(GiveUpHeader+this->nomJoueur);
            isClosed=true;
         close();
        }
@@ -127,7 +128,7 @@ void MainWindow::on_actionAbandon_triggered()
 //**********Entrer du texte dans le tchat*******************************
 void MainWindow::on_pushButtonOKTchat_clicked ()
    {
-    connexion->send(MessageHeader+nomJoueur+" : "+ui->lineEditChat->text());
+    connexion->send(MessageHeader+nomJoueur+" : "+ui->lineEditChat->toPlainText());
     ui->lineEditChat->setText("");
    }
 //*******************Ecriture des messages dans le tchat*****************************************************
