@@ -9,13 +9,14 @@ typedef unsigned char uchar;
 class Joueur
 {
 public:
-    Joueur(Bateau * bateau=NULL,QString name = "none", int nbBateau = 7);
+    Joueur(Bateau * bateau=NULL,QString name = "none", int nbBateau = DEFAULT_BOAT_NUMBER);
     bool attack(uchar x, uchar y);
     bool areAllBoatsDestroyed();
     int getNbDestroyedBoat();
     void giveUp();
     QString getName();
     char getStatusAt(uchar x, uchar y);
+    static const int DEFAULT_BOAT_NUMBER = 7;
 
 private:
     Bateau * lstBoat;

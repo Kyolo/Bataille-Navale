@@ -14,7 +14,7 @@ class Game: public QObject
 {
     Q_OBJECT
 public:
-    Game(uchar nbPlr = 2);
+    Game(int nbPlr = DEFAULT_PLR_NUMBER);
     void start();
     Joueur getPlayerByName(QString name);
     Joueur *getAllPlayer(int * number);
@@ -25,6 +25,7 @@ public:
     static void setInstance(Game * gme);
     static Game *getInstance();
     static Game * instance;
+    static const int DEFAULT_PLR_NUMBER = 2;
 
 private:
     Joueur * lstJoueur;
