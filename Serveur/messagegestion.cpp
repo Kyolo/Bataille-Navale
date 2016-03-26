@@ -20,9 +20,9 @@ void messageGestion::inputMessage(QString message)
     }
     else if (message[0]==GiveUpHeader)
     {
-        cout << "le joueur"<< playerName.toStdString() <<"a quitte le jeu"<<endl;
         QString playerName;
         playerName=message.remove(0,1);
+        cout << "le joueur"<< playerName.toStdString() <<"a quitte le jeu"<<endl;
         emit playerGiveUp(playerName);
     }
 }
