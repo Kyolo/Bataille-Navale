@@ -2441,6 +2441,12 @@
       <height>41</height>
      </rect>
     </property>
+    <property name="lineWrapColumnOrWidth">
+     <number>0</number>
+    </property>
+    <property name="textInteractionFlags">
+     <set>Qt::TextEditorInteraction</set>
+    </property>
    </widget>
    <zorder>labelImageFond</zorder>
    <zorder>textChat</zorder>

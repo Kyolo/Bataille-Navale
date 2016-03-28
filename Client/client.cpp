@@ -74,7 +74,7 @@ void client::getserverdata()
 }
 
 void client::send(QString DonneesAEnvoyer)
-{//l'utilisateur a cliqué sur le bouton envoyer au serveur
+{
     QByteArray paquet;
     QDataStream out(&paquet, QIODevice::WriteOnly);
     out<<(quint16) 0; //on réserve l'entete pour la taille des données

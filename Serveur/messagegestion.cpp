@@ -22,7 +22,7 @@ void messageGestion::inputMessage(QString message)
     {
         QString playerName;
         playerName=message.remove(0,1);
-        cout << "le joueur"<< playerName.toStdString() <<"a quitte le jeu"<<endl;
-        emit playerGiveUp(playerName);
+        cout << "le joueur "<< playerName.toStdString() <<" a quitte le jeu"<<endl;
+        emit splayerGiveUp(playerName);
     }
 }

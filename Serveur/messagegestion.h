@@ -21,7 +21,7 @@ public:
 signals:
     void connexionNvJoueur(Joueur);
     void attaque(QString,QString,uchar,uchar);
-    void playerGiveUp(QString);
+    void splayerGiveUp(QString);
     void tchat(QString);
 };
 

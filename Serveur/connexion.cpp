@@ -31,6 +31,7 @@ Connexion::Connexion()
             connect(server, SIGNAL(newConnection()),this, SLOT(connexion()));
             msgGest= new messageGestion();
             connect(msgGest, SIGNAL(tchat(QString)),this, SLOT(tchat(QString)));
+            connect(msgGest, SIGNAL(splayerGiveUp(QString)), this, SLOT(SplayerGiveUp(QString)));
         }
         tailleMessage = 0;//comme il n'y a pas encore eu de message la taille du message est nulle
     }
@@ -133,7 +134,7 @@ void Connexion::Sattaque(QString from, QString to, uchar posx, uchar posy)
 
 void Connexion::SplayerGiveUp(QString player)
 {
-    emit playerGiveUp(player);
+    //emit playerGiveUp(player);
 }
 
 //**********************************Public Slots***********************************************************************

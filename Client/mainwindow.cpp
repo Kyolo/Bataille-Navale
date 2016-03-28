@@ -63,6 +63,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
         int reponseQuitter = QMessageBox::information(this, "Fermeture du programme", "Voulez vous fermer le programme et quitter la partie en cours?", QMessageBox::Yes | QMessageBox::No);
            if (reponseQuitter == QMessageBox::Yes)
            {
+               connexion->send(GiveUpHeader+this->nomJoueur);
                event->accept();
 
            }
@@ -114,16 +115,14 @@ void MainWindow::on_actionAbandon_triggered()
     {
     int reponseAbandon = QMessageBox::information(this, "Abandon de la partie ?", "Voulez vraiment abandonner la partie en cours? Toutes vos données seront perdues.", QMessageBox::Yes | QMessageBox::No);
        if (reponseAbandon == QMessageBox::Yes)
-       { ui->actionNewGame->setEnabled(true);
+       {
+         connexion->send(GiveUpHeader+this->nomJoueur);
+         ui->actionNewGame->setEnabled(true);
          ui->actionAbandon->setEnabled(false);
+         ui->graphicsView->setEnabled(false);
+         fond = scene->addPixmap(QPixmap(":/mer.gif"));
          QMessageBox::information(this, "Fin de la partie", "Vous avez abandonné la partie");
        }
-       else if (reponseAbandon == QMessageBox::No)
-       {
-       }
-    ui->graphicsView->setEnabled(false);
-    fond = scene->addPixmap(QPixmap(":/mer.gif"));
-
     }
 //**********Entrer du texte dans le tchat*******************************
 void MainWindow::on_pushButtonOKTchat_clicked ()
