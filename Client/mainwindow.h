@@ -27,6 +27,7 @@ public slots:
  void on_actionAbandon_triggered ();
  void on_actionTchatDisable_triggered ();
  void on_actionRactiveTchat_triggered ();
+ void mousePressEvent(QMouseEvent *e);
 
 private:
 
@@ -35,7 +36,8 @@ private:
       QGraphicsPixmapItem *fond;
     QString nomJoueur = "Joueur 1";
     client *connexion;
-
+    int pressedX;
+    int pressedY;
     bool isClosed=false;
 
 protected:

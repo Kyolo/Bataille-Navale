@@ -1885,7 +1885,7 @@
    <widget class="QLabel" name="labelImageFond">
     <property name="geometry">
      <rect>
-      <x>0</x>
+      <x>-10</x>
       <y>0</y>
       <width>811</width>
       <height>551</height>
@@ -2461,7 +2461,7 @@
      <x>0</x>
      <y>0</y>
      <width>1000</width>
-     <height>31</height>
+     <height>30</height>
     </rect>
    </property>
    <property name="palette">

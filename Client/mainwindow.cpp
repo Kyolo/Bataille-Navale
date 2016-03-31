@@ -10,8 +10,12 @@
 #include <QGraphicsScene>
 #include <QMouseEvent>
 
+#include <stdio.h>
+#include <iostream>
+
 #include "comunicationconstants.h"
 
+using namespace std;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -19,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
      ui->setupUi(this);
      ui->labelImageFond->setPixmap(QPixmap (":/carteFondFlou.jpg"));
+     ui->graphicsView->setGeometry(100,30,483,483);
      scene = new QGraphicsScene(this);
         scene->setSceneRect(QRectF(0,0,483,483));
         ui->graphicsView->setScene(scene);
@@ -168,4 +173,14 @@ void MainWindow::on_actionRactiveTchat_triggered()
 void MainWindow::serverError(QString error)
 {
     QMessageBox::critical(this, "Erreur",error, QMessageBox::Ok);
+}
+
+void MainWindow::mousePressEvent(QMouseEvent *e)
+{
+    QPointF pt = ui->graphicsView->mapToScene(e->pos());//récupération de la position
+    pressedX=pt.x();                                                           //adaptation à la position : pressedX
+    pressedY=pt.y()-32;
+    cout<<"positionX "<<pressedX<<endl;
+    cout <<"positionY "<<pressedY<<endl;
+
 }
