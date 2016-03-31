@@ -23,9 +23,9 @@ MainWindow::MainWindow(QWidget *parent) :
 {
      ui->setupUi(this);
      ui->labelImageFond->setPixmap(QPixmap (":/carteFondFlou.jpg"));
-     ui->graphicsView->setGeometry(100,30,483,483);
+     ui->graphicsView->setGeometry(GWposX,GWposY,434,434);
      scene = new QGraphicsScene(this);
-        scene->setSceneRect(QRectF(0,0,483,483));
+        scene->setSceneRect(QRectF(0,0,434,434));
         ui->graphicsView->setScene(scene);
        // fond = scene->addPixmap(QPixmap(":/Damiereau.jpg"));
         ui->textChat->setText(""); // descativation du chat tant que pas connecté
@@ -34,6 +34,7 @@ MainWindow::MainWindow(QWidget *parent) :
      ui->lineEditChat->setEnabled(false);
      ui->pushButtonOKTchat->setEnabled(false);
      ui->labelTchatDisable->setText("Tchat désactivé! \n \n Veuillez d'abord \n vous connecter !");
+     state=0;
    // descativation du chat tant que pas connecté
 }
 MainWindow::~MainWindow()
@@ -95,7 +96,8 @@ void MainWindow::on_actionNewGame_triggered()
     ui->actionNewGame->setEnabled(false);
     ui->actionAbandon->setEnabled(true);
     ui->graphicsView->setEnabled(true);
-    fond = scene->addPixmap(QPixmap(":/Damiereau.jpg"));
+    fond = scene->addPixmap(QPixmap(":/merCarre.jpg"));
+    draw();
     QString adresseIP = QInputDialog::getText(this, tr("Adresse IP de connexion"), tr("Veuillez entrer l'adresse IP pour vous connecter : "), QLineEdit::Normal);
     qDebug()<<adresseIP;
     QString portConnexion = QInputDialog::getText(this, tr("Port de connexion"), tr("Veuillez entrer le port pour vous connecter : "), QLineEdit::Normal);
@@ -178,9 +180,34 @@ void MainWindow::serverError(QString error)
 void MainWindow::mousePressEvent(QMouseEvent *e)
 {
     QPointF pt = ui->graphicsView->mapToScene(e->pos());//récupération de la position
-    pressedX=pt.x();                                                           //adaptation à la position : pressedX
-    pressedY=pt.y()-32;
+    pressedX=((int)pt.x()-GWposX-1)/27;
+    pressedY=((int)pt.y()-32-GWposY-1)/27;
     cout<<"positionX "<<pressedX<<endl;
     cout <<"positionY "<<pressedY<<endl;
+
+    if(pressedX>15||pressedX<0||pressedY>15||pressedY<0)
+        return;
+
+    //Gestion de l'attaque et/ou du placement des bateaux
+    switch(state){
+    case STATE_ATWAR:
+
+        break;
+    case STATE_PREPARATION:
+        break;
+    }
+
+
+}
+
+void MainWindow::draw()
+{
+    QPen pen;
+    pen.setColor(QColor(0,0,0));
+    for(int a=0; a<16; a++)
+    {
+            scene->addRect(a*27+1,0,28,432,pen);
+            scene->addRect(0,a*27+1,432,28,pen);
+    }
 
 }

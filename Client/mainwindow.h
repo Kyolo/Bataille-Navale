@@ -39,6 +39,13 @@ private:
     int pressedX;
     int pressedY;
     bool isClosed=false;
+    void draw();
+    static const int GWposX=100;
+    static const int GWposY=30;
+    int state;
+
+    static const int STATE_PREPARATION = 0;
+    static const int STATE_ATWAR = 1;
 
 protected:
     void closeEvent(QCloseEvent *event);
