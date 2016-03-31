@@ -176,7 +176,7 @@ void MainWindow::serverError(QString error)
 {
     QMessageBox::critical(this, "Erreur",error, QMessageBox::Ok);
 }
-
+//**********************Clic de la souris********************
 void MainWindow::mousePressEvent(QMouseEvent *e)
 {
     QPointF pt = ui->graphicsView->mapToScene(e->pos());//récupération de la position
