@@ -2441,6 +2441,77 @@
       <height>28</height>
      </rect>
     </property>
+    <property name="palette">
+     <palette>
+      <active>
+       <colorrole role="WindowText">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>139</red>
+          <green>156</green>
+          <blue>176</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Text">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>139</red>
+          <green>156</green>
+          <blue>176</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </active>
+      <inactive>
+       <colorrole role="WindowText">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>139</red>
+          <green>156</green>
+          <blue>176</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Text">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>139</red>
+          <green>156</green>
+          <blue>176</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </inactive>
+      <disabled>
+       <colorrole role="WindowText">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>127</red>
+          <green>127</green>
+          <blue>127</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Text">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>127</red>
+          <green>127</green>
+          <blue>127</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </disabled>
+     </palette>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
    </widget>
    <widget class="QLabel" name="bateau5">
     <property name="geometry">
@@ -2925,6 +2996,9 @@
       <bold>true</bold>
      </font>
     </property>
+    <property name="cursor" stdset="0">
+     <cursorShape>OpenHandCursor</cursorShape>
+    </property>
     <property name="frameShape">
      <enum>QFrame::NoFrame</enum>
     </property>
@@ -2969,9 +3043,9 @@
       <colorrole role="WindowText">
        <brush brushstyle="SolidPattern">
         <color alpha="255">
-         <red>230</red>
-         <green>230</green>
-         <blue>230</blue>
+         <red>84</red>
+         <green>94</green>
+         <blue>106</blue>
         </color>
        </brush>
       </colorrole>
@@ -3023,18 +3097,18 @@
       <colorrole role="Text">
        <brush brushstyle="SolidPattern">
         <color alpha="255">
-         <red>230</red>
-         <green>230</green>
-         <blue>230</blue>
+         <red>84</red>
+         <green>94</green>
+         <blue>106</blue>
         </color>
        </brush>
       </colorrole>
       <colorrole role="ButtonText">
        <brush brushstyle="SolidPattern">
         <color alpha="255">
-         <red>225</red>
-         <green>225</green>
-         <blue>225</blue>
+         <red>100</red>
+         <green>113</green>
+         <blue>127</blue>
         </color>
        </brush>
       </colorrole>
@@ -3115,9 +3189,9 @@
       <colorrole role="WindowText">
        <brush brushstyle="SolidPattern">
         <color alpha="255">
-         <red>230</red>
-         <green>230</green>
-         <blue>230</blue>
+         <red>84</red>
+         <green>94</green>
+         <blue>106</blue>
         </color>
        </brush>
       </colorrole>
@@ -3169,18 +3243,18 @@
       <colorrole role="Text">
        <brush brushstyle="SolidPattern">
         <color alpha="255">
-         <red>230</red>
-         <green>230</green>
-         <blue>230</blue>
+         <red>84</red>
+         <green>94</green>
+         <blue>106</blue>
         </color>
        </brush>
       </colorrole>
       <colorrole role="ButtonText">
        <brush brushstyle="SolidPattern">
         <color alpha="255">
-         <red>225</red>
-         <green>225</green>
-         <blue>225</blue>
+         <red>100</red>
+         <green>113</green>
+         <blue>127</blue>
         </color>
        </brush>
       </colorrole>
@@ -3818,7 +3892,6 @@
     </property>
     <addaction name="actionNewGame"/>
     <addaction name="actionAbandon"/>
-    <addaction name="separator"/>
     <addaction name="separator"/>
     <addaction name="actionTchatDisable"/>
     <addaction name="actionRactiveTchat"/>
