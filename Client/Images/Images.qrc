@@ -8,5 +8,9 @@
         <file>iconeFenetre.png</file>
         <file>mer.gif</file>
         <file>merCarre.jpg</file>
+        <file>bateau2Vertical.png</file>
+        <file>bateau3Vertical.png</file>
+        <file>bateau4Vertical.png</file>
+        <file>bateau5Vertical.png</file>
     </qresource>
 </RCC>
