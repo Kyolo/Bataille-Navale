@@ -456,7 +456,7 @@
    <string>Bataille Navale</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="Images/Images.qrc">
+   <iconset resource="Images/images.qrc">
     <normaloff>:/iconeFenetre.png</normaloff>:/iconeFenetre.png</iconset>
   </property>
   <property name="windowOpacity">
@@ -3015,8 +3015,8 @@
    <widget class="QPushButton" name="validBoatPosition">
     <property name="geometry">
      <rect>
-      <x>680</x>
-      <y>523</y>
+      <x>640</x>
+      <y>520</y>
       <width>75</width>
       <height>20</height>
      </rect>
@@ -3123,7 +3123,7 @@
      <string>Valider</string>
     </property>
     <property name="icon">
-     <iconset resource="Images/Images.qrc">
+     <iconset>
       <normaloff>:/flècheOK.png</normaloff>:/flècheOK.png</iconset>
     </property>
     <property name="iconSize">
@@ -3142,7 +3142,6 @@
      <bool>true</bool>
     </property>
    </widget>
-   <zorder>validBoatPosition</zorder>
    <zorder>labelImageFond</zorder>
    <zorder>fondBateaux</zorder>
    <zorder>textChat</zorder>
@@ -3157,6 +3156,7 @@
    <zorder>bateau22</zorder>
    <zorder>bateau42</zorder>
    <zorder>bateau33</zorder>
+   <zorder>validBoatPosition</zorder>
    <zorder>lineEditChat</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -4128,7 +4128,7 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
-  <include location="Images/Images.qrc"/>
+  <include location="Images/images.qrc"/>
  </resources>
  <connections/>
 </ui>
