@@ -138,6 +138,7 @@ void MainWindow::on_actionNewGame_triggered()
     ui->bateau21->setPixmap(QPixmap(":/bateau2.png"));
     ui->bateau22->setGeometry(initialPosBoatX+337,initialPosBoatY+45,50,25);
     ui->bateau22->setPixmap(QPixmap(":/bateau2.png"));
+  //Bouton validation position bateaux ->  ui->validBoatPosition->setGeometry(initialPosBoatX,initialPosBoatY,475,95);
     }
 
 //**************************************************************
@@ -154,6 +155,7 @@ void MainWindow::on_actionAbandon_triggered()
          ui->graphicsView->setEnabled(false);
          fond = scene->addPixmap(QPixmap(":/mer.gif"));
          QMessageBox::information(this, "Fin de la partie", "Vous avez abandonné la partie");
+         ui->fondBateaux->setEnabled(false);
        }
     }
 //**********Entrer du texte dans le tchat*******************************
