@@ -6,6 +6,7 @@
 #include <QGraphicsScene>
 #include <QMouseEvent>
 #include "client.h"
+#include "joueur.h"
 
 
 namespace Ui {
@@ -43,10 +44,12 @@ private:
     static const int GWposX=100;
     static const int GWposY=30;
     int state;
-    static const int initialPosBoatX=600;
-    static const int initialPosBoatY=10;
+    static const int initialPosBoatX=60;
+    static const int initialPosBoatY=470;
     static const int STATE_PREPARATION = 0;
     static const int STATE_ATWAR = 1;
+    Joueur *me;
+    int connecte=0;
 
 protected:
     void closeEvent(QCloseEvent *event);

@@ -10,5 +10,6 @@
         <file>bateau3.png</file>
         <file>bateau4.png</file>
         <file>bateau5.png</file>
+        <file>fondBleu.jpg</file>
     </qresource>
 </RCC>
