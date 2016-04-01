@@ -69,6 +69,7 @@ Joueur *Game::getAllPlayer(int *number){
  * @brief Game::forceQuit : Force l'arrêt du serveur et envoie un signal d'abandon pour tout les joueurs
  */
 void Game::forceQuit(){
+    cout<<"Arrêt du serveur..."<<endl;
     for(int i = 0;i<nbJoueurCo;i++){
         lstJoueur[i].giveUp();
         emit playerLost(lstJoueur[i].getName());
@@ -122,8 +123,12 @@ void Game::newPlayer(Joueur j){
  * @param y : la coordonée y
  */
 void Game::onAttack(QString from, QString to, uchar x, uchar y){
+
+    cout<<from.toStdString().c_str()<<" attaque "+to.toStdString().c_str()+" en ("+x+","+y+") ";
+
     //On attaque le joueur correspondant à la case correspondante
     bool hit = this->getPlayerByName(to).attack(x,y);
+    cout<<hit?"Touché !":"Dans l'eau"<<endl;
 
     //Et on envoit les résultat aux deux joueurs concernés
     emit attackResult(to,x,y,hit);
@@ -131,6 +136,7 @@ void Game::onAttack(QString from, QString to, uchar x, uchar y){
 
     //Si le joueur attaqué a perdu
     if(this->getPlayerByName(to).areAllBoatsDestroyed()){
+        cout<<toStdString().c_str()<<" a perdu"<<endl;
         emit playerLost(to);//On prévient les autres joueurs
         nbJoueurEnLice--;//Et on décrémente le nombre de joueur en lice
     }
@@ -143,6 +149,7 @@ void Game::onAttack(QString from, QString to, uchar x, uchar y){
             if(!lstJoueur[i].areAllBoatsDestroyed())//Par définition c'est celui qui n'a pas tout ses bateaux de détruits
                 winner=lstJoueur[i].getName();
         }
+        cout<<winner.toStdString().c_str()<<" a gagné !"<<endl;
         //Et on préviens les autres qu'on a finit
         emit gameFinished(winner);
     }
@@ -154,6 +161,7 @@ void Game::onAttack(QString from, QString to, uchar x, uchar y){
  * @param who : le couard qui abandonne
  */
 void Game::giveUp(QString who){
+    cout<<who.toStdString().c_str()<<" a abandonné(e) la partie"<<endl;
     this->getPlayerByName(who).giveUp();
     emit playerLost(who);
 }
