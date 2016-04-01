@@ -223,12 +223,41 @@ void MainWindow::mousePressEvent(QMouseEvent *e)
         case STATE_PREPARATION:
             break;
         }
-    }else{
-
     }
-
+    updateLabelsPositions();
+    if(boatIsSelected==false)
+    {
+        for (int i=0; i<8; i++)
+        {
+            if(posX>labelRects[i].x() && posX<labelRects[i].width()+labelRects[i].x() && posY>labelRects[i].y()+33 && posY<labelRects[i].height()+labelRects[i].y()+33)
+            {
+                boatClicked=i;
+                boatIsSelected=true;
+            }
+        }
+    }
+}
+void MainWindow::mouseReleaseEvent(QMouseEvent *e)
+{
+    boatIsSelected=false;
+    boatClicked=-1;
 }
 
+void MainWindow::mouseMoveEvent(QMouseEvent *e)
+{
+if(boatIsSelected==true)
+{
+    QPointF pt = ui->graphicsView->mapToScene(e->pos());//récupération de la position
+    int posX=(int)pt.x();
+    int posY = (int)pt.y();
+    updateBoatGeometry(boatClicked, posX, posY);
+}
+}
+
+void MainWindow::mouseDoubleClickEvent(QMouseEvent *e)
+{
+
+}
 void MainWindow::draw()
 {
     QPen pen;
@@ -239,4 +268,58 @@ void MainWindow::draw()
             scene->addRect(0,a*27+1,432,28,pen);
     }
 
+}
+
+void MainWindow::updateLabelsPositions()
+{
+    labelRects[0]=ui->bateau21->geometry();
+    labelRects[1]=ui->bateau22->geometry();
+    labelRects[2]=ui->bateau31->geometry();
+    labelRects[3]=ui->bateau32->geometry();
+    labelRects[4]=ui->bateau33->geometry();
+    labelRects[5]=ui->bateau41->geometry();
+    labelRects[6]=ui->bateau42->geometry();
+    labelRects[7]=ui->bateau5->geometry();
+}
+void MainWindow::updateBoatGeometry(int boat, int x, int y)
+{
+    y=y-33;
+    switch(boat){
+    case 0:
+            ui->bateau21->setGeometry(x, y, 50,25);
+        break;
+    case 1:
+        ui->bateau22->setGeometry(x, y, 50, 25);
+        break;
+    case 2:
+        ui->bateau31->setGeometry(x, y, 75, 25);
+        break;
+    case 3:
+        ui->bateau32->setGeometry(x, y, 75, 25);
+        break;
+    case 4:
+        ui->bateau33->setGeometry(x, y, 75, 25);
+        break;
+    case 5:
+        ui->bateau41->setGeometry(x, y, 100, 25);
+        break;
+    case 6:
+        ui->bateau42->setGeometry(x, y, 100, 25);
+        break;
+    case 7:
+        ui->bateau5->setGeometry(x, y, 125, 25);
+        break;
+    }
+    /*ui->bateau5->setGeometry(initialPosBoatX+15,initialPosBoatY+10,125,25);
+    ui->bateau5->setPixmap(QPixmap(":/bateau5.png"));
+    ui->bateau41->setGeometry(initialPosBoatX+155,initialPosBoatY+10,100,25);
+    ui->bateau41->setPixmap(QPixmap(":/bateau4.png"));
+    ui->bateau42->setGeometry(initialPosBoatX+270,initialPosBoatY+10,100,25);
+    ui->bateau42->setPixmap(QPixmap(":/bateau4.png"));
+    ui->bateau31->setGeometry(initialPosBoatX+385,initialPosBoatY+10,75,25);
+    ui->bateau31->setPixmap(QPixmap(":/bateau3.png"));
+    ui->bateau32->setGeometry(initialPosBoatX+92,initialPosBoatY+45,75,25);
+    ui->bateau32->setPixmap(QPixmap(":/bateau3.png"));
+    ui->bateau33->setGeometry(initialPosBoatX+185,initialPosBoatY+45,75,25);
+    ui->bateau33->setPixmap(QPixmap(":/bateau3.png"));*/
 }
