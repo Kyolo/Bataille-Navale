@@ -9,7 +9,7 @@
 #include <QMovie>
 #include <QGraphicsScene>
 #include <QMouseEvent>
-
+#include <QPixmap>
 #include <stdio.h>
 #include <iostream>
 
@@ -36,6 +36,16 @@ MainWindow::MainWindow(QWidget *parent) :
      ui->labelTchatDisable->setText("Tchat désactivé! \n \n Veuillez d'abord \n vous connecter !");
      state=0;
    // descativation du chat tant que pas connecté
+     ui->bateau2->setGeometry(initialPosBoatX,initialPosBoatY,50,25);
+     ui->bateau2->setPixmap(QPixmap(":/bateau2.png"));
+     ui->bateau5->setGeometry(initialPosBoatX+75,initialPosBoatY,125,25);
+     ui->bateau5->setPixmap(QPixmap(":/bateau5.png"));
+     ui->bateau4->setGeometry(initialPosBoatX+100,initialPosBoatY+30,100,25);
+     ui->bateau4->setPixmap(QPixmap(":/bateau4.png"));
+     ui->bateau31->setGeometry(initialPosBoatX,initialPosBoatY+30,75,25);
+     ui->bateau31->setPixmap(QPixmap(":/bateau3.png"));
+     ui->bateau32->setGeometry(initialPosBoatX+50,initialPosBoatY+60,75,25);
+     ui->bateau32->setPixmap(QPixmap(":/bateau3.png"));
 }
 MainWindow::~MainWindow()
 {
@@ -134,7 +144,7 @@ void MainWindow::on_actionAbandon_triggered()
 //**********Entrer du texte dans le tchat*******************************
 void MainWindow::on_pushButtonOKTchat_clicked ()
    {
-    connexion->send(MessageHeader+nomJoueur+" : "+ui->lineEditChat->toPlainText());
+    connexion->send(MessageHeader+nomJoueur+" : "+ui->lineEditChat->text());
     ui->lineEditChat->setText("");
    }
 //*******************Ecriture des messages dans le tchat*****************************************************
@@ -180,24 +190,22 @@ void MainWindow::serverError(QString error)
 void MainWindow::mousePressEvent(QMouseEvent *e)
 {
     QPointF pt = ui->graphicsView->mapToScene(e->pos());//récupération de la position
-    pressedX=((int)pt.x()-GWposX-1)/27;
-    pressedY=((int)pt.y()-32-GWposY-1)/27;
-    cout<<"positionX "<<pressedX<<endl;
-    cout <<"positionY "<<pressedY<<endl;
+    if(((int)pt.x>=100)&&((int)pt.x<=534)&&((int)pt.y>=30)&&((int)pt.Y<=464))
+    {
+        pressedX=((int)pt.x()-GWposX-1)/27;
+        pressedY=((int)pt.y()-32-GWposY-1)/27;
+        cout<<"positionX "<<pressedX<<endl;
+        cout <<"positionY "<<pressedY<<endl;
 
-    if(pressedX>15||pressedX<0||pressedY>15||pressedY<0)
-        return;
+        switch(state){
+        case STATE_ATWAR:
 
-    //Gestion de l'attaque et/ou du placement des bateaux
-    switch(state){
-    case STATE_ATWAR:
-
-        break;
-    case STATE_PREPARATION:
-        break;
+            break;
+        case STATE_PREPARATION:
+            break;
+        }
     }
-
-
+        return;
 }
 
 void MainWindow::draw()

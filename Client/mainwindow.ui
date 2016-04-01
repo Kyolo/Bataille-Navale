@@ -888,7 +888,7 @@
     <property name="geometry">
      <rect>
       <x>600</x>
-      <y>90</y>
+      <y>100</y>
       <width>201</width>
       <height>421</height>
      </rect>
@@ -1250,9 +1250,9 @@
     <property name="geometry">
      <rect>
       <x>769</x>
-      <y>508</y>
+      <y>518</y>
       <width>32</width>
-      <height>41</height>
+      <height>31</height>
      </rect>
     </property>
     <property name="palette">
@@ -2432,20 +2432,109 @@
      <enum>Qt::ScrollBarAlwaysOff</enum>
     </property>
    </widget>
-   <widget class="QTextEdit" name="lineEditChat">
+   <widget class="QLineEdit" name="lineEditChat">
     <property name="geometry">
      <rect>
       <x>600</x>
-      <y>510</y>
+      <y>520</y>
       <width>171</width>
-      <height>41</height>
+      <height>31</height>
      </rect>
     </property>
-    <property name="lineWrapColumnOrWidth">
-     <number>0</number>
+   </widget>
+   <widget class="QLabel" name="bateau5">
+    <property name="geometry">
+     <rect>
+      <x>680</x>
+      <y>10</y>
+      <width>125</width>
+      <height>25</height>
+     </rect>
     </property>
-    <property name="textInteractionFlags">
-     <set>Qt::TextEditorInteraction</set>
+    <property name="minimumSize">
+     <size>
+      <width>125</width>
+      <height>25</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>image1</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="bateau2">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>10</y>
+      <width>50</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>50</width>
+      <height>25</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>image 2</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="bateau4">
+    <property name="geometry">
+     <rect>
+      <x>700</x>
+      <y>40</y>
+      <width>100</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>100</width>
+      <height>25</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>bateau3</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="bateau31">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>40</y>
+      <width>75</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>75</width>
+      <height>25</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>bateau3</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="bateau32">
+    <property name="geometry">
+     <rect>
+      <x>650</x>
+      <y>70</y>
+      <width>75</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>75</width>
+      <height>25</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>bateau3</string>
     </property>
    </widget>
    <zorder>labelImageFond</zorder>
@@ -2454,6 +2543,11 @@
    <zorder>labelTchatDisable</zorder>
    <zorder>graphicsView</zorder>
    <zorder>lineEditChat</zorder>
+   <zorder>bateau5</zorder>
+   <zorder>bateau2</zorder>
+   <zorder>bateau4</zorder>
+   <zorder>bateau31</zorder>
+   <zorder>bateau32</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

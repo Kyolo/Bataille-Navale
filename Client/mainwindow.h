@@ -43,7 +43,8 @@ private:
     static const int GWposX=100;
     static const int GWposY=30;
     int state;
-
+    static const int initialPosBoatX=600;
+    static const int initialPosBoatY=10;
     static const int STATE_PREPARATION = 0;
     static const int STATE_ATWAR = 1;
 
