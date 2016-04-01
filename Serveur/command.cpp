@@ -35,6 +35,7 @@ void CommandManager::useCommand(QString command, QStringList args ){
             cout<<"\tsay <message> : Envoie un message aux clients connectés"<<endl;
             cout<<"\tdisp <joueur> : Affiche la grille du (ou des) joueur(s) demandé(s)"<<endl;
             cout<<"\tstop : Force l'arret du serveur et provoque l'abandon forcé des joueurs"<<endl;
+            cout<<"\tlist : Affiche la liste des joueurs connectés"<<endl;
         }
         return;
     }
