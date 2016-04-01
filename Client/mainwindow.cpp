@@ -35,17 +35,19 @@ MainWindow::MainWindow(QWidget *parent) :
      ui->pushButtonOKTchat->setEnabled(false);
      ui->labelTchatDisable->setText("Tchat désactivé! \n \n Veuillez d'abord \n vous connecter !");
      state=0;
-   // descativation du chat tant que pas connecté
-     ui->bateau2->setGeometry(initialPosBoatX,initialPosBoatY,50,25);
+     ui->labelFondBateaux->setGeometry(initialPosBoatX,initialPosBoatY,500,95);
+     ui->labelFondBateaux->setPixmap(QPixmap(":/fondBleu.jpg"));
+     ui->bateau2->setGeometry(initialPosBoatX+15,initialPosBoatY+15,50,25);
      ui->bateau2->setPixmap(QPixmap(":/bateau2.png"));
-     ui->bateau5->setGeometry(initialPosBoatX+75,initialPosBoatY,125,25);
+     ui->bateau5->setGeometry(initialPosBoatX+100,initialPosBoatY+15,125,25);
      ui->bateau5->setPixmap(QPixmap(":/bateau5.png"));
-     ui->bateau4->setGeometry(initialPosBoatX+100,initialPosBoatY+30,100,25);
+     ui->bateau4->setGeometry(initialPosBoatX+225,initialPosBoatY+15,100,25);
      ui->bateau4->setPixmap(QPixmap(":/bateau4.png"));
      ui->bateau31->setGeometry(initialPosBoatX,initialPosBoatY+30,75,25);
      ui->bateau31->setPixmap(QPixmap(":/bateau3.png"));
      ui->bateau32->setGeometry(initialPosBoatX+50,initialPosBoatY+60,75,25);
      ui->bateau32->setPixmap(QPixmap(":/bateau3.png"));
+
 }
 MainWindow::~MainWindow()
 {
@@ -206,8 +208,10 @@ void MainWindow::mousePressEvent(QMouseEvent *e)
         case STATE_PREPARATION:
             break;
         }
+    }else{
+
     }
-        return;
+
 }
 
 void MainWindow::draw()
