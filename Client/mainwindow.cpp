@@ -56,7 +56,7 @@ MainWindow::~MainWindow()
 //**********************************************************************************
 //**********************************************************************************
 //**********************************************************************************
-int connecte=0;
+
 
 //*****Quitter*********************************************************
 //A partir du menu
@@ -65,7 +65,10 @@ void MainWindow::on_actionQuitter_triggered ()
     int reponseQuitter = QMessageBox::information(this, "Fermeture du programme", "Voulez vous fermer le programme et quitter la partie en cours?", QMessageBox::Yes | QMessageBox::No);
        if (reponseQuitter == QMessageBox::Yes)
        {
-           connexion->send(GiveUpHeader+this->nomJoueur);
+           if(connecte==1)
+           {
+                connexion->send(GiveUpHeader+me->getName());
+           }
            isClosed=true;
         close();
        }
@@ -81,7 +84,10 @@ void MainWindow::closeEvent(QCloseEvent *event)
         int reponseQuitter = QMessageBox::information(this, "Fermeture du programme", "Voulez vous fermer le programme et quitter la partie en cours?", QMessageBox::Yes | QMessageBox::No);
            if (reponseQuitter == QMessageBox::Yes)
            {
-               connexion->send(GiveUpHeader+this->nomJoueur);
+               if(connecte==1)
+               {
+                    connexion->send(GiveUpHeader+me->getName());
+               }
                event->accept();
 
            }
@@ -105,6 +111,8 @@ void MainWindow::on_actionNewGame_triggered()
     {
     bool ok;
     nomJoueur = QInputDialog::getText(this, tr("Nom du joueur"), tr("Votre nom :"), QLineEdit::Normal,QDir::home().dirName(), &ok);
+    me=new Joueur(nomJoueur);
+    me->setPerson(true);
     ui->actionNewGame->setEnabled(false);
     ui->actionAbandon->setEnabled(true);
     ui->graphicsView->setEnabled(true);
@@ -135,7 +143,7 @@ void MainWindow::on_actionAbandon_triggered()
     int reponseAbandon = QMessageBox::information(this, "Abandon de la partie ?", "Voulez vraiment abandonner la partie en cours? Toutes vos données seront perdues.", QMessageBox::Yes | QMessageBox::No);
        if (reponseAbandon == QMessageBox::Yes)
        {
-         connexion->send(GiveUpHeader+this->nomJoueur);
+         connexion->send(GiveUpHeader+me->getName());
          ui->actionNewGame->setEnabled(true);
          ui->actionAbandon->setEnabled(false);
          ui->graphicsView->setEnabled(false);
@@ -146,7 +154,7 @@ void MainWindow::on_actionAbandon_triggered()
 //**********Entrer du texte dans le tchat*******************************
 void MainWindow::on_pushButtonOKTchat_clicked ()
    {
-    connexion->send(MessageHeader+nomJoueur+" : "+ui->lineEditChat->text());
+    connexion->send(MessageHeader+me->getName()+" : "+ui->lineEditChat->text());
     ui->lineEditChat->setText("");
    }
 //*******************Ecriture des messages dans le tchat*****************************************************
@@ -194,7 +202,7 @@ void MainWindow::mousePressEvent(QMouseEvent *e)
     QPointF pt = ui->graphicsView->mapToScene(e->pos());//récupération de la position
     int posX=(int)pt.x();
     int posY = (int)pt.y();
-    if(posX>=100 && posX<=534 && posY>=30 && posY<=464)
+    if(posX>=100 && posX<=534 && posY>=30 && posY<=487)
     {
         pressedX=((int)pt.x()-GWposX-1)/27;
         pressedY=((int)pt.y()-32-GWposY-1)/27;
