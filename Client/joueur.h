@@ -8,6 +8,7 @@ class Joueur
 public:
     Joueur(QString name);
     QString playerName;
+
 };
 
 #endif // JOUEUR_H

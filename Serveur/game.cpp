@@ -124,11 +124,11 @@ void Game::newPlayer(Joueur j){
  */
 void Game::onAttack(QString from, QString to, uchar x, uchar y){
 
-    cout<<from.toStdString().c_str()<<" attaque "+to.toStdString().c_str()+" en ("+x+","+y+") ";
+    cout<<from.toStdString()<<" attaque "<<to.toStdString()<<" en ("<<x<<","<<y<<") ";
 
     //On attaque le joueur correspondant à la case correspondante
     bool hit = this->getPlayerByName(to).attack(x,y);
-    cout<<hit?"Touché !":"Dans l'eau"<<endl;
+    cout<<(hit?"Touché !":"Dans l'eau")<<endl;
 
     //Et on envoit les résultat aux deux joueurs concernés
     emit attackResult(to,x,y,hit);
@@ -136,7 +136,7 @@ void Game::onAttack(QString from, QString to, uchar x, uchar y){
 
     //Si le joueur attaqué a perdu
     if(this->getPlayerByName(to).areAllBoatsDestroyed()){
-        cout<<toStdString().c_str()<<" a perdu"<<endl;
+        cout<<to.toStdString().c_str()<<" a perdu"<<endl;
         emit playerLost(to);//On prévient les autres joueurs
         nbJoueurEnLice--;//Et on décrémente le nombre de joueur en lice
     }
