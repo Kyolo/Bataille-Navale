@@ -14,15 +14,14 @@ messageGestion::messageGestion()
 
 void messageGestion::inputMessage(QString message)
 {
-    if(message[0]==MessageHeader)
+    if(message[0]==Header::Message)
     {
         emit tchat(message);
     }
-    else if (message[0]==GiveUpHeader)
+    else if (message[0]==Header::GiveUp)
     {
         QString playerName;
         playerName=message.remove(0,1);
-        cout << "le joueur "<< playerName.toStdString() <<" a quitte le jeu"<<endl;
         emit splayerGiveUp(playerName);
     }
 }

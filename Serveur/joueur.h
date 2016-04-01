@@ -16,7 +16,7 @@ public:
     void giveUp();
     QString getName();
     char getStatusAt(uchar x, uchar y);
-    static const int DEFAULT_BOAT_NUMBER = 7;
+    static const int DEFAULT_BOAT_NUMBER = 8;
 
 private:
     Bateau * lstBoat;
