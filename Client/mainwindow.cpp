@@ -34,7 +34,25 @@ MainWindow::MainWindow(QWidget *parent) :
      ui->lineEditChat->setEnabled(false);
      ui->pushButtonOKTchat->setEnabled(false);
      ui->labelTchatDisable->setText("Tchat désactivé! \n \n Veuillez d'abord \n vous connecter !");
-     state=0;   
+     state=0;
+    /* ui->labelFondBateaux->setGeometry(initialPosBoatX,initialPosBoatY,475,95);
+     ui->labelFondBateaux->setPixmap(QPixmap(":/fondBleu.jpg"));*/
+     ui->bateau5->setGeometry(initialPosBoatX+15,initialPosBoatY+10,125,25);
+     ui->bateau5->setPixmap(QPixmap(":/bateau5.png"));
+     ui->bateau41->setGeometry(initialPosBoatX+155,initialPosBoatY+10,100,25);
+     ui->bateau41->setPixmap(QPixmap(":/bateau4.png"));
+     ui->bateau42->setGeometry(initialPosBoatX+270,initialPosBoatY+10,100,25);
+     ui->bateau42->setPixmap(QPixmap(":/bateau4.png"));
+     ui->bateau31->setGeometry(initialPosBoatX+385,initialPosBoatY+10,75,25);
+     ui->bateau31->setPixmap(QPixmap(":/bateau3.png"));
+     ui->bateau32->setGeometry(initialPosBoatX+92,initialPosBoatY+45,75,25);
+     ui->bateau32->setPixmap(QPixmap(":/bateau3.png"));
+     ui->bateau33->setGeometry(initialPosBoatX+185,initialPosBoatY+45,75,25);
+     ui->bateau33->setPixmap(QPixmap(":/bateau3.png"));
+     ui->bateau21->setGeometry(initialPosBoatX+272,initialPosBoatY+45,50,25);
+     ui->bateau21->setPixmap(QPixmap(":/bateau2.png"));
+     ui->bateau22->setGeometry(initialPosBoatX+337,initialPosBoatY+45,50,25);
+     ui->bateau22->setPixmap(QPixmap(":/bateau2.png"));
 }
 MainWindow::~MainWindow()
 {
@@ -120,25 +138,6 @@ void MainWindow::on_actionNewGame_triggered()
     ui->lineEditChat->setEnabled(true);
     ui->pushButtonOKTchat->setEnabled(true);
     ui->labelTchatDisable->setText("");
-    ui->fondBateaux->setEnabled(true);
-    ui->fondBateaux->setGeometry(initialPosBoatX,initialPosBoatY,475,95);
-    ui->bateau5->setGeometry(initialPosBoatX+15,initialPosBoatY+10,125,25);
-    ui->bateau5->setPixmap(QPixmap(":/bateau5.png"));
-    ui->bateau41->setGeometry(initialPosBoatX+155,initialPosBoatY+10,100,25);
-    ui->bateau41->setPixmap(QPixmap(":/bateau4.png"));
-    ui->bateau42->setGeometry(initialPosBoatX+270,initialPosBoatY+10,100,25);
-    ui->bateau42->setPixmap(QPixmap(":/bateau4.png"));
-    ui->bateau31->setGeometry(initialPosBoatX+385,initialPosBoatY+10,75,25);
-    ui->bateau31->setPixmap(QPixmap(":/bateau3.png"));
-    ui->bateau32->setGeometry(initialPosBoatX+92,initialPosBoatY+45,75,25);
-    ui->bateau32->setPixmap(QPixmap(":/bateau3.png"));
-    ui->bateau33->setGeometry(initialPosBoatX+185,initialPosBoatY+45,75,25);
-    ui->bateau33->setPixmap(QPixmap(":/bateau3.png"));
-    ui->bateau21->setGeometry(initialPosBoatX+272,initialPosBoatY+45,50,25);
-    ui->bateau21->setPixmap(QPixmap(":/bateau2.png"));
-    ui->bateau22->setGeometry(initialPosBoatX+337,initialPosBoatY+45,50,25);
-    ui->bateau22->setPixmap(QPixmap(":/bateau2.png"));
-  //Bouton validation position bateaux ->  ui->validBoatPosition->setGeometry(initialPosBoatX,initialPosBoatY,475,95);
     }
 
 //**************************************************************
@@ -155,7 +154,6 @@ void MainWindow::on_actionAbandon_triggered()
          ui->graphicsView->setEnabled(false);
          fond = scene->addPixmap(QPixmap(":/mer.gif"));
          QMessageBox::information(this, "Fin de la partie", "Vous avez abandonné la partie");
-         ui->fondBateaux->setEnabled(false);
        }
     }
 //**********Entrer du texte dans le tchat*******************************
@@ -209,21 +207,6 @@ void MainWindow::mousePressEvent(QMouseEvent *e)
     QPointF pt = ui->graphicsView->mapToScene(e->pos());//récupération de la position
     int posX=(int)pt.x();
     int posY = (int)pt.y();
-    if(posX>=100 && posX<=534 && posY>=63 && posY<=493)
-    {
-        pressedX=((int)pt.x()-GWposX-1)/27;
-        pressedY=((int)pt.y()-32-GWposY-1)/27;
-        cout<<"positionX "<<pressedX<<endl;
-        cout <<"positionY "<<pressedY<<endl;
-
-        switch(state){
-        case STATE_ATWAR:
-
-            break;
-        case STATE_PREPARATION:
-            break;
-        }
-    }
     updateLabelsPositions();
     if(boatIsSelected==false)
     {
@@ -239,6 +222,24 @@ void MainWindow::mousePressEvent(QMouseEvent *e)
 }
 void MainWindow::mouseReleaseEvent(QMouseEvent *e)
 {
+    QPointF pt = ui->graphicsView->mapToScene(e->pos());//récupération de la position
+    int posX=(int)pt.x();
+    int posY = (int)pt.y();
+    if(posX>=100 && posX<=534 && posY>=30 && posY<=487)
+    {
+        pressedX=((int)pt.x()-GWposX-1)/27;
+        pressedY=((int)pt.y()-32-GWposY-1)/27;
+        cout<<"positionX "<<pressedX<<endl;
+        cout <<"positionY "<<pressedY<<endl;
+
+        switch(state){
+        case STATE_ATWAR:
+
+            break;
+        case STATE_PREPARATION:
+            break;
+        }
+    }
     boatIsSelected=false;
     boatClicked=-1;
 }
@@ -256,7 +257,16 @@ if(boatIsSelected==true)
 
 void MainWindow::mouseDoubleClickEvent(QMouseEvent *e)
 {
-
+    QPointF pt = ui->graphicsView->mapToScene(e->pos());//récupération de la position
+    int posX=(int)pt.x();
+    int posY = (int)pt.y();
+    for (int i=0; i<8; i++)
+    {
+        if(posX>labelRects[i].x() && posX<labelRects[i].width()+labelRects[i].x() && posY>labelRects[i].y()+33 && posY<labelRects[i].height()+labelRects[i].y()+33)
+        {
+            boatClicked=i;
+        }
+    }
 }
 void MainWindow::draw()
 {
@@ -281,6 +291,7 @@ void MainWindow::updateLabelsPositions()
     labelRects[6]=ui->bateau42->geometry();
     labelRects[7]=ui->bateau5->geometry();
 }
+
 void MainWindow::updateBoatGeometry(int boat, int x, int y)
 {
     y=y-33;
@@ -309,17 +320,6 @@ void MainWindow::updateBoatGeometry(int boat, int x, int y)
     case 7:
         ui->bateau5->setGeometry(x, y, 125, 25);
         break;
+    case 8:
     }
-    /*ui->bateau5->setGeometry(initialPosBoatX+15,initialPosBoatY+10,125,25);
-    ui->bateau5->setPixmap(QPixmap(":/bateau5.png"));
-    ui->bateau41->setGeometry(initialPosBoatX+155,initialPosBoatY+10,100,25);
-    ui->bateau41->setPixmap(QPixmap(":/bateau4.png"));
-    ui->bateau42->setGeometry(initialPosBoatX+270,initialPosBoatY+10,100,25);
-    ui->bateau42->setPixmap(QPixmap(":/bateau4.png"));
-    ui->bateau31->setGeometry(initialPosBoatX+385,initialPosBoatY+10,75,25);
-    ui->bateau31->setPixmap(QPixmap(":/bateau3.png"));
-    ui->bateau32->setGeometry(initialPosBoatX+92,initialPosBoatY+45,75,25);
-    ui->bateau32->setPixmap(QPixmap(":/bateau3.png"));
-    ui->bateau33->setGeometry(initialPosBoatX+185,initialPosBoatY+45,75,25);
-    ui->bateau33->setPixmap(QPixmap(":/bateau3.png"));*/
 }
