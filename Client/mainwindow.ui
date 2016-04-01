@@ -2445,8 +2445,8 @@
    <widget class="QLabel" name="bateau5">
     <property name="geometry">
      <rect>
-      <x>680</x>
-      <y>10</y>
+      <x>700</x>
+      <y>20</y>
       <width>125</width>
       <height>25</height>
      </rect>
@@ -2458,33 +2458,33 @@
      </size>
     </property>
     <property name="text">
-     <string>image1</string>
+     <string>bateau 5</string>
     </property>
    </widget>
-   <widget class="QLabel" name="bateau2">
-    <property name="geometry">
-     <rect>
-      <x>620</x>
-      <y>10</y>
-      <width>50</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>50</width>
-      <height>25</height>
-     </size>
-    </property>
-    <property name="text">
-     <string>image 2</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="bateau4">
+   <widget class="QLabel" name="bateau21">
     <property name="geometry">
      <rect>
       <x>700</x>
       <y>40</y>
+      <width>81</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>50</width>
+      <height>25</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>bateau 21</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="bateau41">
+    <property name="geometry">
+     <rect>
+      <x>700</x>
+      <y>0</y>
       <width>100</width>
       <height>25</height>
      </rect>
@@ -2496,15 +2496,15 @@
      </size>
     </property>
     <property name="text">
-     <string>bateau3</string>
+     <string>bateau 41</string>
     </property>
    </widget>
    <widget class="QLabel" name="bateau31">
     <property name="geometry">
      <rect>
-      <x>620</x>
+      <x>614</x>
       <y>40</y>
-      <width>75</width>
+      <width>81</width>
       <height>25</height>
      </rect>
     </property>
@@ -2515,14 +2515,14 @@
      </size>
     </property>
     <property name="text">
-     <string>bateau3</string>
+     <string>bateau31</string>
     </property>
    </widget>
    <widget class="QLabel" name="bateau32">
     <property name="geometry">
      <rect>
-      <x>650</x>
-      <y>70</y>
+      <x>620</x>
+      <y>60</y>
       <width>75</width>
       <height>25</height>
      </rect>
@@ -2534,7 +2534,7 @@
      </size>
     </property>
     <property name="text">
-     <string>bateau3</string>
+     <string>bateau32</string>
     </property>
    </widget>
    <widget class="QLabel" name="labelFondBateaux">
@@ -3100,6 +3100,45 @@
      <string/>
     </property>
    </widget>
+   <widget class="QLabel" name="bateau22">
+    <property name="geometry">
+     <rect>
+      <x>700</x>
+      <y>62</y>
+      <width>71</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>bateau 22</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="bateau42">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>0</y>
+      <width>71</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>bateau 42</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="bateau33">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>20</y>
+      <width>71</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>bateau 33</string>
+    </property>
+   </widget>
    <zorder>labelImageFond</zorder>
    <zorder>labelFondBateaux</zorder>
    <zorder>textChat</zorder>
@@ -3108,10 +3147,13 @@
    <zorder>graphicsView</zorder>
    <zorder>lineEditChat</zorder>
    <zorder>bateau5</zorder>
-   <zorder>bateau2</zorder>
-   <zorder>bateau4</zorder>
+   <zorder>bateau21</zorder>
+   <zorder>bateau41</zorder>
    <zorder>bateau31</zorder>
    <zorder>bateau32</zorder>
+   <zorder>bateau22</zorder>
+   <zorder>bateau42</zorder>
+   <zorder>bateau33</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

@@ -35,19 +35,24 @@ MainWindow::MainWindow(QWidget *parent) :
      ui->pushButtonOKTchat->setEnabled(false);
      ui->labelTchatDisable->setText("Tchat désactivé! \n \n Veuillez d'abord \n vous connecter !");
      state=0;
-     ui->labelFondBateaux->setGeometry(initialPosBoatX,initialPosBoatY,500,95);
+     ui->labelFondBateaux->setGeometry(initialPosBoatX,initialPosBoatY,475,95);
      ui->labelFondBateaux->setPixmap(QPixmap(":/fondBleu.jpg"));
-     ui->bateau2->setGeometry(initialPosBoatX+15,initialPosBoatY+15,50,25);
-     ui->bateau2->setPixmap(QPixmap(":/bateau2.png"));
-     ui->bateau5->setGeometry(initialPosBoatX+100,initialPosBoatY+15,125,25);
+     ui->bateau5->setGeometry(initialPosBoatX+15,initialPosBoatY+10,125,25);
      ui->bateau5->setPixmap(QPixmap(":/bateau5.png"));
-     ui->bateau4->setGeometry(initialPosBoatX+225,initialPosBoatY+15,100,25);
-     ui->bateau4->setPixmap(QPixmap(":/bateau4.png"));
-     ui->bateau31->setGeometry(initialPosBoatX,initialPosBoatY+30,75,25);
+     ui->bateau41->setGeometry(initialPosBoatX+155,initialPosBoatY+10,100,25);
+     ui->bateau41->setPixmap(QPixmap(":/bateau4.png"));
+     ui->bateau42->setGeometry(initialPosBoatX+270,initialPosBoatY+10,100,25);
+     ui->bateau42->setPixmap(QPixmap(":/bateau4.png"));
+     ui->bateau31->setGeometry(initialPosBoatX+385,initialPosBoatY+10,75,25);
      ui->bateau31->setPixmap(QPixmap(":/bateau3.png"));
-     ui->bateau32->setGeometry(initialPosBoatX+50,initialPosBoatY+60,75,25);
+     ui->bateau32->setGeometry(initialPosBoatX+92,initialPosBoatY+45,75,25);
      ui->bateau32->setPixmap(QPixmap(":/bateau3.png"));
-
+     ui->bateau33->setGeometry(initialPosBoatX+185,initialPosBoatY+45,75,25);
+     ui->bateau33->setPixmap(QPixmap(":/bateau3.png"));
+     ui->bateau21->setGeometry(initialPosBoatX+272,initialPosBoatY+45,50,25);
+     ui->bateau21->setPixmap(QPixmap(":/bateau2.png"));
+     ui->bateau22->setGeometry(initialPosBoatX+337,initialPosBoatY+45,50,25);
+     ui->bateau22->setPixmap(QPixmap(":/bateau2.png"));
 }
 MainWindow::~MainWindow()
 {
