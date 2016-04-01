@@ -2,5 +2,6 @@
 
 Joueur::Joueur(QString name)
 {
+    playerName=name;
 }
 

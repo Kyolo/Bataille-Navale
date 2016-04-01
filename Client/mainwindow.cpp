@@ -190,7 +190,9 @@ void MainWindow::serverError(QString error)
 void MainWindow::mousePressEvent(QMouseEvent *e)
 {
     QPointF pt = ui->graphicsView->mapToScene(e->pos());//récupération de la position
-    if(((int)pt.x>=100)&&((int)pt.x<=534)&&((int)pt.y>=30)&&((int)pt.Y<=464))
+    int posX=(int)pt.x();
+    int posY = (int)pt.y();
+    if(posX>=100 && posX<=534 && posY>=30 && posY<=464)
     {
         pressedX=((int)pt.x()-GWposX-1)/27;
         pressedY=((int)pt.y()-32-GWposY-1)/27;
