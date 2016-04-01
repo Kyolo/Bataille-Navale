@@ -320,6 +320,5 @@ void MainWindow::updateBoatGeometry(int boat, int x, int y)
     case 7:
         ui->bateau5->setGeometry(x, y, 125, 25);
         break;
-    case 8:
     }
 }
