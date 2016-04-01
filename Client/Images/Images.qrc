@@ -1,19 +1,12 @@
 <RCC>
     <qresource prefix="/">
-        <file>iconeFenetre.png</file>
-        <file>mer.gif</file>
-        <file>carteFond.jpg</file>
-        <file>carteFondFlou.jpg</file>
-        <file>imageTransparente.png</file>
-        <file>merCarre.jpg</file>
         <file>bateau2.png</file>
         <file>bateau3.png</file>
         <file>bateau4.png</file>
         <file>bateau5.png</file>
-<<<<<<< HEAD
-        <file>fondBleu.jpg</file>
-        <file>flècheOK.png</file>
-=======
->>>>>>> e5c556ecba53b573861dff32661883557809bb30
+        <file>carteFondFlou.jpg</file>
+        <file>iconeFenetre.png</file>
+        <file>mer.gif</file>
+        <file>merCarre.jpg</file>
     </qresource>
 </RCC>

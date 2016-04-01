@@ -25,7 +25,7 @@ HEADERS  += mainwindow.h \
 FORMS    += mainwindow.ui
 
 RESOURCES += \
-    Images/Images.qrc
+    Images/images.qrc
 
 DISTFILES += \
     Sons/sonchat.wav \
