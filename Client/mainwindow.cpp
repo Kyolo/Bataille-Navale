@@ -253,6 +253,7 @@ if(boatIsSelected==true)
     QPointF pt = ui->graphicsView->mapToScene(e->pos());//récupération de la position
     int posX=(int)pt.x();
     int posY = (int)pt.y();
+
     updateBoatGeometry(boatClicked, posX, posY);
 }
 }
@@ -262,11 +263,13 @@ void MainWindow::mouseDoubleClickEvent(QMouseEvent *e)
     QPointF pt = ui->graphicsView->mapToScene(e->pos());//récupération de la position
     int posX=(int)pt.x();
     int posY = (int)pt.y();
+    updateLabelsPositions();
     for (int i=0; i<8; i++)
     {
         if(posX>labelRects[i].x() && posX<labelRects[i].width()+labelRects[i].x() && posY>labelRects[i].y()+33 && posY<labelRects[i].height()+labelRects[i].y()+33)
         {
             boatClicked=i;
+            turnImage(i, posX, posY);
         }
     }
 }
@@ -299,7 +302,7 @@ void MainWindow::updateBoatGeometry(int boat, int x, int y)
     y=y-33;
     switch(boat){
     case 0:
-            ui->bateau21->setGeometry(x, y, 50,25);
+              ui->bateau21->setGeometry(x, y, labelRects[boat].width(), labelRects[boat].height());
         break;
     case 1:
         ui->bateau22->setGeometry(x, y, 50, 25);
@@ -322,5 +325,46 @@ void MainWindow::updateBoatGeometry(int boat, int x, int y)
     case 7:
         ui->bateau5->setGeometry(x, y, 125, 25);
         break;
+    }
+}
+
+void MainWindow::turnImage(int boat, int x, int y)
+{
+    y=y-33;//correction des pixels de la barre de menu
+    switch(boat){
+    case 0:
+        if(labelRects[boat].width()>labelRects[boat].height())
+        {
+             ui->bateau21->setGeometry(x, y, labelRects[boat].height(),labelRects[boat].width());
+             ui->bateau21->setPixmap(QPixmap(":/bateau2Vertical.png"));
+        }
+        else
+        {
+            ui->bateau21->setGeometry(x, y, labelRects[boat].height(), labelRects[boat].width());
+            ui->bateau21->setPixmap(QPixmap(":/bateau2.png"));
+        }
+        break;
+    case 1:
+        ui->bateau22->setGeometry(x, y, 50, 25);
+        break;
+    case 2:
+        ui->bateau31->setGeometry(x, y, 75, 25);
+        break;
+    case 3:
+        ui->bateau32->setGeometry(x, y, 75, 25);
+        break;
+    case 4:
+        ui->bateau33->setGeometry(x, y, 75, 25);
+        break;
+    case 5:
+        ui->bateau41->setGeometry(x, y, 100, 25);
+        break;
+    case 6:
+        ui->bateau42->setGeometry(x, y, 100, 25);
+        break;
+    case 7:
+        ui->bateau5->setGeometry(x, y, 125, 25);
+        break;
+        updateLabelsPositions();
     }
 }

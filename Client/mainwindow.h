@@ -59,6 +59,7 @@ private:
     int boatClicked=-1;
     bool boatIsSelected=false;
     void updateBoatGeometry(int boat, int x, int y);
+    void turnImage(int boat, int x, int y);
 
 protected:
     void closeEvent(QCloseEvent *event);
