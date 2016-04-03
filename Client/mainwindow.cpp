@@ -138,6 +138,7 @@ void MainWindow::on_actionNewGame_triggered()
     ui->bateau21->setPixmap(QPixmap(":/bateau2.png"));
     ui->bateau22->setGeometry(initialPosBoatX+337,initialPosBoatY+45,50,25);
     ui->bateau22->setPixmap(QPixmap(":/bateau2.png"));
+    ui->RAZBateaux->setGeometry(initialPosBoatX-19,initialPosBoatY-2,20,95);
     // bouton validation position bateaux -> ui->validBoatPosition->setGeometry(initialPosBoatX,initialPosBoatY,475,95);
     }
 
@@ -367,4 +368,24 @@ void MainWindow::turnImage(int boat, int x, int y)
         break;
         updateLabelsPositions();
     }
+}
+
+void MainWindow::on_RAZBateaux_clicked()
+{
+    ui->bateau5->setGeometry(initialPosBoatX+15,initialPosBoatY+10,125,25);
+    ui->bateau5->setPixmap(QPixmap(":/bateau5.png"));
+    ui->bateau41->setGeometry(initialPosBoatX+155,initialPosBoatY+10,100,25);
+    ui->bateau41->setPixmap(QPixmap(":/bateau4.png"));
+    ui->bateau42->setGeometry(initialPosBoatX+270,initialPosBoatY+10,100,25);
+    ui->bateau42->setPixmap(QPixmap(":/bateau4.png"));
+    ui->bateau31->setGeometry(initialPosBoatX+385,initialPosBoatY+10,75,25);
+    ui->bateau31->setPixmap(QPixmap(":/bateau3.png"));
+    ui->bateau32->setGeometry(initialPosBoatX+92,initialPosBoatY+45,75,25);
+    ui->bateau32->setPixmap(QPixmap(":/bateau3.png"));
+    ui->bateau33->setGeometry(initialPosBoatX+185,initialPosBoatY+45,75,25);
+    ui->bateau33->setPixmap(QPixmap(":/bateau3.png"));
+    ui->bateau21->setGeometry(initialPosBoatX+272,initialPosBoatY+45,50,25);
+    ui->bateau21->setPixmap(QPixmap(":/bateau2.png"));
+    ui->bateau22->setGeometry(initialPosBoatX+337,initialPosBoatY+45,50,25);
+    ui->bateau22->setPixmap(QPixmap(":/bateau2.png"));
 }

@@ -29,6 +29,7 @@ public slots:
  void on_actionAbandon_triggered ();
  void on_actionTchatDisable_triggered ();
  void on_actionRactiveTchat_triggered ();
+ void on_RAZBateaux_clicked ();
  void mousePressEvent(QMouseEvent *e);
  void mouseMoveEvent(QMouseEvent *e);
  void mouseDoubleClickEvent(QMouseEvent *e);
