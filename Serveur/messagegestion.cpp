@@ -1,6 +1,7 @@
 #include "messagegestion.h"
 
 #include <QString>
+#include <QStringList>
 
 #include "communicationconstants.h"
 
@@ -23,5 +24,8 @@ void messageGestion::inputMessage(QString message)
         QString playerName;
         playerName=message.remove(0,1);
         emit splayerGiveUp(playerName);
+    } else if (message[0]==Header::PlayerAttack){
+        QStringList lst = message.split(":");
+        emit attaque(lst[1],lst[2],(unsigned char)lst[3].toInt(),(unsigned char)lst[4].toInt());
     }
 }
