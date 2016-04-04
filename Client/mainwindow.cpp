@@ -99,6 +99,7 @@ void MainWindow::on_actionNewGame_triggered()
     {
     bool ok;
     nomJoueur = QInputDialog::getText(this, tr("Nom du joueur"), tr("Votre nom :"), QLineEdit::Normal,QDir::home().dirName(), &ok);
+    nomJoueur.replace(QString(":"),QString("_"));
     me=new Joueur(nomJoueur);
     me->setPerson(true);
     ui->actionNewGame->setEnabled(false);
