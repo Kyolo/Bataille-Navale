@@ -34,6 +34,7 @@ MainWindow::MainWindow(QWidget *parent) :
      ui->lineEditChat->setEnabled(false);
      ui->pushButtonOKTchat->setEnabled(false);
      ui->labelTchatDisable->setText("Tchat désactivé! \n \n Veuillez d'abord \n vous connecter !");
+     ui->labelJoueursConnectes->append("Joueurs connectés :\n");
      state=0;
 
 }
@@ -121,6 +122,7 @@ void MainWindow::on_actionNewGame_triggered()
     ui->lineEditChat->setEnabled(true);
     ui->pushButtonOKTchat->setEnabled(true);
     ui->labelTchatDisable->setText("");
+    QMessageBox::information(this, "Bataille navale", "Veuillez maintenant placer vos bateaux sur la grille !\nN'oubliez pas de valider votre choix à la fin de l'opération.");
     ui->fondBateaux->setGeometry(initialPosBoatX,initialPosBoatY,475,95);
     ui->bateau5->setGeometry(initialPosBoatX+15,initialPosBoatY+10,125,25);
     ui->bateau5->setPixmap(QPixmap(":/bateau5.png"));
@@ -139,6 +141,18 @@ void MainWindow::on_actionNewGame_triggered()
     ui->bateau22->setGeometry(initialPosBoatX+337,initialPosBoatY+45,50,25);
     ui->bateau22->setPixmap(QPixmap(":/bateau2.png"));
     ui->RAZBateaux->setGeometry(initialPosBoatX-19,initialPosBoatY-2,20,95);
+    ui->graphicsView->setVisible(true);
+    ui->fondBateaux->setVisible(true);
+    ui->RAZBateaux->setVisible(true);
+    ui->bateau5->setVisible(true);
+    ui->bateau21->setVisible(true);
+    ui->bateau22->setVisible(true);
+    ui->bateau31->setVisible(true);
+    ui->bateau32->setVisible(true);
+    ui->bateau33->setVisible(true);
+    ui->bateau41->setVisible(true);
+    ui->bateau42->setVisible(true);
+    ui->labelJoueursConnectes->append(" •  "+nomJoueur);
     // bouton validation position bateaux -> ui->validBoatPosition->setGeometry(initialPosBoatX,initialPosBoatY,475,95);
     }
 
@@ -147,7 +161,7 @@ void MainWindow::on_actionNewGame_triggered()
 //*************Abandon de la partie********************************
 void MainWindow::on_actionAbandon_triggered()
     {
-    int reponseAbandon = QMessageBox::information(this, "Abandon de la partie ?", "Voulez vraiment abandonner la partie en cours? Toutes vos données seront perdues.", QMessageBox::Yes | QMessageBox::No);
+    int reponseAbandon = QMessageBox::information(this, "Abandon de la partie ?", "Voulez vraiment abandonner la partie en cours ?\nToutes vos données seront perdues.", QMessageBox::Yes | QMessageBox::No);
        if (reponseAbandon == QMessageBox::Yes)
        {
          connexion->send(GiveUpHeader+me->getName());
@@ -156,7 +170,18 @@ void MainWindow::on_actionAbandon_triggered()
          ui->graphicsView->setEnabled(false);
          fond = scene->addPixmap(QPixmap(":/mer.gif"));
          QMessageBox::information(this, "Fin de la partie", "Vous avez abandonné la partie");
-         ui->fondBateaux->setEnabled(false);
+         ui->graphicsView->setVisible(false);
+         ui->fondBateaux->setVisible(false);
+         ui->RAZBateaux->setVisible(false);
+         ui->bateau5->setVisible(false);
+         ui->bateau21->setVisible(false);
+         ui->bateau22->setVisible(false);
+         ui->bateau31->setVisible(false);
+         ui->bateau32->setVisible(false);
+         ui->bateau33->setVisible(false);
+         ui->bateau41->setVisible(false);
+         ui->bateau42->setVisible(false);
+
        }
     }
 //**********Entrer du texte dans le tchat*******************************
