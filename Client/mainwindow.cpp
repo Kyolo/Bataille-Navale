@@ -142,6 +142,10 @@ void MainWindow::on_actionNewGame_triggered()
     ui->bateau22->setGeometry(initialPosBoatX+337,initialPosBoatY+45,50,25);
     ui->bateau22->setPixmap(QPixmap(":/bateau2.png"));
     ui->RAZBateaux->setGeometry(initialPosBoatX-19,initialPosBoatY-2,20,95);
+    for (int i=0; i<8; i++)
+    {
+        isHorizontal[i]=true;
+    }
     ui->graphicsView->setVisible(true);
     ui->fondBateaux->setVisible(true);
     ui->RAZBateaux->setVisible(true);
@@ -269,13 +273,13 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *e)
             updateLabelsPositions();
             for (int i=0; i<8; i++)
             {
-                cout << "recherche des bateaux"<<endl;
                 if(posX>=labelRects[i].x() && posX<=labelRects[i].width()+labelRects[i].x() && posY>=labelRects[i].y()+33 && posY<=labelRects[i].height()+labelRects[i].y()+33)
                 {
-                    cout <<"bateau "<<i<< " detecte"<<endl;
                     boatClicked=i;
-                    updateBoatGeometry(boatClicked,GWposX+1+(pressedX)*27,GWposY+32+1+(pressedY)*27 );
-                    cout << "Positionnement du bateau a l'adresse x: "<<GWposX+(pressedX+1)*27<< "y: "<<GWposY+32+(pressedY+1)*27<<endl;
+                    if(labelRects[i].width()+GWposX+1+(pressedX)*27<=534&&labelRects[i].height()+GWposY+1+(pressedY)*27<=487)
+                    {
+                        updateBoatGeometry(boatClicked,GWposX+1+(pressedX)*27,GWposY+33+1+(pressedY)*27 );
+                    }
                 }
             }
             break;
@@ -376,11 +380,13 @@ void MainWindow::turnImage(int boat, int x, int y)
         {
              ui->bateau21->setGeometry(x, y, labelRects[boat].height(),labelRects[boat].width());
              ui->bateau21->setPixmap(QPixmap(":/bateau2Vertical.png"));
+             isHorizontal[boat]=false;
         }
         else
         {
             ui->bateau21->setGeometry(x, y, labelRects[boat].height(), labelRects[boat].width());
             ui->bateau21->setPixmap(QPixmap(":/bateau2.png"));
+            isHorizontal[boat]=true;
         }
         break;
     case 1:
@@ -426,4 +432,56 @@ void MainWindow::on_RAZBateaux_clicked()
     ui->bateau21->setPixmap(QPixmap(":/bateau2.png"));
     ui->bateau22->setGeometry(initialPosBoatX+337,initialPosBoatY+45,50,25);
     ui->bateau22->setPixmap(QPixmap(":/bateau2.png"));
+}
+
+void MainWindow::on_ButtonDone_clicked()
+{
+    cout <<"clic sur le bouton Done"<<endl;
+    updatePlayerBoats();
+    int isWrite = me->checkWrite(true);
+    switch(isWrite)
+    {
+    case 0:
+        cout <<"tout va bien"<<endl;
+        break;
+    case 1:
+        QMessageBox::critical(this, "Erreur", "Des bateaux se superposent", QMessageBox::Ok);
+    break;
+    case 2:
+        QMessageBox::critical(this, "Erreur", "Tous les bateaux ne sont pas placés", QMessageBox::Ok);
+    break;
+}
+}
+
+void MainWindow::updatePlayerBoats()
+{
+    for (int i=0; i<8; i++)
+    {
+        switch(i){
+        case 0:
+            me->setBoat((labelRects[i].x()-GWposX-1)/27, (labelRects[i].y()-32-GWposY-1)/27,isHorizontal[i],i,2);
+            break;
+        case 1:
+            me->setBoat((labelRects[i].x()-GWposX-1)/27, (labelRects[i].y()-32-GWposY-1)/27,isHorizontal[i],i,2);
+            break;
+        case 2:
+            me->setBoat((labelRects[i].x()-GWposX-1)/27, (labelRects[i].y()-32-GWposY-1)/27,isHorizontal[i],i,3);
+            break;
+        case 3:
+            me->setBoat((labelRects[i].x()-GWposX-1)/27, (labelRects[i].y()-32-GWposY-1)/27,isHorizontal[i],i,3);
+            break;
+        case 4:
+            me->setBoat((labelRects[i].x()-GWposX-1)/27, (labelRects[i].y()-32-GWposY-1)/27,isHorizontal[i],i,3);
+            break;
+        case 5:
+            me->setBoat((labelRects[i].x()-GWposX-1)/27, (labelRects[i].y()-32-GWposY-1)/27,isHorizontal[i],i,4);
+            break;
+        case 6:
+           me->setBoat((labelRects[i].x()-GWposX-1)/27, (labelRects[i].y()-32-GWposY-1)/27,isHorizontal[i],i,4);
+            break;
+        case 7:
+            me->setBoat((labelRects[i].x()-GWposX-1)/27, (labelRects[i].y()-32-GWposY-1)/27,isHorizontal[i],i,5);
+            break;
+        }
+    }
 }

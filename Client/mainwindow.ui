@@ -4101,6 +4101,19 @@ Z</string>
      <enum>QAbstractScrollArea::AdjustIgnored</enum>
     </property>
    </widget>
+   <widget class="QPushButton" name="ButtonDone">
+    <property name="geometry">
+     <rect>
+      <x>520</x>
+      <y>520</y>
+      <width>80</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Done</string>
+    </property>
+   </widget>
    <zorder>labelImageFond</zorder>
    <zorder>fondBateaux</zorder>
    <zorder>textChat</zorder>
@@ -4119,6 +4132,7 @@ Z</string>
    <zorder>RAZBateaux</zorder>
    <zorder>lineEditChat</zorder>
    <zorder>labelJoueursConnectes</zorder>
+   <zorder>ButtonDone</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -4126,7 +4140,7 @@ Z</string>
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>31</height>
+     <height>30</height>
     </rect>
    </property>
    <property name="palette">

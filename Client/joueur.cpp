@@ -11,6 +11,13 @@ Joueur::Joueur(QString name)
             isAttack[a][b]=false;
         }
     }
+    for (int i=0; i<8; i++)
+    {
+        boatPosx[i]=-1;
+        boatPosy[i]=-1;
+        boatIsHorizontal[i]=-1;
+        boatSize[i]=-1;
+    }
 }
 void Joueur::setPerson(bool isMe)
 {
@@ -21,11 +28,12 @@ bool Joueur::getPerson()
     return isLocal;
 }
 
-void Joueur::setBoat(int posx, int posy, bool isHorizontal, int numberOfBoat)
+void Joueur::setBoat(int posx, int posy, bool isHorizontal, int numberOfBoat, int size)
 {
     boatPosx[numberOfBoat]=posx;
     boatPosy[numberOfBoat]=posy;
     boatIsHorizontal[numberOfBoat]=isHorizontal;
+    boatSize[numberOfBoat]=size;
 }
 
 void Joueur::setAttack(int posx, int posy, bool isInTheWater)
@@ -36,4 +44,36 @@ void Joueur::setAttack(int posx, int posy, bool isInTheWater)
 QString Joueur::getName()
 {
     return playerName;
+}
+
+int Joueur::checkWrite(bool doneClicked)
+{
+    for (int i=0; i<8; i++)
+    {
+        for (int a=0; a<0; a++)
+        {
+            for (int b=0; b<boatSize[i]; b++)
+            {
+                if(boatIsHorizontal[i]==true)
+                {
+                    if(boatPosx[i]+b==boatPosx[a] && boatPosy[i]==boatPosy[a] && i!=a)
+                    {
+                        return 1;
+                    }
+                }
+                if(boatIsHorizontal[i]==false)
+                {
+                    if(boatPosx[i]==boatPosx[a] && boatPosy[i]+b==boatPosy[a] && i!=a)
+                    {
+                        return 1;
+                    }
+                }
+            }
+        }
+        if((boatPosx[i]<0 || boatPosx[i]>16 || boatPosy[i]<0 || boatPosy[i]>16 )&& doneClicked==true)
+        {
+            return 2;
+        }
+    }
+    return 0;
 }
