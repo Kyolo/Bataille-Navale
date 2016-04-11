@@ -437,8 +437,10 @@ void MainWindow::on_RAZBateaux_clicked()
 void MainWindow::on_ButtonDone_clicked()
 {
     cout <<"clic sur le bouton Done"<<endl;
+    updateLabelsPositions();
     updatePlayerBoats();
-    int isWrite = me->checkWrite(true);
+    int isWrite=-1 ;
+    isWrite= me->checkWrite(true);
     switch(isWrite)
     {
     case 0:
@@ -459,28 +461,30 @@ void MainWindow::updatePlayerBoats()
     {
         switch(i){
         case 0:
-            me->setBoat((labelRects[i].x()-GWposX-1)/27, (labelRects[i].y()-32-GWposY-1)/27,isHorizontal[i],i,2);
+            me->setBoat((labelRects[i].x()-GWposX-1)/27, (labelRects[i].y()-GWposY-1)/27,isHorizontal[i],i,2);
+            cout <<"x: "<<labelRects[i].x()<<"y: "<<labelRects[i].y()<<endl;
+            cout <<"x: "<<(labelRects[i].x()-GWposX-1)/27<<" y: "<<(labelRects[i].y()-GWposY-1)/27 <<endl;
             break;
         case 1:
-            me->setBoat((labelRects[i].x()-GWposX-1)/27, (labelRects[i].y()-32-GWposY-1)/27,isHorizontal[i],i,2);
+            me->setBoat((labelRects[i].x()-GWposX-1)/27, (labelRects[i].y()-GWposY-1)/27,isHorizontal[i],i,2);
             break;
         case 2:
-            me->setBoat((labelRects[i].x()-GWposX-1)/27, (labelRects[i].y()-32-GWposY-1)/27,isHorizontal[i],i,3);
+            me->setBoat((labelRects[i].x()-GWposX-1)/27, (labelRects[i].y()-GWposY-1)/27,isHorizontal[i],i,3);
             break;
         case 3:
-            me->setBoat((labelRects[i].x()-GWposX-1)/27, (labelRects[i].y()-32-GWposY-1)/27,isHorizontal[i],i,3);
+            me->setBoat((labelRects[i].x()-GWposX-1)/27, (labelRects[i].y()-GWposY-1)/27,isHorizontal[i],i,3);
             break;
         case 4:
-            me->setBoat((labelRects[i].x()-GWposX-1)/27, (labelRects[i].y()-32-GWposY-1)/27,isHorizontal[i],i,3);
+            me->setBoat((labelRects[i].x()-GWposX-1)/27, (labelRects[i].y()-GWposY-1)/27,isHorizontal[i],i,3);
             break;
         case 5:
-            me->setBoat((labelRects[i].x()-GWposX-1)/27, (labelRects[i].y()-32-GWposY-1)/27,isHorizontal[i],i,4);
+            me->setBoat((labelRects[i].x()-GWposX-1)/27, (labelRects[i].y()-GWposY-1)/27,isHorizontal[i],i,4);
             break;
         case 6:
-           me->setBoat((labelRects[i].x()-GWposX-1)/27, (labelRects[i].y()-32-GWposY-1)/27,isHorizontal[i],i,4);
+           me->setBoat((labelRects[i].x()-GWposX-1)/27, (labelRects[i].y()-GWposY-1)/27,isHorizontal[i],i,4);
             break;
         case 7:
-            me->setBoat((labelRects[i].x()-GWposX-1)/27, (labelRects[i].y()-32-GWposY-1)/27,isHorizontal[i],i,5);
+            me->setBoat((labelRects[i].x()-GWposX-1)/27, (labelRects[i].y()-GWposY-1)/27,isHorizontal[i],i,5);
             break;
         }
     }

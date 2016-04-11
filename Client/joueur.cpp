@@ -70,7 +70,7 @@ int Joueur::checkWrite(bool doneClicked)
                 }
             }
         }
-        if((boatPosx[i]<0 || boatPosx[i]>16 || boatPosy[i]<0 || boatPosy[i]>16 )&& doneClicked==true)
+        if((boatPosx[i]<0 || boatPosx[i]>=15 || boatPosy[i]<0 || boatPosy[i]>=15 )&& doneClicked==true)
         {
             return 2;
         }
