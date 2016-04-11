@@ -266,6 +266,18 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *e)
 
             break;
         case STATE_PREPARATION:
+            updateLabelsPositions();
+            for (int i=0; i<8; i++)
+            {
+                cout << "recherche des bateaux"<<endl;
+                if(posX>=labelRects[i].x() && posX<=labelRects[i].width()+labelRects[i].x() && posY>=labelRects[i].y()+33 && posY<=labelRects[i].height()+labelRects[i].y()+33)
+                {
+                    cout <<"bateau "<<i<< " detecte"<<endl;
+                    boatClicked=i;
+                    updateBoatGeometry(boatClicked,GWposX+1+(pressedX)*27,GWposY+32+1+(pressedY)*27 );
+                    cout << "Positionnement du bateau a l'adresse x: "<<GWposX+(pressedX+1)*27<< "y: "<<GWposY+32+(pressedY+1)*27<<endl;
+                }
+            }
             break;
         }
     }
