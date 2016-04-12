@@ -15,7 +15,7 @@ Joueur::Joueur(QString name)
     {
         boatPosx[i]=-1;
         boatPosy[i]=-1;
-        boatIsHorizontal[i]=-1;
+        boatIsHorizontal[i]=true;
         boatSize[i]=-1;
     }
 }
@@ -48,31 +48,64 @@ QString Joueur::getName()
 
 int Joueur::checkWrite(bool doneClicked)
 {
-    for (int i=0; i<8; i++)
+    for(int boatVerificated=0; boatVerificated<8; boatVerificated++)
     {
-        for (int a=0; a<0; a++)
+        for(int boatVerificatedSize=0; boatVerificatedSize<boatSize[boatVerificated]; boatVerificatedSize++)
         {
-            for (int b=0; b<boatSize[i]; b++)
+            for(int boatChecked=0; boatChecked<8;boatChecked++)
             {
-                if(boatIsHorizontal[i]==true)
+                for(int boatCheckedSize=0; boatCheckedSize<boatSize[boatChecked]; boatCheckedSize++)
                 {
-                    if(boatPosx[i]+b==boatPosx[a] && boatPosy[i]==boatPosy[a] && i!=a)
+                    if(boatVerificated!=boatChecked)
                     {
-                        return 1;
-                    }
-                }
-                if(boatIsHorizontal[i]==false)
-                {
-                    if(boatPosx[i]==boatPosx[a] && boatPosy[i]+b==boatPosy[a] && i!=a)
-                    {
-                        return 1;
+                        if(boatIsHorizontal[boatVerificated]==true && boatIsHorizontal[boatChecked]==true)
+                        {
+                            if(boatPosx[boatVerificated]+boatVerificatedSize==boatPosx[boatChecked]+boatCheckedSize && boatPosy[boatVerificated]==boatPosy[boatChecked])
+                            {
+                                return 1;
+                            }
+                        }
+                        if(boatIsHorizontal[boatVerificated]==false && boatIsHorizontal[boatChecked]==false)
+                        {
+                            if(boatPosx[boatVerificated]==boatPosx[boatChecked] && boatPosy[boatVerificated]+boatVerificatedSize==boatPosy[boatChecked]+boatCheckedSize)
+                            {
+                                return 1;
+                            }
+                        }
+                        if(boatIsHorizontal[boatVerificated]==true && boatIsHorizontal[boatChecked]==false)
+                        {
+                            if(boatPosx[boatVerificated]+boatVerificatedSize==boatPosx[boatChecked] && boatPosy[boatVerificated]==boatPosy[boatChecked]+boatCheckedSize)
+                            {
+                                return 1;
+                            }
+                        }
+                        if(boatIsHorizontal[boatVerificated]==false && boatIsHorizontal[boatChecked]==true)
+                        {
+                            if(boatPosx[boatVerificated]==boatPosx[boatChecked]+boatCheckedSize && boatPosy[boatVerificated]+boatVerificatedSize==boatPosy[boatChecked])
+                            {
+                                return 1;
+                            }
+                        }
                     }
                 }
             }
         }
-        if((boatPosx[i]<0 || boatPosx[i]>=15 || boatPosy[i]<0 || boatPosy[i]>=15 )&& doneClicked==true)
+    }
+    for (int i=0; i<8; i++)//Verification que tous les bateaux sont dans la grille
+    {
+        if(boatIsHorizontal[i]==true)
         {
-            return 2;
+            if((boatPosx[i]<0 || boatPosx[i]+boatSize[i]-1>15 || boatPosy[i]<0 || boatPosy[i]>15 )&& doneClicked==true)
+            {
+                return 2;
+            }
+        }
+        if(boatIsHorizontal[i]==false)
+        {
+            if((boatPosx[i]<0 || boatPosx[i]>15 || boatPosy[i]<0 || boatPosy[i]+boatSize[i]-1>15 )&& doneClicked==true)
+            {
+                return 2;
+            }
         }
     }
     return 0;
