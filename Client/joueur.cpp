@@ -110,3 +110,15 @@ int Joueur::checkWrite(bool doneClicked)
     }
     return 0;
 }
+
+QString Joueur::writeMessage()
+{
+    QString message = "";
+    message = message+NewPlayer ;
+    message=playerName+":";
+    for(int i=0; i<8; i++)
+    {
+        message=message+QString::number(boatPosx[i])+":"+QString::number(boatPosy[i])+":"+QString::number(boatSize[i])+":"+QString::number(boatIsHorizontal[i])+":";
+    }
+    return message;
+}

@@ -2,6 +2,7 @@
 #define JOUEUR_H
 
 #include <QString>
+#include "comunicationconstants.h"
 
 class Joueur
 {
@@ -20,6 +21,7 @@ public:
     bool isAttack[16][16];
     bool attackIsInTheWater[16][16];
     int checkWrite(bool doneClicked);
+    QString writeMessage();
 private:
     bool isLocal=false;
 };

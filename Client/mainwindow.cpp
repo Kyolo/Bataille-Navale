@@ -445,6 +445,7 @@ void MainWindow::on_ButtonDone_clicked()
     {
     case 0:
         cout <<"tout va bien"<<endl;
+        connexion->send(me->writeMessage());
         break;
     case 1:
         QMessageBox::critical(this, "Erreur", "Des bateaux se superposent", QMessageBox::Ok);
