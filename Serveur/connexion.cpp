@@ -12,6 +12,7 @@
 
 #include <stdio.h>
 #include <iostream>
+#include <stdlib.h>
 #include <QString>
 
 using namespace std;
@@ -158,13 +159,21 @@ void Connexion::messageGestion(QString message)
     {
         cout << message.toStdString() << endl;
         message=message.remove(0,1);
-        QStringList playerName=message.split(":");
-        QString Name=playerName.at(2);
+        QStringList messageSplit=message.split(":");
+        QString Name=messageSplit.at(0);
+        message=message.remove(0,Name.capacity()+1);
+        QStringList positions=message.split(":");
         cout <<Name.toStdString()<<endl;
         for (int i=0 ; i<8 ; i++)
         {
-
+            QString taille=positions.at(4*i+2);
+            QString posX=positions.at(4*i);
+            QString PosY=positions.at(4*i+1);
+            QString IsHorizontal=positions.at(4*i+3);
+            boats[i]= new Bateau(taille.toInt(),posX.toInt(),PosY.toInt(), IsHorizontal.toInt());
         }
+        player = new Joueur(*boats, Name, 8);
+        emit connexionNvJoueur(*player);
     }
     else if (message[0]==Header::GiveUp)
     {

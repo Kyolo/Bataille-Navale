@@ -113,8 +113,7 @@ int Joueur::checkWrite(bool doneClicked)
 
 QString Joueur::writeMessage()
 {
-    QString message = "";
-    message = message+NewPlayer ;
+    QString message;
     message=playerName+":";
     for(int i=0; i<8; i++)
     {
