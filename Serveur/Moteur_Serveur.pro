@@ -20,7 +20,6 @@ SOURCES += main.cpp \
     game.cpp \
     connexion.cpp \
     joueur.cpp \
-    messagegestion.cpp \
     command.cpp
 
 HEADERS += \
@@ -28,6 +27,5 @@ HEADERS += \
     game.h \
     connexion.h \
     joueur.h \
-    messagegestion.h \
     command.h \
     communicationconstants.h

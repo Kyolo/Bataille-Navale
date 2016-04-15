@@ -10,8 +10,6 @@
 
 #include <string.h>
 
-#include "messagegestion.h"
-
 typedef unsigned char uchar;
 
 class Connexion: public QObject
@@ -27,16 +25,15 @@ private slots:  //les slots de gestion des évènements
     void deconnexion();
     QString getIPaddress();
     //slots de gestion de messages
-    void SconnexionNvJoueur(Joueur player);
-    void Sattaque(QString from,QString to,uchar posx,uchar posy);
-    void SplayerGiveUp(QString player);
     void tchat(QString message);
 
 private:
     QTcpServer *server;
     QList<QTcpSocket *> client;
     quint16 tailleMessage;
-    messageGestion *msgGest;
+    void messageGestion(QString message);
+     Bateau *boats[8];
+     Joueur *player;
 
 signals:
     void connexionNvJoueur(Joueur);

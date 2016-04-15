@@ -30,6 +30,7 @@ public slots:
  void on_actionTchatDisable_triggered ();
  void on_actionRactiveTchat_triggered ();
  void on_RAZBateaux_clicked ();
+ void on_ButtonDone_clicked();
  void mousePressEvent(QMouseEvent *e);
  void mouseMoveEvent(QMouseEvent *e);
  void mouseDoubleClickEvent(QMouseEvent *e);
@@ -57,10 +58,12 @@ private:
     int connecte=0;
     void updateLabelsPositions();
     QRect labelRects[8];
+    bool isHorizontal[8];
     int boatClicked=-1;
     bool boatIsSelected=false;
     void updateBoatGeometry(int boat, int x, int y);
     void turnImage(int boat, int x, int y);
+    void updatePlayerBoats();
 
 protected:
     void closeEvent(QCloseEvent *event);

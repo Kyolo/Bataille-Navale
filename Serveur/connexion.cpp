@@ -1,4 +1,7 @@
 #include "connexion.h"
+#include "communicationconstants.h"
+#include "bateau.h"
+#include "joueur.h"
 
 
 #include <QTcpServer>
@@ -9,9 +12,11 @@
 
 #include <stdio.h>
 #include <iostream>
+#include <stdlib.h>
 #include <QString>
 
 using namespace std;
+using namespace Header;
 
 Connexion::Connexion()
 {
@@ -29,9 +34,6 @@ Connexion::Connexion()
                    "port: "<<server->serverPort()<<endl;
             //on autorise la connexion d'un client. S'il ne doit y avoir qu'un seul client il faudra modifier cette ligne
             connect(server, SIGNAL(newConnection()),this, SLOT(connexion()));
-            msgGest= new messageGestion();
-            connect(msgGest, SIGNAL(tchat(QString)),this, SLOT(tchat(QString)));
-            connect(msgGest, SIGNAL(splayerGiveUp(QString)), this, SLOT(SplayerGiveUp(QString)));
         }
         tailleMessage = 0;//comme il n'y a pas encore eu de message la taille du message est nulle
     }
@@ -86,7 +88,7 @@ void Connexion::getdata()
         return; //on n'a pas tout recu on ne peut pas traiter l'info. On quitte
     QString message;
     in>>message;
-    msgGest->inputMessage(message);//on renvoie le message vers la gestion des messages
+    messageGestion(message);//on renvoie le message vers la gestion des messages
     tailleMessage=0;     //on remet la variable de taille à 0
 }
 
@@ -120,23 +122,6 @@ string Connexion::sendtoclient(const QString &message)
        return "Message sent successfully";
    }
 
-//************************************Slots de redirection des signaux****************************************************
-
-void Connexion::SconnexionNvJoueur(Joueur player)
-{
-    emit connexionNvJoueur(player);
-}
-
-void Connexion::Sattaque(QString from, QString to, uchar posx, uchar posy)
-{
-    emit attaque(from,to,posx,posy);
-}
-
-void Connexion::SplayerGiveUp(QString player)
-{
-    //emit playerGiveUp(player);
-}
-
 //**********************************Public Slots***********************************************************************
 void Connexion::gameStarted()
 {
@@ -160,4 +145,44 @@ void Connexion::playerWon(QString winner)
 void Connexion::tchat(QString message)
 {
     this->sendtoclient(message);
+}
+
+void Connexion::messageGestion(QString message)
+{
+    cout <<"reception message"<<endl;
+    cout << message.toStdString()<<endl;
+    if(message[0]==Header::Message)
+    {
+        emit tchat(message);
+    }
+    else if(message[0]== NewPlayer)
+    {
+        cout << message.toStdString() << endl;
+        message=message.remove(0,1);
+        QStringList messageSplit=message.split(":");
+        QString Name=messageSplit.at(0);
+        message=message.remove(0,Name.capacity()+1);
+        QStringList positions=message.split(":");
+        cout <<Name.toStdString()<<endl;
+        for (int i=0 ; i<8 ; i++)
+        {
+            QString taille=positions.at(4*i+2);
+            QString posX=positions.at(4*i);
+            QString PosY=positions.at(4*i+1);
+            QString IsHorizontal=positions.at(4*i+3);
+            boats[i]= new Bateau(taille.toInt(),posX.toInt(),PosY.toInt(), IsHorizontal.toInt());
+        }
+        player = new Joueur(*boats, Name, 8);
+        emit connexionNvJoueur(*player);
+    }
+    else if (message[0]==Header::GiveUp)
+    {
+        QString playerName;
+        playerName=message.remove(0,1);
+        emit playerGiveUp(playerName);
+    }
+    else if (message[0]==Header::PlayerAttack){
+        QStringList lst = message.split(":");
+        emit attaque(lst[1],lst[2],(unsigned char)lst[3].toInt(),(unsigned char)lst[4].toInt());
+    }
 }
