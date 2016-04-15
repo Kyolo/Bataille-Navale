@@ -43,9 +43,6 @@ MainWindow::~MainWindow()
     delete ui;
 }
 //**********************************************************************************
-//**********************************************************************************
-//**********************************************************************************
-
 
 //*****Quitter*********************************************************
 //A partir du menu
@@ -90,12 +87,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
        event->accept();
    }
 }
-
-//********************************************************************
 //*************Nouvelle partie*******************************
-
-
-
 void MainWindow::on_actionNewGame_triggered()
     {
     bool ok;
@@ -158,6 +150,7 @@ void MainWindow::on_actionNewGame_triggered()
     ui->bateau41->setVisible(true);
     ui->bateau42->setVisible(true);
     ui->labelJoueursConnectes->append(" •  "+nomJoueur);
+
     // bouton validation position bateaux -> ui->validBoatPosition->setGeometry(initialPosBoatX,initialPosBoatY,475,95);
     }
 
@@ -446,6 +439,7 @@ void MainWindow::on_ButtonDone_clicked()
     case 0:
         cout <<"tout va bien"<<endl;
         connexion->send(NewPlayer+me->writeMessage());
+        state=1;
         break;
     case 1:
         QMessageBox::critical(this, "Erreur", "Des bateaux se superposent", QMessageBox::Ok);

@@ -4114,6 +4114,21 @@ Z</string>
      <string>Done</string>
     </property>
    </widget>
+   <widget class="QComboBox" name="selectionJoueurs">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>160</y>
+      <width>91</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string/>
+     </property>
+    </item>
+   </widget>
    <zorder>labelImageFond</zorder>
    <zorder>fondBateaux</zorder>
    <zorder>textChat</zorder>
@@ -4133,6 +4148,7 @@ Z</string>
    <zorder>lineEditChat</zorder>
    <zorder>labelJoueursConnectes</zorder>
    <zorder>ButtonDone</zorder>
+   <zorder>selectionJoueurs</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

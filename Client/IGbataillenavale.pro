@@ -15,12 +15,14 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     client.cpp \
-    joueur.cpp
+    joueur.cpp \
+    adversaire.cpp
 
 HEADERS  += mainwindow.h \
     client.h \
     comunicationconstants.h \
-    joueur.h
+    joueur.h \
+    adversaire.h
 
 FORMS    += mainwindow.ui
 
