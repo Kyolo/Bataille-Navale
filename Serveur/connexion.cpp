@@ -188,4 +188,8 @@ void Connexion::messageGestion(QString message)
         QStringList lst = message.split(":");
         emit attaque(lst[1],lst[2],(unsigned char)lst[3].toInt(),(unsigned char)lst[4].toInt());
     }
+    else if(message[0]==NewName)
+    {
+        this->sendtoclient(message);
+    }
 }

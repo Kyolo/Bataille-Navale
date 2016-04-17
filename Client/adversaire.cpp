@@ -26,3 +26,17 @@ int Adversaire::getSituation(int x, int y)
 {
     return isInWater[x][y];
 }
+
+AdversaireTab::AdversaireTab(int numberOfAdversaire)
+{
+    nbr=numberOfAdversaire;
+    //adversaire = new Adversaire[nbr];
+}
+
+int AdversaireTab::getByName(QString name)
+{
+    for(int i=0; i<nbr; i++)
+    {
+
+    }
+}

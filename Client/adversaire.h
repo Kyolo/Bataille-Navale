@@ -15,4 +15,16 @@ private:
     int isInWater[16][16];
 };
 
+class AdversaireTab
+{
+public:
+    AdversaireTab(int numberOfAdversaire);
+    int getByName(QString name);
+    Adversaire *adversaire;
+private:
+    int nbr;
+};
+
+
+
 #endif // ADVERSAIRE_H

@@ -91,4 +91,9 @@ void client::msgGestion(QString message)
         message.remove(0,1);
         emit tchatRecive(message);
     }
+    else if(message[0]==NewName)
+    {
+        message.remove(0,1);
+        emit newPerson(message);
+    }
 }
