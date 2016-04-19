@@ -36,6 +36,8 @@ MainWindow::MainWindow(QWidget *parent) :
      ui->labelTchatDisable->setText("Tchat désactivé! \n \n Veuillez d'abord \n vous connecter !");
      ui->labelJoueursConnectes->append("Joueurs connectés :\n");
      state=0;
+     ui->tircoule->setPixmap(QPixmap(":/Tircoulé.png"));
+     ui->tircoule->setGeometry(157,157+10,25,25);
 
 }
 MainWindow::~MainWindow()
@@ -158,7 +160,7 @@ void MainWindow::on_actionNewGame_triggered()
     ui->bateau41->setVisible(true);
     ui->bateau42->setVisible(true);
     ui->labelJoueursConnectes->append(" •  "+nomJoueur);
-    // bouton validation position bateaux -> ui->validBoatPosition->setGeometry(initialPosBoatX,initialPosBoatY,475,95);
+    //ui->validBoatPosition->setGeometry(initialPosBoatX,initialPosBoatY,475,95);
     }
 
 //**************************************************************
