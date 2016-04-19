@@ -12,6 +12,7 @@
 #include <QPixmap>
 #include <stdio.h>
 #include <iostream>
+#include "adversaire.h"
 
 #include "comunicationconstants.h"
 
@@ -45,9 +46,6 @@ MainWindow::~MainWindow()
     delete ui;
 }
 //**********************************************************************************
-//**********************************************************************************
-//**********************************************************************************
-
 
 //*****Quitter*********************************************************
 //A partir du menu
@@ -92,12 +90,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
        event->accept();
    }
 }
-
-//********************************************************************
 //*************Nouvelle partie*******************************
-
-
-
 void MainWindow::on_actionNewGame_triggered()
     {
     bool ok;
@@ -118,6 +111,7 @@ void MainWindow::on_actionNewGame_triggered()
     ui->actionConnexion->setEnabled(false);
     connect(connexion, SIGNAL(serverError(QString)), this,SLOT(serverError(QString)));
     connect(connexion, SIGNAL(tchatRecive(QString)), this , SLOT(writeInTchat(QString)));
+    connect(connexion,SIGNAL(newPerson(QString)), this, SLOT(NewPerson(QString)));
     connecte=1;
     ui->textChat->setText("");
     ui->textChat->setEnabled(true);
@@ -159,11 +153,22 @@ void MainWindow::on_actionNewGame_triggered()
     ui->bateau33->setVisible(true);
     ui->bateau41->setVisible(true);
     ui->bateau42->setVisible(true);
+<<<<<<< HEAD
     ui->labelJoueursConnectes->append(" •  "+nomJoueur);
     //ui->validBoatPosition->setGeometry(initialPosBoatX,initialPosBoatY,475,95);
+=======
+    connexion->send(NewName+nomJoueur);
+    // bouton validation position bateaux -> ui->validBoatPosition->setGeometry(initialPosBoatX,initialPosBoatY,475,95);
+>>>>>>> 90870356036c4e104993247db2ce53b8e1453ce0
     }
 
 //**************************************************************
+void MainWindow::NewPerson(QString name)
+{
+    ui->labelJoueursConnectes->append(" •  "+name);
+    ui->selectionJoueurs->addItem(name);
+
+}
 
 //*************Abandon de la partie********************************
 void MainWindow::on_actionAbandon_triggered()
@@ -448,6 +453,7 @@ void MainWindow::on_ButtonDone_clicked()
     case 0:
         cout <<"tout va bien"<<endl;
         connexion->send(NewPlayer+me->writeMessage());
+        state=1;
         break;
     case 1:
         QMessageBox::critical(this, "Erreur", "Des bateaux se superposent", QMessageBox::Ok);

@@ -4114,6 +4114,7 @@ Z</string>
      <string>Done</string>
     </property>
    </widget>
+<<<<<<< HEAD
    <widget class="QLabel" name="tircoule">
     <property name="geometry">
      <rect>
@@ -4126,6 +4127,22 @@ Z</string>
     <property name="text">
      <string/>
     </property>
+=======
+   <widget class="QComboBox" name="selectionJoueurs">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>160</y>
+      <width>91</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string/>
+     </property>
+    </item>
+>>>>>>> 90870356036c4e104993247db2ce53b8e1453ce0
    </widget>
    <zorder>labelImageFond</zorder>
    <zorder>fondBateaux</zorder>
@@ -4146,7 +4163,11 @@ Z</string>
    <zorder>lineEditChat</zorder>
    <zorder>labelJoueursConnectes</zorder>
    <zorder>ButtonDone</zorder>
+<<<<<<< HEAD
    <zorder>tircoule</zorder>
+=======
+   <zorder>selectionJoueurs</zorder>
+>>>>>>> 90870356036c4e104993247db2ce53b8e1453ce0
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

@@ -25,6 +25,7 @@ private slots:
 signals:
     void tchatRecive(QString);
     void serverError(QString);
+    void newPerson(QString);
 };
 
 #endif // CLIENT_H
