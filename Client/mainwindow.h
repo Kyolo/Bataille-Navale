@@ -8,7 +8,6 @@
 #include <QRect>
 #include "client.h"
 #include "joueur.h"
-#include "adversaire.h"
 
 
 namespace Ui {
@@ -72,7 +71,6 @@ protected:
 private slots:
     void serverError(QString);
     void writeInTchat(QString);
-    void NewPerson(QString);
 };
 
 

@@ -157,22 +157,19 @@ void Connexion::messageGestion(QString message)
     }
     else if(message[0]== NewPlayer)
     {
-        message=message.remove(0,1);
         cout << message.toStdString() << endl;
+        message=message.remove(0,1);
         QStringList messageSplit=message.split(":");
         QString Name=messageSplit.at(0);
         message=message.remove(0,Name.capacity()+1);
-        cout << message.toStdString() << endl;
         QStringList positions=message.split(":");
         cout <<Name.toStdString()<<endl;
-        cout << Name.capacity()<<endl;
         for (int i=0 ; i<8 ; i++)
         {
             QString taille=positions.at(4*i+2);
             QString posX=positions.at(4*i);
             QString PosY=positions.at(4*i+1);
             QString IsHorizontal=positions.at(4*i+3);
-            cout << "taille du bateau : "<<taille.toStdString()<< "  PosX : "<<posX.toStdString()<<"  PosY : "<<PosY.toStdString()<<"  Is Horizontal : "<<IsHorizontal.toStdString()<<endl;
             boats[i]= new Bateau(taille.toInt(),posX.toInt(),PosY.toInt(), IsHorizontal.toInt());
         }
         player = new Joueur(*boats, Name, 8);
@@ -187,9 +184,5 @@ void Connexion::messageGestion(QString message)
     else if (message[0]==Header::PlayerAttack){
         QStringList lst = message.split(":");
         emit attaque(lst[1],lst[2],(unsigned char)lst[3].toInt(),(unsigned char)lst[4].toInt());
-    }
-    else if(message[0]==NewName)
-    {
-        this->sendtoclient(message);
     }
 }
