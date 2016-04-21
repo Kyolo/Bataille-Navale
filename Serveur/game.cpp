@@ -99,6 +99,10 @@ Game *Game::getInstance(){
     return Game::instance;
 }
 
+int Game::getNbJoueur(){
+     return nbJoueurCo;
+}
+
 //****************************************Slots************************************************************
 /**
  * @brief Game::newPlayer : Gère l'ajout d'un nouveau joueur
@@ -106,8 +110,8 @@ Game *Game::getInstance(){
  */
 void Game::newPlayer(Joueur j){
     this->lstJoueur[nbJoueurCo]=j;
-    cout<<j.getName().toStdString().c_str()<<" vient de se connecter. Il faut encore "<<nbJoueurMax-nbJoueurCo<<" joueurs avant le début de la partie."<<endl;
     nbJoueurCo++;
+    cout<<j.getName().toStdString().c_str()<<" vient de se connecter. Il faut encore "<<nbJoueurMax-nbJoueurCo<<" joueurs avant le début de la partie."<<endl;
     nbJoueurEnLice++;
     if(nbJoueurCo==nbJoueurMax){
         cout<<"Tout les joueurs sont connectés, début de la partie"<<endl;
