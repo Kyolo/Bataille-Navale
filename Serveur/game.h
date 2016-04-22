@@ -17,7 +17,7 @@ public:
     Game(int nbPlr = DEFAULT_PLR_NUMBER);
     void start();
     Joueur getPlayerByName(QString name);
-    Joueur *getAllPlayer(int * number);
+    Joueur *getAllPlayer();
     void forceQuit();
     void sendToChat(QString msg);
     ~Game();

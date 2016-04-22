@@ -60,8 +60,7 @@ Joueur Game::getPlayerByName(QString name){
  * @param number : un pointeur vers un entier qui contiendra le nombre de joueur
  * @return La liste des joueurs sous forme de tableau dynamique
  */
-Joueur *Game::getAllPlayer(int *number){
-    number=&(this->nbJoueurCo);
+Joueur *Game::getAllPlayer(){
     return lstJoueur;
 }
 
