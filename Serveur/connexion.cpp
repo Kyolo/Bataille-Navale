@@ -20,22 +20,22 @@ using namespace Header;
 
 Connexion::Connexion()
 {
-    cout<<"initialisation du serveur..."<<endl;
-    for (int i=0; i<10;i++)
+    cout<<"Initialisation du serveur..."<<endl;
+    /*for (int i=0; i<10;i++)
     {
         names[i]="";
-    }
+     } *///Après vérification, c'est inutile
     //------- Gestion du serveur ------------------------------------------------------
         server=new QTcpServer(this);
         if (!server->listen(QHostAddress::Any, 40110)) //utilisation du port 40110 pour le serveur
         { //erreur lors du démarrage du serveur
-            cout<<"Le serveur n'a pas pu être démarré :"<<
+            cout<<"Le serveur n'a pas pu être démarré : "<<
                    server->errorString().toStdString()<<endl;
         }
         else
         { //le serveur a réussi à s'initialiser
-            cout<<"Le serveur demarre:"<<endl<< "adresse: "<<getIPaddress().toStdString()<<endl<<
-                   "port: "<<server->serverPort()<<endl;
+            cout<<"Le serveur est en attente de connexion"<<endl<< "Adresse locale : "<<getIPaddress().toStdString()<<endl<<
+                   "port : "<<server->serverPort()<<endl;
             //on autorise la connexion d'un client. S'il ne doit y avoir qu'un seul client il faudra modifier cette ligne
             connect(server, SIGNAL(newConnection()),this, SLOT(connexion()));
         }
@@ -64,7 +64,7 @@ QString Connexion::getIPaddress()
 void Connexion::connexion()
 
 {
-    cout<<"nouveau client"<<endl;
+    cout<<"Nouveau connexion d'un client détectée"<<endl;
     sendtoclient("Le client est connecte");
     QTcpSocket *nouveauClient = server->nextPendingConnection();
     client << nouveauClient;
@@ -109,7 +109,7 @@ void Connexion::deconnexion()
 }
 //************** Procedure d'envoie de message au client **************************************************
 
-string Connexion::sendtoclient(const QString &message)
+void Connexion::sendtoclient(const QString &message)
 {
     QByteArray paquet;
     QDataStream out(&paquet, QIODevice::WriteOnly);
@@ -123,9 +123,8 @@ string Connexion::sendtoclient(const QString &message)
        {
               client[i]->write(paquet); //on envoie les paquest de données au client
        }
-       return "Message sent successfully";
    }
-string Connexion::sendToOneClient(const QString &message, int witchClient)
+void Connexion::sendToOneClient(const QString &message, int whichClient)
 {
     QByteArray paquet;
     QDataStream out(&paquet, QIODevice::WriteOnly);
@@ -134,8 +133,7 @@ string Connexion::sendToOneClient(const QString &message, int witchClient)
        out.device()->seek(0); //on se remet au debut de paquet
        out <<(quint16)(paquet.size() - sizeof(quint16)); //on remplace le 0
        //on envoie aux clients
-       client[witchClient]->write(paquet); //on envoie les paquest de données au client
-       return "Message sent successfully";
+       client[whichClient]->write(paquet); //on envoie les paquets de données au client
 }
 
 //**********************************Public Slots***********************************************************************
@@ -165,15 +163,13 @@ void Connexion::tchat(QString message)
 
 void Connexion::messageGestion(QString message)
 {
-    cout <<"reception message"<<endl;
-    cout << message.toStdString()<<endl;
+    cout <<"Réception d'un message..."<<endl<<"\t" <<message.toStdString()<<endl;
     if(message[0]==Header::Message)
     {
         emit tchat(message);
     }
     else if(message[0]== NewPlayer)
     {
-        cout << message.toStdString() << endl;
         message=message.remove(0,1);
         QStringList messageSplit=message.split(":");
         QString Name=messageSplit.at(0);
@@ -209,7 +205,7 @@ void Connexion::messageGestion(QString message)
             if(names[i]==message)
             {
                 sendToOneClient(QString::number(NewNameError), client.size()-1);
-                cout<<"nomIdentique"<<endl;
+                cerr<<"Erreur : "<<message.toStdString()<<" est un nom déjà prit"<<endl;
                 break;
             }
             else if(names[i]=="")

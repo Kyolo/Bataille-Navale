@@ -27,7 +27,7 @@ int Joueur::getNbDestroyedBoat(){
         if(lstBoat[i].isDestroyed())
             count++;
     }
-    return false;
+    return count;
 }
 
 void Joueur::giveUp(){
@@ -41,17 +41,14 @@ QString Joueur::getName(){
 }
 
 char Joueur::getStatusAt(uchar x, uchar y){
-    QStringList lst = QStringList();//On crée une liste
 
     for(int i=0;i<nbBoat;i++){
-        lst.push_back(QString(QChar(lstBoat->getStatusAt(x,y))));//On y ajoute le statut de tout les bateaux
+        char ch = lstBoat[i]->getStatusAt(x,y);//Pour chaque bateau on récupère le statut à sa position
+        if(ch!=Bateau::NONE)//Si le statut n'est pas nul, alors il y a un bateau, on renvoit
+            return ch;
     }
-
-    lst.removeDuplicates();//On enlève les doublons, car il y aura forcement plein d'espaces
-
-    if(lst.length()==0)
-        return Bateau::NONE;
-
-    return lst.at(0)[0].toLatin1();
+    
+//S'il n'y a rien, on renvoie NONE
+    return Bateau::NONE;
 
 }

@@ -17,8 +17,8 @@ class Connexion: public QObject
     Q_OBJECT
 public:
     Connexion();
-    std::string sendtoclient(const QString &message);
-    std::string sendToOneClient(const QString &message, int witchClient);
+    void sendtoclient(const QString &message);
+    void sendToOneClient(const QString &message, int whichClient);
 
 private slots:  //les slots de gestion des évènements
     void connexion();

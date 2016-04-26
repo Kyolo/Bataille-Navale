@@ -3,6 +3,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <string.h>
+#include <communicationconstants.h>
 
 #include <QCoreApplication>
 
@@ -79,11 +80,11 @@ void Game::forceQuit(){
 
 
 /**
- * @brief Game::sendToChat : Envoie un message au client, tout simplement
+ * @brief Game::sendToChat : Envoie un message aux clients, tout simplement
  * @param msg : le message
  */
 void Game::sendToChat(QString msg){
-    co->sendtoclient(0x01+msg);
+    co->sendtoclient(Header::Message+msg);
 }
 
 Game::~Game(){
@@ -127,7 +128,7 @@ void Game::newPlayer(Joueur j){
  */
 void Game::onAttack(QString from, QString to, uchar x, uchar y){
 
-    cout<<from.toStdString()<<" attaque "<<to.toStdString()<<" en ("<<x<<","<<y<<") ";
+    cout<<from.toStdString()<<" attaque "<<to.toStdString()<<" en ("<<x<<","<<y<<") : ";
 
     //On attaque le joueur correspondant à la case correspondante
     bool hit = this->getPlayerByName(to).attack(x,y);
