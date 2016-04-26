@@ -25,6 +25,7 @@ private slots:
 signals:
     void tchatRecive(QString);
     void serverError(QString);
+    void rename();
 };
 
 #endif // CLIENT_H

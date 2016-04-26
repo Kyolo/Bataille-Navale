@@ -92,8 +92,9 @@ void client::msgGestion(QString message)
         message.remove(0,1);
         emit tchatRecive(message);
     }
-    if(message[0]==NewNameError)
+    if(message[0]==0x61)
     {
         cout<<"nom identique"<<endl;
+        emit rename();
     }
 }

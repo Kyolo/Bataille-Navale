@@ -73,6 +73,7 @@ protected:
 private slots:
     void serverError(QString);
     void writeInTchat(QString);
+    void rename();
 };
 
 

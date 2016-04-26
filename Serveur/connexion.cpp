@@ -125,7 +125,7 @@ string Connexion::sendtoclient(const QString &message)
        }
        return "Message sent successfully";
    }
-string Connexion::sendToOneClient(const QString &message, int witchClient)
+string Connexion::sendToOneClient( QString &message, int witchClient)
 {
     QByteArray paquet;
     QDataStream out(&paquet, QIODevice::WriteOnly);
@@ -208,7 +208,7 @@ void Connexion::messageGestion(QString message)
         {
             if(names[i]==message)
             {
-                sendToOneClient(QString::number(NewNameError), client.size()-1);
+                sendToOneClient(NewNameError, client.size()-1);
                 cout<<"nomIdentique"<<endl;
                 break;
             }
@@ -216,9 +216,10 @@ void Connexion::messageGestion(QString message)
             {
                 names[i]=message;
                 QString messageNames="";
-                for (int a=0; a<i;i++)
+                for (int a=0; a<=i;a++)
                 {
-                    messageNames=messageNames+names[i]+":";
+                    cout <<"plantage imminent"<<endl;
+                    messageNames=messageNames+names[a]+":";
                 }
                 sendToOneClient(messageNames,client.size()-1);
                 break;

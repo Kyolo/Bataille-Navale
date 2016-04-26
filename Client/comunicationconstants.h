@@ -1,5 +1,6 @@
 #ifndef COMUNICATIONCONSTANTS_H
 #define COMUNICATIONCONSTANTS_H
+#include<QString>
 
 #define MessageHeader 0x01
 #define GiveUpHeader 0x02
@@ -10,5 +11,5 @@
 #define GameStarted 0x07
 #define GameFinished 0x08
 #define NewName 0x09
-const static int NewNameError = 0x0A;
+
 #endif // COMUNICATIONCONSTANTS_H
