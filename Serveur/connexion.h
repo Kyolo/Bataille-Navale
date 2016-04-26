@@ -18,6 +18,7 @@ class Connexion: public QObject
 public:
     Connexion();
     std::string sendtoclient(const QString &message);
+    std::string sendToOneClient(const QString &message, int witchClient);
 
 private slots:  //les slots de gestion des évènements
     void connexion();
@@ -34,6 +35,7 @@ private:
     void messageGestion(QString message);
      Bateau *boats[8];
      Joueur *player;
+     QString names[10];
 
 signals:
     void connexionNvJoueur(Joueur);

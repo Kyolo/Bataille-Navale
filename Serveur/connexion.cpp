@@ -21,6 +21,10 @@ using namespace Header;
 Connexion::Connexion()
 {
     cout<<"initialisation du serveur..."<<endl;
+    for (int i=0; i<10;i++)
+    {
+        names[i]="";
+    }
     //------- Gestion du serveur ------------------------------------------------------
         server=new QTcpServer(this);
         if (!server->listen(QHostAddress::Any, 40110)) //utilisation du port 40110 pour le serveur
@@ -121,6 +125,18 @@ string Connexion::sendtoclient(const QString &message)
        }
        return "Message sent successfully";
    }
+string Connexion::sendToOneClient(const QString &message, int witchClient)
+{
+    QByteArray paquet;
+    QDataStream out(&paquet, QIODevice::WriteOnly);
+       out << (quint16) 0;// 0 au début du paquet pour réserver la place nécessaire pour le nbre de paquets
+       out <<message; //on écrit le message
+       out.device()->seek(0); //on se remet au debut de paquet
+       out <<(quint16)(paquet.size() - sizeof(quint16)); //on remplace le 0
+       //on envoie aux clients
+       client[witchClient]->write(paquet); //on envoie les paquest de données au client
+       return "Message sent successfully";
+}
 
 //**********************************Public Slots***********************************************************************
 void Connexion::gameStarted()
@@ -184,5 +200,28 @@ void Connexion::messageGestion(QString message)
     else if (message[0]==Header::PlayerAttack){
         QStringList lst = message.split(":");
         emit attaque(lst[1],lst[2],(unsigned char)lst[3].toInt(),(unsigned char)lst[4].toInt());
+    }
+    else if(message[0]==NewName)
+    {
+        message=message.remove(0,1);
+        for (int i=0; i<10;i++)
+        {
+            if(names[i]==message)
+            {
+                sendToOneClient(QString::number(NewNameError), client.size()-1);
+                cout<<"nomIdentique"<<endl;
+            }
+            if(names[i]=="")
+            {
+                names[i]=message;
+                QString messageNames="";
+                for (int a=0; a<i;i++)
+                {
+                    messageNames=messageNames+names[i]+":";
+                }
+                sendToOneClient(messageNames,client.size()-1);
+                break;
+            }
+        }
     }
 }

@@ -8,6 +8,7 @@
 #include <QRect>
 #include "client.h"
 #include "joueur.h"
+#include "adversaire.h"
 
 
 namespace Ui {
@@ -64,6 +65,7 @@ private:
     void updateBoatGeometry(int boat, int x, int y);
     void turnImage(int boat, int x, int y);
     void updatePlayerBoats();
+    TableauAdversaire adversaires;
 
 protected:
     void closeEvent(QCloseEvent *event);

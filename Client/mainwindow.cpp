@@ -45,9 +45,6 @@ MainWindow::~MainWindow()
     delete ui;
 }
 //**********************************************************************************
-//**********************************************************************************
-//**********************************************************************************
-
 
 //*****Quitter*********************************************************
 //A partir du menu
@@ -160,6 +157,7 @@ void MainWindow::on_actionNewGame_triggered()
     ui->bateau41->setVisible(true);
     ui->bateau42->setVisible(true);
     ui->labelJoueursConnectes->append(" •  "+nomJoueur);
+    connexion->send(NewName+me->playerName);
     //ui->validBoatPosition->setGeometry(initialPosBoatX,initialPosBoatY,475,95);
     }
 
