@@ -64,7 +64,7 @@ QString Connexion::getIPaddress()
 void Connexion::connexion()
 
 {
-    cout<<"Nouveau connexion d'un client détectée"<<endl;
+    cout<<"Nouvelle connexion d'un client détectée"<<endl;
     sendtoclient("Le client est connecte");
     QTcpSocket *nouveauClient = server->nextPendingConnection();
     client << nouveauClient;
