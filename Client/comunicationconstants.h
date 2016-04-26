@@ -10,5 +10,5 @@
 #define GameStarted 0x07
 #define GameFinished 0x08
 #define NewName 0x09
-#define NewNameError 0x0A
+const static int NewNameError = 0x0A;
 #endif // COMUNICATIONCONSTANTS_H

@@ -86,9 +86,14 @@ void client::send(QString DonneesAEnvoyer)
 
 void client::msgGestion(QString message)
 {
+    cout<<message.toStdString()<<endl;
     if(message[0]==MessageHeader)
     {
         message.remove(0,1);
         emit tchatRecive(message);
+    }
+    if(message[0]==NewNameError)
+    {
+        cout<<"nom identique"<<endl;
     }
 }

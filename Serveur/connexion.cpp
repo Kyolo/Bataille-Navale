@@ -210,8 +210,9 @@ void Connexion::messageGestion(QString message)
             {
                 sendToOneClient(QString::number(NewNameError), client.size()-1);
                 cout<<"nomIdentique"<<endl;
+                break;
             }
-            if(names[i]=="")
+            else if(names[i]=="")
             {
                 names[i]=message;
                 QString messageNames="";
