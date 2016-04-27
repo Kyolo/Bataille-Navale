@@ -15,6 +15,8 @@ const static int GameStarted=0x07;
 const static int GameFinished=0x08;
 const static int NewName=0x09;
 const static int NewNameError=0x0A;
+const static int AttackResult=0x0B;
+const static int AttackFromClient=0x0C;
 }
 
 #endif // COMMUNICATIONCONSTANTS_H

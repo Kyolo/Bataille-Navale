@@ -117,8 +117,7 @@ void Connexion::sendtoclient(const QString message)
        out.device()->seek(0); //on se remet au debut de paquet
        out <<(quint16)(paquet.size() - sizeof(quint16)); //on remplace le 0
        //on envoie aux clients
-       for
-               (int i=0; i<client.size();i++)
+       for(int i=0; i<client.size();i++)
        {
               client[i]->write(paquet); //on envoie les paquest de données au client
        }
@@ -138,25 +137,27 @@ void Connexion::sendToOneClient( QString message, int whichClient)
 //**********************************Public Slots***********************************************************************
 void Connexion::gameStarted()
 {
-
+    this->sendtoclient(Header::GameStarted);
 }
 
 void Connexion::attackResult(QString who, uchar wherex, uchar wherey, bool in_the_water)
 {
-
+    this->sendtoclient(Header::AttackResult+":"+who+":"+QString::number(wherex)+":"+QString::number(wherey)+":"+QString::number(in_the_water));
 }
 
 void Connexion::playerLost(QString who)
 {
-
+    this->sendtoclient(Header::PlayerLost+":"+who);
 }
 
 void Connexion::playerWon(QString winner)
 {
-
+    this->sendtoclient(Header::PlayerWin+":"+winner);
 }
 void Connexion::tchat(QString message)
 {
+    if(message[0]!=Header::Message)
+        message.prepend((char*)Header::Message);
     this->sendtoclient(message);
 }
 
