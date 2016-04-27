@@ -3,7 +3,8 @@
 
 #include <QtNetwork>
 #include <QObject>
-#include <string>
+
+typedef unsigned char uchar;
 
 class client: public QObject
 {
@@ -27,6 +28,11 @@ signals:
     void serverError(QString);
     void rename();
     void NewNameSignal(QString);
+    void AttackReceived(QString,uchar,uchar,bool);
+    void signalPlayerLost(QString);
+    void signalPlayerWin(QString);
+    void gmeStart();
+    void newAdversaire(QString);
 };
 
 #endif // CLIENT_H

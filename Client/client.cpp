@@ -87,24 +87,32 @@ void client::send(QString DonneesAEnvoyer)
 void client::msgGestion(QString message)
 {
     cout<<message.toStdString()<<endl;
-    if(message[0]==MessageHeader)
-    {
+
+    if(message[0].toLatin1()==MessageHeader){
         message.remove(0,1);
         emit tchatRecive(message);
-    }
-    else if(message[0]==NewNameError)
-    {
-        cout<<"nom identique"<<endl;
+    }else if(message[0].toLatin1()==NewNameError){
+        cout<<"Votre nom est déjà utilisé"<<endl;
         emit rename();
-    }
-    else if(message[0]==NewName)
-    {
-        cout << "reception de noms"<<endl;
+    }else if(message[0].toLatin1()==NewName){
+        cout<<"Reception des noms des autres joueurs"<<endl;
         message.remove(0,1);
-        QStringList namesList = message.split(":");
-        for (int i=0; i<namesList.size(); i++)
-        {
-            emit NewNameSignal(namesList.at(i));
+        QStringList nameList = message.split(":");
+        for(int i=0;i<nameList.size();i++){
+            if(((QString)nameList.at(i)).isEmpty())
+                continue;//Si jamais le nom est vide, on passe au suivant
+            emit NewNameSignal(nameList.at(i));
         }
+    }else if(message[0].toLatin1()==PlayerAttack){
+        QStringList par = message.split(":");
+        emit AttackReceived(par[1],(uchar)((QString)par[2]).toInt(),(uchar)((QString)par[3]).toInt(),(bool)((QString)par[4]).toInt());
+    } else if(message[0].toLatin1()==PlayerLost){
+        emit signalPlayerLost((QString)(message.split(":").at(1)));
+    }else if(message[0].toLatin1()==PlayerWin){
+        emit signalPlayerWin((QString)(message.split(":").at(1)));
+    }else if(message[0].toLatin1()==GameStarted){
+        emit gmeStart();
+    } else if(message[0].toLatin1()==NewPlayer){
+        emit newAdversaire((QString)(message.split(":").at(1)));
     }
 }
