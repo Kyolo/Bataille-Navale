@@ -4,7 +4,7 @@
 
 #include "comunicationconstants.h"
 
-using namespace std;
+using namespace std; using namespace Header;
 
 client::client(string addr, quint16 port)
 {
