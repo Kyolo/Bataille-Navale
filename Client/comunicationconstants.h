@@ -1,16 +1,18 @@
 #ifndef COMUNICATIONCONSTANTS_H
 #define COMUNICATIONCONSTANTS_H
-#include<QString>
 
-#define MessageHeader 0x01
-#define GiveUpHeader 0x02
-#define NewPlayer 0x03
-#define PlayerAttack 0x04
-#define PlayerLost 0x05
-#define PlayerWin 0x06
-#define GameStarted 0x07
-#define GameFinished 0x08
-#define NewName 0x09
-#define NewNameError 0x0A
+namespace Header {
+    const static int MessageHeader = 0x01;
+    const static int GiveUpHeader = 0x02;
+    const static int NewPlayer = 0x03;
+    const static int PlayerAttack = 0x04;
+    const static int PlayerLost = 0x05;
+    const static int PlayerWin = 0x06;
+    const static int GameStarted = 0x07;
+    const static int GameFinished = 0x08;
+    const static int NewName = 0x09;
+    const static int NewNameError = 0x0A;
+
+}
 
 #endif // COMUNICATIONCONSTANTS_H
