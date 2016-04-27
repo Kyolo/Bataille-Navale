@@ -20,22 +20,22 @@ using namespace Header;
 
 Connexion::Connexion()
 {
-    cout<<"Initialisation du serveur..."<<endl;
-    /*for (int i=0; i<10;i++)
+    cout<<"initialisation du serveur..."<<endl;
+    for (int i=0; i<10;i++)
     {
         names[i]="";
-     } *///Après vérification, c'est inutile
+    }
     //------- Gestion du serveur ------------------------------------------------------
         server=new QTcpServer(this);
         if (!server->listen(QHostAddress::Any, 40110)) //utilisation du port 40110 pour le serveur
         { //erreur lors du démarrage du serveur
-            cout<<"Le serveur n'a pas pu être démarré : "<<
+            cout<<"Le serveur n'a pas pu être démarré :"<<
                    server->errorString().toStdString()<<endl;
         }
         else
         { //le serveur a réussi à s'initialiser
-            cout<<"Le serveur est en attente de connexion"<<endl<< "Adresse locale : "<<getIPaddress().toStdString()<<endl<<
-                   "port : "<<server->serverPort()<<endl;
+            cout<<"Le serveur demarre:"<<endl<< "adresse: "<<getIPaddress().toStdString()<<endl<<
+                   "port: "<<server->serverPort()<<endl;
             //on autorise la connexion d'un client. S'il ne doit y avoir qu'un seul client il faudra modifier cette ligne
             connect(server, SIGNAL(newConnection()),this, SLOT(connexion()));
         }
@@ -64,7 +64,7 @@ QString Connexion::getIPaddress()
 void Connexion::connexion()
 
 {
-    cout<<"Nouvelle connexion d'un client détectée"<<endl;
+    cout<<"nouveau client"<<endl;
     sendtoclient("Le client est connecte");
     QTcpSocket *nouveauClient = server->nextPendingConnection();
     client << nouveauClient;
@@ -108,8 +108,7 @@ void Connexion::deconnexion()
     socket->deleteLater();
 }
 //************** Procedure d'envoie de message au client **************************************************
-
-void Connexion::sendtoclient(const QString &message)
+void Connexion::sendtoclient(const QString message)
 {
     QByteArray paquet;
     QDataStream out(&paquet, QIODevice::WriteOnly);
@@ -124,11 +123,7 @@ void Connexion::sendtoclient(const QString &message)
               client[i]->write(paquet); //on envoie les paquest de données au client
        }
    }
-<<<<<<< HEAD
-string Connexion::sendToOneClient( QString &message, int witchClient)
-=======
-void Connexion::sendToOneClient(const QString &message, int whichClient)
->>>>>>> c1b8438cd5314eeea473007573e57bf20b7223d1
+void Connexion::sendToOneClient( QString message, int whichClient)
 {
     QByteArray paquet;
     QDataStream out(&paquet, QIODevice::WriteOnly);
@@ -137,7 +132,7 @@ void Connexion::sendToOneClient(const QString &message, int whichClient)
        out.device()->seek(0); //on se remet au debut de paquet
        out <<(quint16)(paquet.size() - sizeof(quint16)); //on remplace le 0
        //on envoie aux clients
-       client[whichClient]->write(paquet); //on envoie les paquets de données au client
+       client[whichClient]->write(paquet); //on envoie les paquest de données au client
 }
 
 //**********************************Public Slots***********************************************************************
@@ -167,13 +162,15 @@ void Connexion::tchat(QString message)
 
 void Connexion::messageGestion(QString message)
 {
-    cout <<"Réception d'un message..."<<endl<<"\t" <<message.toStdString()<<endl;
+    cout <<"reception message"<<endl;
+    cout << message.toStdString()<<endl;
     if(message[0]==Header::Message)
     {
         emit tchat(message);
     }
     else if(message[0]== NewPlayer)
     {
+        cout << message.toStdString() << endl;
         message=message.remove(0,1);
         QStringList messageSplit=message.split(":");
         QString Name=messageSplit.at(0);
@@ -208,25 +205,20 @@ void Connexion::messageGestion(QString message)
         {
             if(names[i]==message)
             {
-<<<<<<< HEAD
-                sendToOneClient(NewNameError, client.size()-1);
+                sendToOneClient(QString(Header::NewNameError+""), client.size()-1);
                 cout<<"nomIdentique"<<endl;
-=======
-                sendToOneClient(QString::number(NewNameError), client.size()-1);
-                cerr<<"Erreur : "<<message.toStdString()<<" est un nom déjà prit"<<endl;
->>>>>>> c1b8438cd5314eeea473007573e57bf20b7223d1
                 break;
             }
             else if(names[i]=="")
             {
                 names[i]=message;
                 QString messageNames="";
-                for (int a=0; a<=i;a++)
+                for (int a=0; a<i;a++)
                 {
-                    cout <<"plantage imminent"<<endl;
                     messageNames=messageNames+names[a]+":";
                 }
                 sendToOneClient(messageNames,client.size()-1);
+                sendtoclient(NewName+message+":");
                 break;
             }
         }

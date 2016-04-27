@@ -116,6 +116,7 @@ void MainWindow::on_actionNewGame_triggered()
     connect(connexion, SIGNAL(serverError(QString)), this,SLOT(serverError(QString)));
     connect(connexion, SIGNAL(tchatRecive(QString)), this , SLOT(writeInTchat(QString)));
     connect(connexion, SIGNAL(rename()), this, SLOT(rename()));
+    connect(connexion, SIGNAL(NewNameSignal(QString)), this , SLOT(NewNameSlot(QString)));
     connecte=1;
     ui->textChat->setText("");
     ui->textChat->setEnabled(true);
@@ -207,6 +208,12 @@ void MainWindow::rename()
     nomJoueur = QInputDialog::getText(this, tr("Nom du joueur"), tr("Veuillez changer votre nom. Un autre joueur possede deja celui-ci. :"), QLineEdit::Normal,QDir::home().dirName());
     me->playerName=nomJoueur;
     connexion->send(NewName+me->playerName);
+}
+
+void MainWindow::NewNameSlot(QString name)
+{
+    cout<<"ajout nom au menu deroulant"<<endl;
+    ui->nameBox->addItem(name);
 }
 
 //********* Désactiver le Tchat **********************************************

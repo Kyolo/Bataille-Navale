@@ -14,7 +14,7 @@ const static int PlayerWin=0x06;
 const static int GameStarted=0x07;
 const static int GameFinished=0x08;
 const static int NewName=0x09;
-QString NewNameError = "a";
+const static int NewNameError=0x0A;
 }
 
 #endif // COMMUNICATIONCONSTANTS_H

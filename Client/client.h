@@ -26,6 +26,7 @@ signals:
     void tchatRecive(QString);
     void serverError(QString);
     void rename();
+    void NewNameSignal(QString);
 };
 
 #endif // CLIENT_H

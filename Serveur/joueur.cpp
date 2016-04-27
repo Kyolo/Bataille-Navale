@@ -43,7 +43,7 @@ QString Joueur::getName(){
 char Joueur::getStatusAt(uchar x, uchar y){
 
     for(int i=0;i<nbBoat;i++){
-        char ch = lstBoat[i]->getStatusAt(x,y);//Pour chaque bateau on récupère le statut à sa position
+        char ch = lstBoat[i].getStatusAt(x,y);//Pour chaque bateau on récupère le statut à sa position
         if(ch!=Bateau::NONE)//Si le statut n'est pas nul, alors il y a un bateau, on renvoit
             return ch;
     }
