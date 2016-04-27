@@ -92,13 +92,14 @@ void client::msgGestion(QString message)
         message.remove(0,1);
         emit tchatRecive(message);
     }
-    else if(message[0]==0x61)
+    else if(message[0]==NewNameError)
     {
         cout<<"nom identique"<<endl;
         emit rename();
     }
     else if(message[0]==NewName)
     {
+        cout << "reception de noms"<<endl;
         message.remove(0,1);
         QStringList namesList = message.split(":");
         for (int i=0; i<namesList.size(); i++)

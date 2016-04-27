@@ -6,7 +6,7 @@ typedef unsigned char uchar;
 class Bateau
 {
 public:
-    Bateau(uchar taille, uchar posx, uchar posy, bool hori);
+    Bateau(uchar taille=0, uchar posx=0, uchar posy=0, bool hori=false);
     bool isDestroyed();
     uchar getPositionX();
     uchar getPositionY();

@@ -170,6 +170,7 @@ void Connexion::messageGestion(QString message)
     }
     else if(message[0]== NewPlayer)
     {
+        Bateau *boats;
         cout << message.toStdString() << endl;
         message=message.remove(0,1);
         QStringList messageSplit=message.split(":");
@@ -177,16 +178,17 @@ void Connexion::messageGestion(QString message)
         message=message.remove(0,Name.capacity()+1);
         QStringList positions=message.split(":");
         cout <<Name.toStdString()<<endl;
+        boats = new Bateau[Joueur::DEFAULT_BOAT_NUMBER];
         for (int i=0 ; i<8 ; i++)
         {
             QString taille=positions.at(4*i+2);
             QString posX=positions.at(4*i);
             QString PosY=positions.at(4*i+1);
             QString IsHorizontal=positions.at(4*i+3);
-            boats[i]= new Bateau(taille.toInt(),posX.toInt(),PosY.toInt(), IsHorizontal.toInt());
+            boats[i]= Bateau(taille.toInt(),posX.toInt(),PosY.toInt(), IsHorizontal.toInt());
         }
-        player = new Joueur(*boats, Name, 8);
-        emit connexionNvJoueur(*player);
+       Joueur player = Joueur(boats, Name, 8);
+        emit connexionNvJoueur(player);
     }
     else if (message[0]==Header::GiveUp)
     {
@@ -219,6 +221,7 @@ void Connexion::messageGestion(QString message)
                 }
                 sendToOneClient(messageNames,client.size()-1);
                 sendtoclient(NewName+message+":");
+                cout << "envoi des noms"<<endl;
                 break;
             }
         }

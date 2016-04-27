@@ -34,8 +34,7 @@ private:
     QList<QTcpSocket *> client;
     quint16 tailleMessage;
     void messageGestion(QString message);
-     Bateau *boats[8];
-     Joueur *player;
+
      QString names[10];
 
 signals:
