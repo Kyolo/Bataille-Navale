@@ -252,20 +252,27 @@ void MainWindow::serverError(QString error)
 //**********************Clic de la souris********************
 void MainWindow::mousePressEvent(QMouseEvent *e)
 {
-    QPointF pt = ui->graphicsView->mapToScene(e->pos());//récupération de la position
-    int posX=(int)pt.x();
-    int posY = (int)pt.y();
-    updateLabelsPositions();
-    if(boatIsSelected==false)
+    switch(state)
     {
-        for (int i=0; i<8; i++)
+    case STATE_ATWAR:
+        break;
+    case STATE_PREPARATION:
+        QPointF pt = ui->graphicsView->mapToScene(e->pos());//récupération de la position
+        int posX=(int)pt.x();
+        int posY = (int)pt.y();
+        updateLabelsPositions();
+        if(boatIsSelected==false)
         {
-            if(posX>labelRects[i].x() && posX<labelRects[i].width()+labelRects[i].x() && posY>labelRects[i].y()+33 && posY<labelRects[i].height()+labelRects[i].y()+33)
+            for (int i=0; i<8; i++)
             {
-                boatClicked=i;
-                boatIsSelected=true;
+                if(posX>labelRects[i].x() && posX<labelRects[i].width()+labelRects[i].x() && posY>labelRects[i].y()+33 && posY<labelRects[i].height()+labelRects[i].y()+33)
+                {
+                    boatClicked=i;
+                    boatIsSelected=true;
+                }
             }
         }
+        break;
     }
 }
 void MainWindow::mouseReleaseEvent(QMouseEvent *e)
@@ -273,6 +280,7 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *e)
     QPointF pt = ui->graphicsView->mapToScene(e->pos());//récupération de la position
     int posX=(int)pt.x();
     int posY = (int)pt.y();
+    cout <<"Mouse release"<<endl;
     if(posX>=100 && posX<=534 && posY>=30 && posY<=487)
     {
         pressedX=((int)pt.x()-GWposX-1)/27;
@@ -282,7 +290,7 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *e)
 
         switch(state){
         case STATE_ATWAR:
-
+cout << "at war"<<endl;
             break;
         case STATE_PREPARATION:
             updateLabelsPositions();
@@ -311,7 +319,6 @@ if(boatIsSelected==true)
     QPointF pt = ui->graphicsView->mapToScene(e->pos());//récupération de la position
     int posX=(int)pt.x();
     int posY = (int)pt.y();
-
     updateBoatGeometry(boatClicked, posX, posY);
 }
 }
@@ -461,6 +468,7 @@ void MainWindow::on_ButtonDone_clicked()
     case 0:
         cout <<"tout va bien"<<endl;
         connexion->send(NewPlayer+me->writeMessage());
+        state=1;
         break;
     case 1:
         QMessageBox::critical(this, "Erreur", "Des bateaux se superposent", QMessageBox::Ok);

@@ -20,8 +20,7 @@ client::client(string addr, quint16 port)
 }
 
 void client::connecte()
-{ //lorsque le signal de connexion est reçu du serveur le client affiche un message et les paramétrages
-   //ne peuvent plus être modifiés
+{
     cout<<"Connexion reussie !"<<endl;
 }
 
@@ -37,7 +36,7 @@ void client::erreurSocket(QAbstractSocket::SocketError erreur)
     switch(erreur) // On affiche un message différent selon l'erreur qu'on nous indique
     {
         case QAbstractSocket::HostNotFoundError:
-           emit serverError("ERREUR : le serveur n'a pas pu être trouvé. Vérifiez l'IP et le port.");
+           emit serverError("ERREUR : le serveur n'a pas pu etre trouvé. Verifiez l'IP et le port.");
             break;
         case QAbstractSocket::ConnectionRefusedError:
             emit serverError("ERREUR : le serveur a refuse la connexion. Verifiez si le programme \"serveur\" a bien ete lance. Verifiez aussi l'IP et le port.");

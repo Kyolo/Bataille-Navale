@@ -179,12 +179,14 @@ void Connexion::messageGestion(QString message)
         QStringList positions=message.split(":");
         cout <<Name.toStdString()<<endl;
         boats = new Bateau[Joueur::DEFAULT_BOAT_NUMBER];
+        cout<< "potitionnement des bateaux du joueur : "<<Name.toStdString()<<endl;
         for (int i=0 ; i<8 ; i++)
         {
             QString taille=positions.at(4*i+2);
             QString posX=positions.at(4*i);
             QString PosY=positions.at(4*i+1);
             QString IsHorizontal=positions.at(4*i+3);
+            cout<<"taille : "<<taille.toStdString()<<"     posX : "<<posX.toStdString()<<"      posY : "<<PosY.toStdString()<<"       IsHorizontal : "<<IsHorizontal.toStdString()<<endl;
             boats[i]= Bateau(taille.toInt(),posX.toInt(),PosY.toInt(), IsHorizontal.toInt());
         }
        Joueur player = Joueur(boats, Name, 8);
