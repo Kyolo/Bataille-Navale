@@ -60,7 +60,7 @@ void CommandManager::useCommand(QString command, QStringList args ){
         num = Game::getInstance()->getNbJoueur();
         cout<<"Les joueurs connectés sont :"<<endl;
         for(int i=0;i<num;i++){
-            cout<<"\t"<<plrs[i].getName().toStdString()<<" "<<(plrs[i].areAllBoatsDestroyed()?"En lice":"Mort")<<endl;
+            cout<<"\t"<<plrs[i].getName().toStdString()<<" "<<(plrs[i].areAllBoatsDestroyed()?"Mort":"Lice")<<endl;
         }
         return;
     }
