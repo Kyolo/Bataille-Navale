@@ -137,7 +137,7 @@ void Connexion::sendToOneClient( QString message, int whichClient)
 //**********************************Public Slots***********************************************************************
 void Connexion::gameStarted()
 {
-    this->sendtoclient(Header::GameStarted);
+    this->sendtoclient(QString(Header::GameStarted));
 }
 
 void Connexion::attackResult(QString who, uchar wherex, uchar wherey, bool in_the_water)

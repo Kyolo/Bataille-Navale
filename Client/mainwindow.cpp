@@ -255,6 +255,7 @@ void MainWindow::mousePressEvent(QMouseEvent *e)
     switch(state)
     {
     case STATE_ATWAR:
+        cout <<"clic"<<endl;
         break;
     case STATE_PREPARATION:
         QPointF pt = ui->graphicsView->mapToScene(e->pos());//récupération de la position
@@ -352,108 +353,120 @@ void MainWindow::draw()
 
 void MainWindow::updateLabelsPositions()
 {
-    labelRects[0]=ui->bateau21->geometry();
-    labelRects[1]=ui->bateau22->geometry();
-    labelRects[2]=ui->bateau31->geometry();
-    labelRects[3]=ui->bateau32->geometry();
-    labelRects[4]=ui->bateau33->geometry();
-    labelRects[5]=ui->bateau41->geometry();
-    labelRects[6]=ui->bateau42->geometry();
-    labelRects[7]=ui->bateau5->geometry();
+    if(state==0)
+    {
+        labelRects[0]=ui->bateau21->geometry();
+        labelRects[1]=ui->bateau22->geometry();
+        labelRects[2]=ui->bateau31->geometry();
+        labelRects[3]=ui->bateau32->geometry();
+        labelRects[4]=ui->bateau33->geometry();
+        labelRects[5]=ui->bateau41->geometry();
+        labelRects[6]=ui->bateau42->geometry();
+        labelRects[7]=ui->bateau5->geometry();
+    }
 }
 
 void MainWindow::updateBoatGeometry(int boat, int x, int y)
 {
-    y=y-33;
-    switch(boat){
-    case 0:
-              ui->bateau21->setGeometry(x, y, labelRects[boat].width(), labelRects[boat].height());
-        break;
-    case 1:
-        ui->bateau22->setGeometry(x, y, 50, 25);
-        break;
-    case 2:
-        ui->bateau31->setGeometry(x, y, 75, 25);
-        break;
-    case 3:
-        ui->bateau32->setGeometry(x, y, 75, 25);
-        break;
-    case 4:
-        ui->bateau33->setGeometry(x, y, 75, 25);
-        break;
-    case 5:
-        ui->bateau41->setGeometry(x, y, 100, 25);
-        break;
-    case 6:
-        ui->bateau42->setGeometry(x, y, 100, 25);
-        break;
-    case 7:
-        ui->bateau5->setGeometry(x, y, 125, 25);
-        break;
+    if(state==0)
+    {
+        y=y-33;
+        switch(boat){
+        case 0:
+                  ui->bateau21->setGeometry(x, y, labelRects[boat].width(), labelRects[boat].height());
+            break;
+        case 1:
+            ui->bateau22->setGeometry(x, y, 50, 25);
+            break;
+        case 2:
+            ui->bateau31->setGeometry(x, y, 75, 25);
+            break;
+        case 3:
+            ui->bateau32->setGeometry(x, y, 75, 25);
+            break;
+        case 4:
+            ui->bateau33->setGeometry(x, y, 75, 25);
+            break;
+        case 5:
+            ui->bateau41->setGeometry(x, y, 100, 25);
+            break;
+        case 6:
+            ui->bateau42->setGeometry(x, y, 100, 25);
+            break;
+        case 7:
+            ui->bateau5->setGeometry(x, y, 125, 25);
+            break;
+        }
     }
 }
 
 void MainWindow::turnImage(int boat, int x, int y)
 {
-    y=y-33;//correction des pixels de la barre de menu
-    switch(boat){
-    case 0:
-        if(labelRects[boat].width()>labelRects[boat].height())
-        {
-             ui->bateau21->setGeometry(x, y, labelRects[boat].height(),labelRects[boat].width());
-             ui->bateau21->setPixmap(QPixmap(":/bateau2Vertical.png"));
-             isHorizontal[boat]=false;
+    if(state==0)
+    {
+        y=y-33;//correction des pixels de la barre de menu
+        switch(boat){
+        case 0:
+            if(labelRects[boat].width()>labelRects[boat].height())
+            {
+                 ui->bateau21->setGeometry(x, y, labelRects[boat].height(),labelRects[boat].width());
+                 ui->bateau21->setPixmap(QPixmap(":/bateau2Vertical.png"));
+                 isHorizontal[boat]=false;
+            }
+            else
+            {
+                ui->bateau21->setGeometry(x, y, labelRects[boat].height(), labelRects[boat].width());
+                ui->bateau21->setPixmap(QPixmap(":/bateau2.png"));
+                isHorizontal[boat]=true;
+            }
+            break;
+        case 1:
+            ui->bateau22->setGeometry(x, y, 50, 25);
+            break;
+        case 2:
+            ui->bateau31->setGeometry(x, y, 75, 25);
+            break;
+        case 3:
+            ui->bateau32->setGeometry(x, y, 75, 25);
+            break;
+        case 4:
+            ui->bateau33->setGeometry(x, y, 75, 25);
+            break;
+        case 5:
+            ui->bateau41->setGeometry(x, y, 100, 25);
+            break;
+        case 6:
+            ui->bateau42->setGeometry(x, y, 100, 25);
+            break;
+        case 7:
+            ui->bateau5->setGeometry(x, y, 125, 25);
+            break;
+            updateLabelsPositions();
         }
-        else
-        {
-            ui->bateau21->setGeometry(x, y, labelRects[boat].height(), labelRects[boat].width());
-            ui->bateau21->setPixmap(QPixmap(":/bateau2.png"));
-            isHorizontal[boat]=true;
-        }
-        break;
-    case 1:
-        ui->bateau22->setGeometry(x, y, 50, 25);
-        break;
-    case 2:
-        ui->bateau31->setGeometry(x, y, 75, 25);
-        break;
-    case 3:
-        ui->bateau32->setGeometry(x, y, 75, 25);
-        break;
-    case 4:
-        ui->bateau33->setGeometry(x, y, 75, 25);
-        break;
-    case 5:
-        ui->bateau41->setGeometry(x, y, 100, 25);
-        break;
-    case 6:
-        ui->bateau42->setGeometry(x, y, 100, 25);
-        break;
-    case 7:
-        ui->bateau5->setGeometry(x, y, 125, 25);
-        break;
-        updateLabelsPositions();
     }
 }
 
 void MainWindow::on_RAZBateaux_clicked()
 {
-    ui->bateau5->setGeometry(initialPosBoatX+15,initialPosBoatY+10,125,25);
-    ui->bateau5->setPixmap(QPixmap(":/bateau5.png"));
-    ui->bateau41->setGeometry(initialPosBoatX+155,initialPosBoatY+10,100,25);
-    ui->bateau41->setPixmap(QPixmap(":/bateau4.png"));
-    ui->bateau42->setGeometry(initialPosBoatX+270,initialPosBoatY+10,100,25);
-    ui->bateau42->setPixmap(QPixmap(":/bateau4.png"));
-    ui->bateau31->setGeometry(initialPosBoatX+385,initialPosBoatY+10,75,25);
-    ui->bateau31->setPixmap(QPixmap(":/bateau3.png"));
-    ui->bateau32->setGeometry(initialPosBoatX+92,initialPosBoatY+45,75,25);
-    ui->bateau32->setPixmap(QPixmap(":/bateau3.png"));
-    ui->bateau33->setGeometry(initialPosBoatX+185,initialPosBoatY+45,75,25);
-    ui->bateau33->setPixmap(QPixmap(":/bateau3.png"));
-    ui->bateau21->setGeometry(initialPosBoatX+272,initialPosBoatY+45,50,25);
-    ui->bateau21->setPixmap(QPixmap(":/bateau2.png"));
-    ui->bateau22->setGeometry(initialPosBoatX+337,initialPosBoatY+45,50,25);
-    ui->bateau22->setPixmap(QPixmap(":/bateau2.png"));
+    if(state==0)
+    {
+        ui->bateau5->setGeometry(initialPosBoatX+15,initialPosBoatY+10,125,25);
+        ui->bateau5->setPixmap(QPixmap(":/bateau5.png"));
+        ui->bateau41->setGeometry(initialPosBoatX+155,initialPosBoatY+10,100,25);
+        ui->bateau41->setPixmap(QPixmap(":/bateau4.png"));
+        ui->bateau42->setGeometry(initialPosBoatX+270,initialPosBoatY+10,100,25);
+        ui->bateau42->setPixmap(QPixmap(":/bateau4.png"));
+        ui->bateau31->setGeometry(initialPosBoatX+385,initialPosBoatY+10,75,25);
+        ui->bateau31->setPixmap(QPixmap(":/bateau3.png"));
+        ui->bateau32->setGeometry(initialPosBoatX+92,initialPosBoatY+45,75,25);
+        ui->bateau32->setPixmap(QPixmap(":/bateau3.png"));
+        ui->bateau33->setGeometry(initialPosBoatX+185,initialPosBoatY+45,75,25);
+        ui->bateau33->setPixmap(QPixmap(":/bateau3.png"));
+        ui->bateau21->setGeometry(initialPosBoatX+272,initialPosBoatY+45,50,25);
+        ui->bateau21->setPixmap(QPixmap(":/bateau2.png"));
+        ui->bateau22->setGeometry(initialPosBoatX+337,initialPosBoatY+45,50,25);
+        ui->bateau22->setPixmap(QPixmap(":/bateau2.png"));
+    }
 }
 
 void MainWindow::on_ButtonDone_clicked()
@@ -481,35 +494,38 @@ void MainWindow::on_ButtonDone_clicked()
 
 void MainWindow::updatePlayerBoats()
 {
-    for (int i=0; i<8; i++)
+    if(state==0)
     {
-        switch(i){
-        case 0:
-            me->setBoat((labelRects[i].x()-GWposX-1)/27, (labelRects[i].y()-GWposY-1)/27,isHorizontal[i],i,2);
-            cout <<"x: "<<labelRects[i].x()<<"y: "<<labelRects[i].y()<<endl;
-            cout <<"x: "<<(labelRects[i].x()-GWposX-1)/27<<" y: "<<(labelRects[i].y()-GWposY-1)/27 <<endl;
-            break;
-        case 1:
-            me->setBoat((labelRects[i].x()-GWposX-1)/27, (labelRects[i].y()-GWposY-1)/27,isHorizontal[i],i,2);
-            break;
-        case 2:
-            me->setBoat((labelRects[i].x()-GWposX-1)/27, (labelRects[i].y()-GWposY-1)/27,isHorizontal[i],i,3);
-            break;
-        case 3:
-            me->setBoat((labelRects[i].x()-GWposX-1)/27, (labelRects[i].y()-GWposY-1)/27,isHorizontal[i],i,3);
-            break;
-        case 4:
-            me->setBoat((labelRects[i].x()-GWposX-1)/27, (labelRects[i].y()-GWposY-1)/27,isHorizontal[i],i,3);
-            break;
-        case 5:
-            me->setBoat((labelRects[i].x()-GWposX-1)/27, (labelRects[i].y()-GWposY-1)/27,isHorizontal[i],i,4);
-            break;
-        case 6:
-           me->setBoat((labelRects[i].x()-GWposX-1)/27, (labelRects[i].y()-GWposY-1)/27,isHorizontal[i],i,4);
-            break;
-        case 7:
-            me->setBoat((labelRects[i].x()-GWposX-1)/27, (labelRects[i].y()-GWposY-1)/27,isHorizontal[i],i,5);
-            break;
+        for (int i=0; i<8; i++)
+        {
+            switch(i){
+            case 0:
+                me->setBoat((labelRects[i].x()-GWposX-1)/27, (labelRects[i].y()-GWposY-1)/27,isHorizontal[i],i,2);
+                cout <<"x: "<<labelRects[i].x()<<"y: "<<labelRects[i].y()<<endl;
+                cout <<"x: "<<(labelRects[i].x()-GWposX-1)/27<<" y: "<<(labelRects[i].y()-GWposY-1)/27 <<endl;
+                break;
+            case 1:
+                me->setBoat((labelRects[i].x()-GWposX-1)/27, (labelRects[i].y()-GWposY-1)/27,isHorizontal[i],i,2);
+                break;
+            case 2:
+                me->setBoat((labelRects[i].x()-GWposX-1)/27, (labelRects[i].y()-GWposY-1)/27,isHorizontal[i],i,3);
+                break;
+            case 3:
+                me->setBoat((labelRects[i].x()-GWposX-1)/27, (labelRects[i].y()-GWposY-1)/27,isHorizontal[i],i,3);
+                break;
+            case 4:
+                me->setBoat((labelRects[i].x()-GWposX-1)/27, (labelRects[i].y()-GWposY-1)/27,isHorizontal[i],i,3);
+                break;
+            case 5:
+                me->setBoat((labelRects[i].x()-GWposX-1)/27, (labelRects[i].y()-GWposY-1)/27,isHorizontal[i],i,4);
+                break;
+            case 6:
+               me->setBoat((labelRects[i].x()-GWposX-1)/27, (labelRects[i].y()-GWposY-1)/27,isHorizontal[i],i,4);
+                break;
+            case 7:
+                me->setBoat((labelRects[i].x()-GWposX-1)/27, (labelRects[i].y()-GWposY-1)/27,isHorizontal[i],i,5);
+                break;
+            }
         }
     }
 }
