@@ -137,7 +137,7 @@ void Connexion::sendToOneClient( QString message, int whichClient)
 //**********************************Public Slots***********************************************************************
 void Connexion::gameStarted()
 {
-    this->sendtoclient(QString(Header::GameStarted));
+    this->sendtoclient(Header::GameStarted+"");
 }
 
 void Connexion::attackResult(QString who, uchar wherex, uchar wherey, bool in_the_water)
@@ -157,7 +157,7 @@ void Connexion::playerWon(QString winner)
 void Connexion::tchat(QString message)
 {
     if(message[0]!=Header::Message)
-        message.prepend((char*)Header::Message);
+        message.prepend(""+Header::Message);
     this->sendtoclient(message);
 }
 
