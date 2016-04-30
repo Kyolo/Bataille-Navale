@@ -12,5 +12,6 @@
         <file>bateau3Vertical.png</file>
         <file>bateau4Vertical.png</file>
         <file>bateau5Vertical.png</file>
+        <file>fondDamier.png</file>
     </qresource>
 </RCC>
