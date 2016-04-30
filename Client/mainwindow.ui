@@ -4137,6 +4137,24 @@ Z</string>
      </rect>
     </property>
    </widget>
+   <widget class="QWidget" name="gridLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>70</y>
+      <width>160</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout" rowminimumheight="0" columnminimumwidth="0">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetDefaultConstraint</enum>
+     </property>
+     <property name="spacing">
+      <number>2</number>
+     </property>
+    </layout>
+   </widget>
    <zorder>labelImageFond</zorder>
    <zorder>fondBateaux</zorder>
    <zorder>textChat</zorder>
@@ -4158,6 +4176,7 @@ Z</string>
    <zorder>ButtonDone</zorder>
    <zorder>tircoule</zorder>
    <zorder>nameBox</zorder>
+   <zorder>gridLayoutWidget</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

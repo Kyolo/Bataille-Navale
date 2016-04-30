@@ -24,6 +24,8 @@ MainWindow::MainWindow(QWidget *parent) :
      ui->setupUi(this);
      ui->labelImageFond->setPixmap(QPixmap (":/carteFondFlou.jpg"));
      ui->graphicsView->setGeometry(GWposX,GWposY,434,434);
+     QRect rect(GWposX+1,GWposY+1,434,434);
+     ui->gridLayout->setGeometry(rect);
      scene = new QGraphicsScene(this);
         scene->setSceneRect(QRectF(0,0,434,434));
         ui->graphicsView->setScene(scene);
@@ -36,9 +38,20 @@ MainWindow::MainWindow(QWidget *parent) :
      ui->labelTchatDisable->setText("Tchat désactivé! \n \n Veuillez d'abord \n vous connecter !");
      ui->labelJoueursConnectes->append("Joueurs connectés :\n");
      state=0;
-     ui->tircoule->setPixmap(QPixmap(":/Tircoulé.png"));
-     ui->tircoule->setGeometry(157,157+10,25,25);
-
+     //ui->tircoule->setPixmap(QPixmap(":/Tircoulé.png"));
+    // ui->tircoule->setGeometry(157,157+10,25,25);
+    for (int a=0; a<16; a++)
+    {
+        for( int b=0; b<16; b++)
+        {
+            labelResult[a][b].setMaximumHeight(27);
+             labelResult[a][b].setMinimumHeight(27);
+              labelResult[a][b].setMaximumWidth(27);
+               labelResult[a][b].setMinimumWidth(27);
+            ui->gridLayout->addWidget(&labelResult[a][b], a, b);
+        }
+    }
+    ui->graphicsView->setLayout(ui->gridLayout);
 }
 MainWindow::~MainWindow()
 {
@@ -232,16 +245,11 @@ void MainWindow::AttackReceived(QString nom, uchar x, uchar y, bool etat)
   {
       if(etat==1)
       {
-          QLabel afficheEtat(this);
-          afficheEtat.setGeometry((x+1)*27+GWposX,(y+1)*27+GWposY, 25,25);
-          afficheEtat.setPixmap(QPixmap(":/TirBateau.jpg"));
-
+         labelResult[x][y].setPixmap(QPixmap(":/TirBateau.png"));
       }
       if(etat==0)
       {
-          QLabel afficheEtat(this);
-          afficheEtat.setGeometry((x+1)*27+GWposX,(y+1)*27+GWposY, 25,25);
-          afficheEtat.setPixmap(QPixmap(":/TirCoule.png"));
+        labelResult[x][y].setPixmap(QPixmap(":/TirCoule.png"));
       }
   }
 }
@@ -256,23 +264,24 @@ void MainWindow::ComboBoxChanged(QString name)
     cout<< "comboBox changed"<<endl;
     int id=adversaires.getByName(name);
     cout <<"id du joueur"<< id <<endl;
-    for (int a=0; a<16; a++)
+    if(id!=-1)
     {
-        for (int b=0; b<16; b++)
+        for (int a=0; a<16; a++)
         {
-            if(adversaires.adv[id].getState(a,b)==0)
+            for (int b=0; b<16; b++)
             {
-                QLabel afficheEtat(this);
-                afficheEtat.setGeometry((a)*27+GWposX,(b)*27+GWposY, 25,25);
-                afficheEtat.setPixmap(QPixmap(":/TirCoule.png"));
-
-            }
-            else if(adversaires.adv[id].getState(a,b)==1)
-            {
-                QLabel afficheEtat(this);
-                afficheEtat.setGeometry((a)*27+GWposX,(b)*27+GWposY, 25,25);
-                afficheEtat.setPixmap(QPixmap(":/TirBateau.jpg"));
-                afficheEtat.setVisible(true);
+                if(adversaires.adv[id].getState(a,b)==0)
+                {
+                    labelResult[a][b].setPixmap(QPixmap(":/TirCoule.png"));
+                }
+                else if(adversaires.adv[id].getState(a,b)==1)
+                {
+                    labelResult[a][b].setPixmap(QPixmap(":/TirBateau.png"));
+                }
+                else if(adversaires.adv[id].getState(a,b)==2)
+                {
+                    labelResult[a][b].setPixmap(QPixmap());
+                }
             }
         }
     }

@@ -9,6 +9,7 @@
 #include "client.h"
 #include "joueur.h"
 #include "adversaire.h"
+#include <QLabel>
 
 
 namespace Ui {
@@ -67,6 +68,7 @@ private:
     void updatePlayerBoats();
     TableauAdversaire adversaires;
     bool started=false;
+    QLabel labelResult[16][16];
 
 protected:
     void closeEvent(QCloseEvent *event);
