@@ -105,7 +105,7 @@ void MainWindow::on_actionNewGame_triggered()
     ui->actionNewGame->setEnabled(false);
     ui->actionAbandon->setEnabled(true);
     ui->graphicsView->setEnabled(true);
-    fond = scene->addPixmap(QPixmap(":/merCarre.jpg"));
+    fond = scene->addPixmap(QPixmap(":/fondDamier.png"));
     draw();
     QString adresseIP = QInputDialog::getText(this, tr("Adresse IP de connexion"), tr("Veuillez entrer l'adresse IP pour vous connecter : "), QLineEdit::Normal);
     qDebug()<<adresseIP;
