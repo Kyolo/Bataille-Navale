@@ -7,6 +7,7 @@
 #include <QTcpServer>
 #include <QTcpSocket>
 #include <QString>
+#include <QStringList>
 
 #include <string.h>
 
@@ -35,7 +36,7 @@ private:
     quint16 tailleMessage;
     void messageGestion(QString message);
 
-     QString names[10];
+    QStringList names;
 
 signals:
     void connexionNvJoueur(Joueur);

@@ -213,22 +213,16 @@ void Connexion::messageGestion(QString message)
         message=message.remove(0,1);
         for (int i=0; i<10;i++)
         {
-            if(names[i]==message)
+            if(names[i]!="")
             {
                 sendToOneClient(QString(Header::NewNameError+""), client.size()-1);
                 cout<<"nomIdentique"<<endl;
                 break;
             }
-            else if(names[i]=="")
+            else
             {
-                names[i]=message;
-                QString messageNames="";
-                for (int a=0; a<i;a++)
-                {
-                    messageNames=":"+messageNames+names[a];
-                }
-                //sendToOneClient(messageNames,client.size()-1);
-                sendtoclient(NewName+message);
+                names.append(message);
+                sendtoclient(NewName+":"+(names.join(":")));
                 cout << "envoi des noms"<<endl;
                 break;
             }
