@@ -69,6 +69,7 @@ void client::getserverdata()
        QString message;
        in >> message;
        this->msgGestion(message);
+       socket->readAll();
        tailleMessage = 0;
 }
 
@@ -81,6 +82,7 @@ void client::send(QString DonneesAEnvoyer)
     out.device()->seek(0);//on retourne au début
     out<<(quint16)(paquet.size() - sizeof(quint16));
     socket->write(paquet); //on écrit la donnée sur le socket
+    socket->flush();
 }
 
 void client::msgGestion(QString message)
