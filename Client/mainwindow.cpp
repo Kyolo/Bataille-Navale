@@ -118,6 +118,7 @@ void MainWindow::on_actionNewGame_triggered()
     connect(connexion, SIGNAL(rename()), this, SLOT(rename()));
     connect(connexion, SIGNAL(NewNameSignal(QString)), this , SLOT(NewNameSlot(QString)));
     connect(connexion, SIGNAL(AttackReceived(QString,uchar,uchar,bool)), this, SLOT(AttackReceived(QString,uchar,uchar,bool)));
+    connect(connexion, SIGNAL(gmeStart()), this, SLOT(GameStarted()));
     connecte=1;
     ui->textChat->setText("");
     ui->textChat->setEnabled(true);
@@ -222,6 +223,11 @@ void MainWindow::AttackReceived(QString, uchar, uchar, bool)
 
 }
 
+void MainWindow::GameStarted()
+{
+    started=true;
+}
+
 //********* Désactiver le Tchat **********************************************
 void MainWindow::on_actionTchatDisable_triggered()
 {
@@ -258,15 +264,30 @@ void MainWindow::serverError(QString error)
 //**********************Clic de la souris********************
 void MainWindow::mousePressEvent(QMouseEvent *e)
 {
+    int posX;
+    int posY;
+    QPointF pt = ui->graphicsView->mapToScene(e->pos());//récupération de la position
     switch(state)
     {
     case STATE_ATWAR:
-        cout <<"clic"<<endl;
+        if(started==true)
+        {
+            cout <<"clic"<<endl;
+             posX=(int)pt.x();
+             posY = (int)pt.y();
+            if(posX>=100 && posX<=534 && posY>=30 && posY<=487)
+            {
+               int AttackX=((int)pt.x()-GWposX-1)/27;
+               int AttackY=((int)pt.y()-32-GWposY-1)/27;
+               cout<<"attack x"<<AttackX<<"     attack y"<<AttackY<<endl;
+               connexion->send(PlayerAttack+":"+nomJoueur+":"+ui->nameBox->currentText()+":"+QString::number(AttackX)+":"+QString::number(AttackY));
+            }
+        }
         break;
     case STATE_PREPARATION:
         QPointF pt = ui->graphicsView->mapToScene(e->pos());//récupération de la position
-        int posX=(int)pt.x();
-        int posY = (int)pt.y();
+        posX=(int)pt.x();
+        posY = (int)pt.y();
         updateLabelsPositions();
         if(boatIsSelected==false)
         {
