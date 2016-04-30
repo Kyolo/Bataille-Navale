@@ -86,6 +86,7 @@ void Connexion::getdata()
         if (socket->bytesAvailable() <(int)sizeof(quint16))
                 return;//on n'a pas recu la taille -> on quitte
         in>> tailleMessage; //on récupère la taille reçue
+
     }
     //on verifie que le message est complet
     if (socket->bytesAvailable() < tailleMessage)
@@ -93,6 +94,7 @@ void Connexion::getdata()
     QString message;
     in>>message;
     messageGestion(message);//on renvoie le message vers la gestion des messages
+    socket->readAll();
     tailleMessage=0;     //on remet la variable de taille à 0
 }
 
@@ -120,6 +122,8 @@ void Connexion::sendtoclient(const QString message)
        for(int i=0; i<client.size();i++)
        {
               client[i]->write(paquet); //on envoie les paquest de données au client
+              client[i]->flush();
+
        }
    }
 void Connexion::sendToOneClient( QString message, int whichClient)
@@ -132,6 +136,7 @@ void Connexion::sendToOneClient( QString message, int whichClient)
        out <<(quint16)(paquet.size() - sizeof(quint16)); //on remplace le 0
        //on envoie aux clients
        client[whichClient]->write(paquet); //on envoie les paquest de données au client
+       client[whichClient]->flush();
 }
 
 //**********************************Public Slots***********************************************************************

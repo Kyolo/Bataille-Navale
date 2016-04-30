@@ -66,6 +66,7 @@ private:
     void turnImage(int boat, int x, int y);
     void updatePlayerBoats();
     TableauAdversaire adversaires;
+    bool started=false;
 
 protected:
     void closeEvent(QCloseEvent *event);
@@ -76,6 +77,7 @@ private slots:
     void rename();
     void NewNameSlot(QString name);
     void AttackReceived(QString,uchar,uchar,bool);
+    void GameStarted();
 };
 
 
