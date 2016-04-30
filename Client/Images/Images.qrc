@@ -14,6 +14,10 @@
         <file>bateau5Vertical.png</file>
         <file>fondDamier.png</file>
         <file>TirCoule.png</file>
+<<<<<<< HEAD
         <file>TirBateau.jpg</file>
+=======
+        <file>TirBateau.png</file>
+>>>>>>> 99a7bfe883f703554760fcb99095c7861698c0c0
     </qresource>
 </RCC>

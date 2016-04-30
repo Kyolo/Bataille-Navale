@@ -128,7 +128,7 @@ void Game::newPlayer(Joueur j){
  */
 void Game::onAttack(QString from, QString to, uchar x, uchar y){
 
-    cout<<from.toStdString()<<" attaque "<<to.toStdString()<<" en ("<<x<<","<<y<<") : ";
+    cout<<from.toStdString()<<" attaque "<<to.toStdString()<<" en ("<<QString::number(x).toStdString()<<","<<QString::number(y).toStdString()<<") : ";
 
     //On attaque le joueur correspondant à la case correspondante
     bool hit = this->getPlayerByName(to).attack(x,y);

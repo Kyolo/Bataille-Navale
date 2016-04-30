@@ -22,7 +22,7 @@ CommandManager::CommandManager(){
  */
 void CommandManager::useCommand(QString command, QStringList args ){
     if(command=="stop"){
-        Game::getInstance()->sendToChat("Arret du serveur");
+        Game::getInstance()->sendToChat("<u><i><b>Arret du serveur</b></i></u>");
         Game::getInstance()->forceQuit();
         return;
     }else if(command=="say"){
@@ -31,11 +31,14 @@ void CommandManager::useCommand(QString command, QStringList args ){
     } else if(command=="help"){
         if(args.length()==0){
             cout<<"Liste des commandes : "<<endl;
-            cout<<"\thelp [commande] : affiche l'aide globale ou d'une fonction"<<endl;
+            cout<<"\thelp [commande] : Affiche l'aide globale ou d'une fonction"<<endl;
             cout<<"\tsay <message> : Envoie un message aux clients connectés"<<endl;
             cout<<"\tdisp <joueur> : Affiche la grille du (ou des) joueur(s) demandé(s)"<<endl;
             cout<<"\tstop : Force l'arret du serveur et provoque l'abandon forcé des joueurs"<<endl;
             cout<<"\tlist : Affiche la liste des joueurs connectés"<<endl;
+            cout<<"\tkick <joueur> : Expulse le joueur désigné"<<endl;
+        } else {
+
         }
         return;
     }
@@ -63,6 +66,11 @@ void CommandManager::useCommand(QString command, QStringList args ){
             cout<<"\t"<<plrs[i].getName().toStdString()<<" "<<(plrs[i].areAllBoatsDestroyed()?"Mort":"Lice")<<endl;
         }
         return;
+    } else if(command=="kick"&&args.length()>0){
+        for(int i = 0;i<args.size();i++){
+            Game::getInstance()->playerLost(args[i]);
+        }
+        return;
     }
 
     cerr<<"Commande inconnue"<<endl;
@@ -72,7 +80,6 @@ void CommandManager::run()
 {
     forever{
         string command;
-
         //On lit la commande dans cin
         getline(cin,command);
 

@@ -131,7 +131,7 @@ void Connexion::tchat(QString message){
 }
 
 void Connexion::messageGestion(QString message){
-    cout <<"Reception d'un message : "<< message.toStdString()<<endl;
+    //cout <<"Reception d'un message : "<< message.toStdString()<<endl;
     if(message[0]==Header::Message){
         emit tchat(message);
     }
@@ -172,7 +172,7 @@ void Connexion::messageGestion(QString message){
         for (int i=0; i<names.size();i++){
             if(names[i]==message){
                 sendToOneClient(Header::NewNameError, client.size()-1);
-                cout<<"Un client a essayé de se connecté avec un nom déjà utilisé"<<endl;
+                cout<<"Un client a essayé de se connecter avec un nom déjà utilisé"<<endl;
                 break;
             }
             else if(names[i]==""){
