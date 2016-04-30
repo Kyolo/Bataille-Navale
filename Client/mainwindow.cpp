@@ -159,8 +159,8 @@ void MainWindow::on_actionNewGame_triggered()
     ui->bateau33->setVisible(true);
     ui->bateau41->setVisible(true);
     ui->bateau42->setVisible(true);
-    ui->labelJoueursConnectes->append(" •  "+nomJoueur);
     connexion->send(NewName+me->playerName);
+    adversaires = TableauAdversaire();
     //ui->validBoatPosition->setGeometry(initialPosBoatX,initialPosBoatY,475,95);
     }
 
@@ -213,13 +213,16 @@ void MainWindow::rename()
 
 void MainWindow::NewNameSlot(QString name)
 {
-    cout<<"ajout nom au menu deroulant"<<endl;
+    cout<<"ajout nom au menu deroulant et dans le label joueurs connectés"<<endl;
     ui->nameBox->addItem(name);
+    ui->labelJoueursConnectes->append(" •  "+name);
+    adversaires.newAdv(name);
 }
 
-void MainWindow::AttackReceived(QString, uchar, uchar, bool)
+void MainWindow::AttackReceived(QString nom, uchar x, uchar y, bool etat)
 {
-
+  int id=adversaires.getByName(nom);
+  adversaires.adv[id].setState(x,y,etat);
 }
 
 //********* Désactiver le Tchat **********************************************
