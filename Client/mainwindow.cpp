@@ -119,6 +119,7 @@ void MainWindow::on_actionNewGame_triggered()
     connect(connexion, SIGNAL(NewNameSignal(QString)), this , SLOT(NewNameSlot(QString)));
     connect(connexion, SIGNAL(AttackReceived(QString,uchar,uchar,bool)), this, SLOT(AttackReceived(QString,uchar,uchar,bool)));
     connect(connexion, SIGNAL(gmeStart()), this, SLOT(GameStarted()));
+    connect(ui->nameBox, SIGNAL(currentTextChanged(QString)), this, SLOT(ComboBoxChanged(QString)));
     connecte=1;
     ui->textChat->setText("");
     ui->textChat->setEnabled(true);
@@ -227,11 +228,54 @@ void MainWindow::AttackReceived(QString nom, uchar x, uchar y, bool etat)
 {
   int id=adversaires.getByName(nom);
   adversaires.adv[id].setState(x,y,etat);
+  if(ui->nameBox->currentText()==nom)
+  {
+      if(etat==1)
+      {
+          QLabel afficheEtat(this);
+          afficheEtat.setGeometry((x+1)*27+GWposX,(y+1)*27+GWposY, 25,25);
+          afficheEtat.setPixmap(QPixmap(":/TirBateau.jpg"));
+
+      }
+      if(etat==0)
+      {
+          QLabel afficheEtat(this);
+          afficheEtat.setGeometry((x+1)*27+GWposX,(y+1)*27+GWposY, 25,25);
+          afficheEtat.setPixmap(QPixmap(":/TirCoule.png"));
+      }
+  }
 }
 
 void MainWindow::GameStarted()
 {
     started=true;
+}
+
+void MainWindow::ComboBoxChanged(QString name)
+{
+    cout<< "comboBox changed"<<endl;
+    int id=adversaires.getByName(name);
+    cout <<"id du joueur"<< id <<endl;
+    for (int a=0; a<16; a++)
+    {
+        for (int b=0; b<16; b++)
+        {
+            if(adversaires.adv[id].getState(a,b)==0)
+            {
+                QLabel afficheEtat(this);
+                afficheEtat.setGeometry((a)*27+GWposX,(b)*27+GWposY, 25,25);
+                afficheEtat.setPixmap(QPixmap(":/TirCoule.png"));
+
+            }
+            else if(adversaires.adv[id].getState(a,b)==1)
+            {
+                QLabel afficheEtat(this);
+                afficheEtat.setGeometry((a)*27+GWposX,(b)*27+GWposY, 25,25);
+                afficheEtat.setPixmap(QPixmap(":/TirBateau.jpg"));
+                afficheEtat.setVisible(true);
+            }
+        }
+    }
 }
 
 //********* Désactiver le Tchat **********************************************

@@ -78,6 +78,7 @@ private slots:
     void NewNameSlot(QString name);
     void AttackReceived(QString,uchar,uchar,bool);
     void GameStarted();
+    void ComboBoxChanged(QString name);
 };
 
 
