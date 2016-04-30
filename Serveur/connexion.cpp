@@ -21,10 +21,6 @@ using namespace Header;
 Connexion::Connexion()
 {
     cout<<"initialisation du serveur..."<<endl;
-    for (int i=0; i<10;i++)
-    {
-        names[i]="";
-    }
     //------- Gestion du serveur ------------------------------------------------------
         server=new QTcpServer(this);
         if (!server->listen(QHostAddress::Any, 40110)) //utilisation du port 40110 pour le serveur
@@ -142,27 +138,27 @@ void Connexion::sendToOneClient( QString message, int whichClient)
 //**********************************Public Slots***********************************************************************
 void Connexion::gameStarted()
 {
-    this->sendtoclient(Header::GameStarted+"");
+    this->sendtoclient(Header::GameStarted);
 }
 
 void Connexion::attackResult(QString who, uchar wherex, uchar wherey, bool in_the_water)
 {
-    this->sendtoclient(Header::PlayerAttack+":"+who+":"+QString::number(wherex)+":"+QString::number(wherey)+":"+QString::number(in_the_water));
+    this->sendtoclient(QString(Header::PlayerAttack)+":"+who+":"+QString::number(wherex)+":"+QString::number(wherey)+":"+QString::number(in_the_water));
 }
 
 void Connexion::playerLost(QString who)
 {
-    this->sendtoclient(Header::PlayerLost+":"+who);
+    this->sendtoclient(QString(Header::PlayerLost)+":"+who);
 }
 
 void Connexion::playerWon(QString winner)
 {
-    this->sendtoclient(Header::PlayerWin+":"+winner);
+    this->sendtoclient(QString(Header::PlayerWin)+":"+winner);
 }
 void Connexion::tchat(QString message)
 {
     if(message[0]!=Header::Message)
-        message.prepend(""+Header::Message);
+        message.prepend(Header::Message);
     this->sendtoclient(message);
 }
 
@@ -174,7 +170,7 @@ void Connexion::messageGestion(QString message)
     {
         emit tchat(message);
     }
-    else if(message[0]== NewPlayer)
+    else if(message[0]== Header::NewPlayer)
     {
         Bateau *boats;
         cout << message.toStdString() << endl;
@@ -208,27 +204,23 @@ void Connexion::messageGestion(QString message)
         QStringList lst = message.split(":");
         emit attaque(lst[1],lst[2],(unsigned char)lst[3].toInt(),(unsigned char)lst[4].toInt());
     }
-    else if(message[0]==NewName)
+    else if(message[0]==Header::NewName)
     {
         message=message.remove(0,1);
-        for (int i=0; i<10;i++)
+        names.append("");
+        for (int i=0; i<names.size();i++)
         {
             if(names[i]==message)
             {
-                sendToOneClient(QString(Header::NewNameError+""), client.size()-1);
+                sendToOneClient(Header::NewNameError, client.size()-1);
                 cout<<"nomIdentique"<<endl;
                 break;
             }
             else if(names[i]=="")
             {
                 names[i]=message;
-                QString messageNames="";
-                for (int a=0; a<i;a++)
-                {
-                    messageNames=":"+messageNames+names[a];
-                }
-                //sendToOneClient(messageNames,client.size()-1);
-                sendtoclient(NewName+message);
+
+                sendtoclient(QString(Header::NewName)+":"+names.join(":"));
                 cout << "envoi des noms"<<endl;
                 break;
             }
