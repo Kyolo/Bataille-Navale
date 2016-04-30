@@ -211,7 +211,8 @@ void Connexion::messageGestion(QString message)
     else if(message[0]==NewName)
     {
         message=message.remove(0,1);
-        for (int i=0; i<10;i++)
+        names.append("");
+        for (int i=0; i<names.size();i++)
         {
             if(names[i]!="")
             {
@@ -219,9 +220,9 @@ void Connexion::messageGestion(QString message)
                 cout<<"nomIdentique"<<endl;
                 break;
             }
-            else
+            else if(names[i]=="")
             {
-                names.append(message);
+                names.at(message);
                 sendtoclient(NewName+":"+(names.join(":")));
                 cout << "envoi des noms"<<endl;
                 break;
