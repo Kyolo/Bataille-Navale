@@ -117,6 +117,7 @@ void MainWindow::on_actionNewGame_triggered()
     connect(connexion, SIGNAL(tchatRecive(QString)), this , SLOT(writeInTchat(QString)));
     connect(connexion, SIGNAL(rename()), this, SLOT(rename()));
     connect(connexion, SIGNAL(NewNameSignal(QString)), this , SLOT(NewNameSlot(QString)));
+    connect(connexion, SIGNAL(AttackReceived(QString,uchar,uchar,bool)), this, SLOT(AttackReceived(QString,uchar,uchar,bool)));
     connecte=1;
     ui->textChat->setText("");
     ui->textChat->setEnabled(true);
@@ -216,6 +217,11 @@ void MainWindow::NewNameSlot(QString name)
     ui->nameBox->addItem(name);
 }
 
+void MainWindow::AttackReceived(QString, uchar, uchar, bool)
+{
+
+}
+
 //********* Désactiver le Tchat **********************************************
 void MainWindow::on_actionTchatDisable_triggered()
 {
@@ -281,7 +287,7 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *e)
     QPointF pt = ui->graphicsView->mapToScene(e->pos());//récupération de la position
     int posX=(int)pt.x();
     int posY = (int)pt.y();
-    cout <<"Mouse release"<<endl;
+    cout <<"Mouse release"<<    endl;
     if(posX>=100 && posX<=534 && posY>=30 && posY<=487)
     {
         pressedX=((int)pt.x()-GWposX-1)/27;
