@@ -75,6 +75,7 @@ private slots:
     void writeInTchat(QString);
     void rename();
     void NewNameSlot(QString name);
+    void AttackReceived(QString,uchar,uchar,bool);
 };
 
 
