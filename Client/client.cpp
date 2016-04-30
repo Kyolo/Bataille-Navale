@@ -66,7 +66,7 @@ void client::getserverdata()
        if (socket->bytesAvailable() < tailleMessage)
            return;
        // On a toutes les infos nécessaires pour le message
-       QString message;
+       QString message="";
        in >> message;
        this->msgGestion(message);
        socket->readAll();
@@ -87,15 +87,16 @@ void client::send(QString DonneesAEnvoyer)
 
 void client::msgGestion(QString message)
 {
+    cout<<"nouveau message"<<endl;
     cout<<message.toStdString()<<endl;
 
-    if(message[0].toLatin1()==MessageHeader){
+    if(message[0]==MessageHeader){
         message.remove(0,1);
         emit tchatRecive(message);
-    }else if(message[0].toLatin1()==NewNameError){
+    }else if(message[0]==NewNameError){
         cout<<"Votre nom est déjà utilisé"<<endl;
         emit rename();
-    }else if(message[0].toLatin1()==NewName){
+    }else if(message[0]==NewName){
         cout<<"Reception des noms des autres joueurs"<<endl;
         message.remove(0,1);
         QStringList nameList = message.split(":");
@@ -104,17 +105,17 @@ void client::msgGestion(QString message)
                 continue;//Si jamais le nom est vide, on passe au suivant
             emit NewNameSignal(nameList.at(i));
         }
-    }else if(message[0].toLatin1()==PlayerAttack){
+    }else if(message[0]==PlayerAttack){
         QStringList par = message.split(":");
         emit AttackReceived(par[1],(uchar)((QString)par[2]).toInt(),(uchar)((QString)par[3]).toInt(),(bool)((QString)par[4]).toInt());
-    } else if(message[0].toLatin1()==PlayerLost){
+    } else if(message[0]==PlayerLost){
         emit signalPlayerLost((QString)(message.split(":").at(1)));
-    }else if(message[0].toLatin1()==PlayerWin){
+    }else if(message[0]==PlayerWin){
         emit signalPlayerWin((QString)(message.split(":").at(1)));
-    }else if(message[0].toLatin1()==GameStarted){
+    }else if(message[0]==GameStarted){
         cout<<"game started"<<endl;
         emit gmeStart();
-    } else if(message[0].toLatin1()==NewPlayer){
+    } else if(message[0]==NewPlayer){
         emit newAdversaire((QString)(message.split(":").at(1)));
     }
 }

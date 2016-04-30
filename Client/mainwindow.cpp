@@ -286,7 +286,7 @@ void MainWindow::mousePressEvent(QMouseEvent *e)
                int AttackX=((int)pt.x()-GWposX-1)/27;
                int AttackY=((int)pt.y()-32-GWposY-1)/27;
                cout<<"attack x"<<AttackX<<"     attack y"<<AttackY<<endl;
-               connexion->send(PlayerAttack+":"+nomJoueur+":"+ui->nameBox->currentText()+":"+QString::number(AttackX)+":"+QString::number(AttackY));
+               connexion->send((QString)PlayerAttack+":"+nomJoueur+":"+ui->nameBox->currentText()+":"+QString::number(AttackX)+":"+QString::number(AttackY));
             }
         }
         break;

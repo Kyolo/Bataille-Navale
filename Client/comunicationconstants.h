@@ -2,16 +2,16 @@
 #define COMUNICATIONCONSTANTS_H
 
 namespace Header {
-    const static int MessageHeader = 0x01;
-    const static int GiveUpHeader = 0x02;
-    const static int NewPlayer = 0x03;
-    const static int PlayerAttack = 0x04;
-    const static int PlayerLost = 0x05;
-    const static int PlayerWin = 0x06;
-    const static int GameStarted = 0x07;
-    const static int GameFinished = 0x08;
-    const static int NewName = 0x09;
-    const static int NewNameError = 0x0A;
+    const static QChar MessageHeader = 'a';
+    const static QChar GiveUpHeader = 'b';
+    const static QChar NewPlayer = 'c';
+    const static QChar PlayerAttack = 'd';
+    const static QChar PlayerLost = 'e';
+    const static QChar PlayerWin = 'f';
+    const static QChar GameStarted = 'g';
+    const static QChar GameFinished = 'h';
+    const static QChar NewName = 'i';
+    const static QChar NewNameError = 'j';
 
 }
 
