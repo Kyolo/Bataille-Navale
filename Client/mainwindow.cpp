@@ -215,9 +215,12 @@ void MainWindow::rename()
 void MainWindow::NewNameSlot(QString name)
 {
     cout<<"ajout nom au menu deroulant et dans le label joueurs connectés"<<endl;
+    if(adversaires.getByName(name)==-1)
+    {
     ui->nameBox->addItem(name);
     ui->labelJoueursConnectes->append(" •  "+name);
     adversaires.newAdv(name);
+    }
 }
 
 void MainWindow::AttackReceived(QString nom, uchar x, uchar y, bool etat)

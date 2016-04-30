@@ -112,6 +112,7 @@ void client::msgGestion(QString message)
     }else if(message[0].toLatin1()==PlayerWin){
         emit signalPlayerWin((QString)(message.split(":").at(1)));
     }else if(message[0].toLatin1()==GameStarted){
+        cout<<"game started"<<endl;
         emit gmeStart();
     } else if(message[0].toLatin1()==NewPlayer){
         emit newAdversaire((QString)(message.split(":").at(1)));
