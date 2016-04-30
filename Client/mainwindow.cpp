@@ -387,8 +387,16 @@ void MainWindow::mousePressEvent(QMouseEvent *e)
             {
                int AttackX=((int)pt.x()-GWposX-1)/27;
                int AttackY=((int)pt.y()-32-GWposY-1)/27;
-               cout<<"attack x"<<AttackX<<"     attack y"<<AttackY<<endl;
-               connexion->send((QString)PlayerAttack+":"+nomJoueur+":"+ui->nameBox->currentText()+":"+QString::number(AttackX)+":"+QString::number(AttackY));
+
+               if(adversaires.adv[adversaires.getByName(ui->nameBox->currentText())].getState(AttackX, AttackY)==2)
+               {
+                   cout<<"attack x"<<AttackX<<"     attack y"<<AttackY<<endl;
+                   connexion->send((QString)PlayerAttack+":"+nomJoueur+":"+ui->nameBox->currentText()+":"+QString::number(AttackX)+":"+QString::number(AttackY));
+               }
+                else
+               {
+                   QMessageBox::warning(this, "Attention !", "Vous avez deja attaqué ce joueur a cet endroit",QMessageBox::Ok);
+               }
             }
         }
         break;
