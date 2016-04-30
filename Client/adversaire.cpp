@@ -43,12 +43,18 @@ void TableauAdversaire::newAdv(QString name)
 
 int TableauAdversaire::getByName(QString name)
 {
+    bool found=false;
     for (int i=0; i<10; i++)
     {
         if(adv[i].name==name)
         {
+            bool found =true;
             return i;
         }
+    }
+    if(found==false)
+    {
+        return -1;
     }
 }
 
