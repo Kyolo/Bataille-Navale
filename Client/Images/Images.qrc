@@ -14,5 +14,6 @@
         <file>bateau5Vertical.png</file>
         <file>fondDamier.png</file>
         <file>TirCoule.png</file>
+        <file>TirBateau.png</file>
     </qresource>
 </RCC>
