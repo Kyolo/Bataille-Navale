@@ -225,10 +225,10 @@ void Connexion::messageGestion(QString message)
                 QString messageNames="";
                 for (int a=0; a<i;a++)
                 {
-                    messageNames=messageNames+names[a]+":";
+                    messageNames=":"+messageNames+names[a];
                 }
-                sendToOneClient(messageNames,client.size()-1);
-                sendtoclient(NewName+message+":");
+                //sendToOneClient(messageNames,client.size()-1);
+                sendtoclient(NewName+message);
                 cout << "envoi des noms"<<endl;
                 break;
             }
