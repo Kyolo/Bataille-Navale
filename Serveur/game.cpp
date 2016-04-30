@@ -111,10 +111,10 @@ int Game::getNbJoueur(){
 void Game::newPlayer(Joueur j){
     this->lstJoueur[nbJoueurCo]=j;
     nbJoueurCo++;
-    cout<<j.getName().toStdString().c_str()<<" vient de se connecter. Il faut encore "<<nbJoueurMax-nbJoueurCo<<" joueurs avant le début de la partie."<<endl;
+    cout<<j.getName().toStdString().c_str()<<" est prêt. Il faut encore "<<nbJoueurMax-nbJoueurCo<<" joueurs avant le début de la partie."<<endl;
     nbJoueurEnLice++;
     if(nbJoueurCo==nbJoueurMax){
-        cout<<"Tout les joueurs sont connectés, début de la partie"<<endl;
+        cout<<"Tout les joueurs sont connectés et prêt, début de la partie"<<endl;
         emit gameStarted();
     }
 }
