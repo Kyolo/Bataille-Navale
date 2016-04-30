@@ -237,7 +237,7 @@ void MainWindow::NewNameSlot(QString name)
     }
 }
 
-void MainWindow::AttackReceived(QString nom, uchar x, uchar y, bool etat)
+void MainWindow::AttackReceived(QString nom, uchar y, uchar x, bool etat)
 {
   int id=adversaires.getByName(nom);
   adversaires.adv[id].setState(x,y,etat);
@@ -264,23 +264,72 @@ void MainWindow::ComboBoxChanged(QString name)
     cout<< "comboBox changed"<<endl;
     int id=adversaires.getByName(name);
     cout <<"id du joueur"<< id <<endl;
-    if(id!=-1)
+    if(state==STATE_ATWAR)
     {
-        for (int a=0; a<16; a++)
+        if(name==nomJoueur)
         {
-            for (int b=0; b<16; b++)
+            if(isHorizontal[0]==true)
+            ui->bateau21->setPixmap(QPixmap(":/bateau2.png"));
+            else
+            ui->bateau21->setPixmap(QPixmap(":/bateau2Vertical.png"));
+            if(isHorizontal[1]==true)
+            ui->bateau22->setPixmap(QPixmap(":/bateau2.png"));
+            else
+            ui->bateau22->setPixmap(QPixmap(":/bateau2Vertical.png"));
+            if(isHorizontal[2]==true)
+            ui->bateau31->setPixmap(QPixmap(":/bateau3.png"));
+            else
+            ui->bateau31->setPixmap(QPixmap(":/bateau3Vertical.png"));
+            if(isHorizontal[3]==true)
+            ui->bateau32->setPixmap(QPixmap(":/bateau3.png"));
+            else
+            ui->bateau32->setPixmap(QPixmap(":/bateau3Vertical.png"));
+            if(isHorizontal[4]==true)
+            ui->bateau33->setPixmap(QPixmap(":/bateau3.png"));
+            else
+            ui->bateau33->setPixmap(QPixmap(":/bateau3Vertical.png"));
+            if(isHorizontal[5]==true)
+            ui->bateau41->setPixmap(QPixmap(":/bateau4.png"));
+            else
+            ui->bateau41->setPixmap(QPixmap(":/bateau4Vertical.png"));
+            if(isHorizontal[6]==true)
+            ui->bateau42->setPixmap(QPixmap(":/bateau4.png"));
+            else
+            ui->bateau42->setPixmap(QPixmap(":/bateau4Vertical.png"));
+            if(isHorizontal[7]==true)
+            ui->bateau5->setPixmap(QPixmap(":/bateau5.png"));
+            else
+            ui->bateau5->setPixmap(QPixmap(":/bateau5Vertical.png"));
+        }
+        else
+        {
+           ui->bateau21->setPixmap(QPixmap());
+           ui->bateau22->setPixmap(QPixmap());
+           ui->bateau31->setPixmap(QPixmap());
+           ui->bateau32->setPixmap(QPixmap());
+           ui->bateau33->setPixmap(QPixmap());
+           ui->bateau41->setPixmap(QPixmap());
+           ui->bateau42->setPixmap(QPixmap());
+           ui->bateau5->setPixmap(QPixmap());
+        }
+        if(id!=-1)
+        {
+            for (int a=0; a<16; a++)
             {
-                if(adversaires.adv[id].getState(a,b)==0)
+                for (int b=0; b<16; b++)
                 {
-                    labelResult[a][b].setPixmap(QPixmap(":/TirCoule.png"));
-                }
-                else if(adversaires.adv[id].getState(a,b)==1)
-                {
-                    labelResult[a][b].setPixmap(QPixmap(":/TirBateau.png"));
-                }
-                else if(adversaires.adv[id].getState(a,b)==2)
-                {
-                    labelResult[a][b].setPixmap(QPixmap());
+                    if(adversaires.adv[id].getState(a,b)==0)
+                    {
+                        labelResult[a][b].setPixmap(QPixmap(":/TirCoule.png"));
+                    }
+                    else if(adversaires.adv[id].getState(a,b)==1)
+                    {
+                        labelResult[a][b].setPixmap(QPixmap(":/TirBateau.png"));
+                    }
+                    else if(adversaires.adv[id].getState(a,b)==2)
+                    {
+                        labelResult[a][b].setPixmap(QPixmap());
+                    }
                 }
             }
         }
