@@ -8,6 +8,7 @@
 #include <QTcpSocket>
 #include <QString>
 #include <QStringList>
+#include <QMap>
 
 #include <string.h>
 
@@ -35,8 +36,9 @@ private:
     QList<QTcpSocket *> client;
     quint16 tailleMessage;
     void messageGestion(QString message);
-
     QStringList names;
+
+    QMap<QString, QTcpSocket *> clients;
 
 signals:
     void connexionNvJoueur(Joueur);

@@ -26,7 +26,7 @@ Connexion::Connexion()
     if (!server->listen(QHostAddress::Any, 40110)) //erreur lors du démarrage du serveur
         cout<<"Le serveur n'a pas pu être démarré :"<<server->errorString().toStdString()<<endl;
     else{ //le serveur a réussi à s'initialiser
-        cout<<"Le serveur demarre:"<<endl<< "\nAdresses: "<<getIPaddress().toStdString()<<endl<<"\tPort: "<<server->serverPort()<<endl;
+        cout<<"Le serveur demarre:"<<endl<< "\nAdresses:"<<getIPaddress().toStdString()<<endl<<"\t\nPort: "<<server->serverPort()<<endl;
             //on autorise la connexion d'un client. S'il ne doit y avoir qu'un seul client il faudra modifier cette ligne
             connect(server, SIGNAL(newConnection()),this, SLOT(connexion()));
     }
@@ -37,7 +37,7 @@ Connexion::Connexion()
 QString Connexion::getIPaddress(){
     QString resultat;
     foreach(QHostAddress address, QNetworkInterface::allAddresses()){
-        resultat.append(" [").append(address.toString()).append("]");
+        resultat.append("\n\t[").append(address.toString()).append("]");
     }
     return resultat;//Le serveur n'est pas dans le même réseau peut-être
 }
@@ -127,6 +127,7 @@ void Connexion::playerWon(QString winner){
 void Connexion::tchat(QString message){
     if(message[0]!=Header::Message)
         message.prepend(Header::Message);
+    cout<<message.toStdString()<<endl;
     this->sendtoclient(message);
 }
 
@@ -155,7 +156,8 @@ void Connexion::messageGestion(QString message){
             boats[i]= Bateau(taille.toInt(),posX.toInt(),PosY.toInt(), IsHorizontal.toInt());
         }
        Joueur player = Joueur(boats, Name, 8);
-        emit connexionNvJoueur(player);
+       //clients.insert(Name,&qobject_cast<QTcpSocket>(sender()));
+       emit connexionNvJoueur(player);
     }
     else if (message[0]==Header::GiveUp){
         QString playerName;
