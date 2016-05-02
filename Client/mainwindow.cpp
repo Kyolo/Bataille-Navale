@@ -388,7 +388,7 @@ void MainWindow::mousePressEvent(QMouseEvent *e)
                int AttackX=((int)pt.x()-GWposX-1)/27;
                int AttackY=((int)pt.y()-32-GWposY-1)/27;
 
-               if(adversaires.adv[adversaires.getByName(ui->nameBox->currentText())].getState(AttackX, AttackY)==2)
+               if(adversaires.adv[adversaires.getByName(ui->nameBox->currentText())].getState(AttackY, AttackX)==2)
                {
                    cout<<"attack x"<<AttackX<<"     attack y"<<AttackY<<endl;
                    connexion->send((QString)PlayerAttack+":"+nomJoueur+":"+ui->nameBox->currentText()+":"+QString::number(AttackX)+":"+QString::number(AttackY));
@@ -625,6 +625,14 @@ void MainWindow::on_ButtonDone_clicked()
         cout <<"tout va bien"<<endl;
         connexion->send(NewPlayer+me->writeMessage());
         state=1;
+        ui->bateau21->setCursor(Qt::ArrowCursor);
+        ui->bateau22->setCursor(Qt::ArrowCursor);
+        ui->bateau31->setCursor(Qt::ArrowCursor);
+        ui->bateau32->setCursor(Qt::ArrowCursor);
+        ui->bateau33->setCursor(Qt::ArrowCursor);
+        ui->bateau41->setCursor(Qt::ArrowCursor);
+        ui->bateau42->setCursor(Qt::ArrowCursor);
+        ui->bateau5->setCursor(Qt::ArrowCursor);
         break;
     case 1:
         QMessageBox::critical(this, "Erreur", "Des bateaux se superposent", QMessageBox::Ok);
