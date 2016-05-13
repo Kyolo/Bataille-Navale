@@ -29,7 +29,6 @@ MainWindow::MainWindow(QWidget *parent) :
      scene = new QGraphicsScene(this);
         scene->setSceneRect(QRectF(0,0,434,434));
         ui->graphicsView->setScene(scene);
-       // fond = scene->addPixmap(QPixmap(":/Damiereau.jpg"));
         ui->textChat->setText(""); // descativation du chat tant que pas connecté
      ui->textChat->setEnabled(false);
      ui->lineEditChat->setText("");
@@ -37,9 +36,10 @@ MainWindow::MainWindow(QWidget *parent) :
      ui->pushButtonOKTchat->setEnabled(false);
      ui->labelTchatDisable->setText("Tchat désactivé! \n \n Veuillez d'abord \n vous connecter !");
      ui->labelJoueursConnectes->append("Joueurs connectés :\n");
+     ui->ButtonDone->setVisible(false);
+     ui->RAZBateaux->setVisible(false);
      state=0;
-     //ui->tircoule->setPixmap(QPixmap(":/Tircoulé.png"));
-    // ui->tircoule->setGeometry(157,157+10,25,25);
+
     for (int a=0; a<16; a++)
     {
         for( int b=0; b<16; b++)
@@ -141,7 +141,7 @@ void MainWindow::on_actionNewGame_triggered()
     ui->pushButtonOKTchat->setEnabled(true);
     ui->labelTchatDisable->setText("");
     QMessageBox::information(this, "Bataille navale", "Veuillez maintenant placer vos bateaux sur la grille !\nN'oubliez pas de valider votre choix à la fin de l'opération.");
-    ui->fondBateaux->setGeometry(initialPosBoatX,initialPosBoatY,475,95);
+    ui->fondBateaux->setGeometry(initialPosBoatX,initialPosBoatY,475,100);
     ui->bateau5->setGeometry(initialPosBoatX+15,initialPosBoatY+10,125,25);
     ui->bateau5->setPixmap(QPixmap(":/bateau5.png"));
     ui->bateau41->setGeometry(initialPosBoatX+155,initialPosBoatY+10,100,25);
@@ -159,6 +159,7 @@ void MainWindow::on_actionNewGame_triggered()
     ui->bateau22->setGeometry(initialPosBoatX+337,initialPosBoatY+45,50,25);
     ui->bateau22->setPixmap(QPixmap(":/bateau2.png"));
     ui->RAZBateaux->setGeometry(initialPosBoatX-19,initialPosBoatY-2,20,95);
+    ui->ButtonDone->setGeometry(initialPosBoatX+473,initialPosBoatY-2,20,95);
     for (int i=0; i<8; i++)
     {
         isHorizontal[i]=true;
@@ -166,6 +167,7 @@ void MainWindow::on_actionNewGame_triggered()
     ui->graphicsView->setVisible(true);
     ui->fondBateaux->setVisible(true);
     ui->RAZBateaux->setVisible(true);
+    ui->ButtonDone->setVisible(true);
     ui->bateau5->setVisible(true);
     ui->bateau21->setVisible(true);
     ui->bateau22->setVisible(true);
@@ -633,7 +635,12 @@ void MainWindow::on_ButtonDone_clicked()
         ui->bateau41->setCursor(Qt::ArrowCursor);
         ui->bateau42->setCursor(Qt::ArrowCursor);
         ui->bateau5->setCursor(Qt::ArrowCursor);
+        ui->ButtonDone->setVisible(false);
+        ui->RAZBateaux->setVisible(false);
+        ui->fondBateaux->setVisible(false);
+        ui->textChat->append("Serveur : Attente du deuxième joueur...");
         break;
+
     case 1:
         QMessageBox::critical(this, "Erreur", "Des bateaux se superposent", QMessageBox::Ok);
     break;

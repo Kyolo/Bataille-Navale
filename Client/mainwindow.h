@@ -53,7 +53,7 @@ private:
     static const int GWposY=30;
     int state;
     static const int initialPosBoatX=80;
-    static const int initialPosBoatY=470;
+    static const int initialPosBoatY=464;
     static const int STATE_PREPARATION = 0;
     static const int STATE_ATWAR = 1;
     Joueur *me;
