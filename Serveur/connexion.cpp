@@ -81,6 +81,7 @@ void Connexion::deconnexion(){
     if (socket==0)   //on n'a pas trouvé le client -> on quitte la procedure
         return;
     client.removeOne(socket);
+    clients.values().removeOne(socket);
     socket->deleteLater();
 }
 //************** Procedure d'envoie de message au(x) client(s) **************************************************
@@ -106,6 +107,44 @@ void Connexion::sendToOneClient(QString message, int whichClient){
     //on envoie aux clients
     client[whichClient]->write(paquet); //on envoie les paquest de données au client
     client[whichClient]->flush();
+}
+
+void Connexion::sendToOneClient(QString message, QString name){
+    QByteArray paquet;
+    QDataStream out(&paquet, QIODevice::WriteOnly);
+    out<<(quint16)0;
+    out<<message;
+    out.device()->seek(0);
+    out<<(quint16)(paquet.size() - sizeof(quint16));
+
+    clients[name]->write(paquet);
+    clients[name]->flush();
+}
+
+void Connexion::kick(QString name)
+{
+    if(!clients.keys().contains(name))
+        return;
+    QTcpSocket * socket = clients[name];
+    socket->close();
+    client.removeOne(socket);
+    clients.values().removeOne(socket);
+    socket->deleteLater();
+}
+
+void Connexion::kickClean()
+{
+    QList<QTcpSocket *> players = clients.values();
+
+    for(int i = 0;i<client.size();i++){
+        if(!players.contains(client[i])){
+            QTcpSocket * socket = client[i];
+            socket->close();
+            client.removeOne(socket);
+            socket->deleteLater();
+        }
+    }
+
 }
 
 //**********************************Public Slots***********************************************************************
@@ -156,7 +195,7 @@ void Connexion::messageGestion(QString message){
             boats[i]= Bateau(taille.toInt(),posX.toInt(),PosY.toInt(), IsHorizontal.toInt());
         }
        Joueur player = Joueur(boats, Name, 8);
-       //clients.insert(Name,&qobject_cast<QTcpSocket>(sender()));
+       clients.insert(Name,qobject_cast<QTcpSocket *>(sender()));
        emit connexionNvJoueur(player);
     }
     else if (message[0]==Header::GiveUp){

@@ -75,6 +75,7 @@ void Game::forceQuit(){
         emit playerLost(lstJoueur[i].getName());
     }
     comManager->terminate();
+    comManager->wait();
     QCoreApplication::instance()->exit(0);
 }
 
@@ -100,7 +101,17 @@ Game *Game::getInstance(){
 }
 
 int Game::getNbJoueur(){
-     return nbJoueurCo;
+    return nbJoueurCo;
+}
+
+void Game::kick(QString name){
+    giveUp(name);
+    co->kick(name);
+    sendToChat("<i>"+name+"</i> a été kické(e)");
+}
+
+void Game::cleanConnection(){
+    co->kickClean();
 }
 
 //****************************************Slots************************************************************
@@ -128,6 +139,11 @@ void Game::newPlayer(Joueur j){
  */
 void Game::onAttack(QString from, QString to, uchar x, uchar y){
 
+    //On vérifie que le joueur peut attaquer
+    if(!this->getPlayerByName(from).canAttack())
+        return;
+
+
     cout<<from.toStdString()<<" attaque "<<to.toStdString()<<" en ("<<QString::number(x).toStdString()<<","<<QString::number(y).toStdString()<<") : ";
 
     //On attaque le joueur correspondant à la case correspondante
@@ -137,6 +153,8 @@ void Game::onAttack(QString from, QString to, uchar x, uchar y){
     //Et on envoit les résultat aux deux joueurs concernés
     emit attackResult(to,x,y,hit);
     emit attackResult(from,x,y,hit);
+
+    this->getPlayerByName(from).canAttack(false);
 
     //Si le joueur attaqué a perdu
     if(this->getPlayerByName(to).areAllBoatsDestroyed()){
@@ -156,6 +174,25 @@ void Game::onAttack(QString from, QString to, uchar x, uchar y){
         cout<<winner.toStdString().c_str()<<" a gagné !"<<endl;
         //Et on préviens les autres qu'on a finit
         emit gameFinished(winner);
+        return;
+    }
+
+    int playLeft = 0;
+    for(int i = 0;i<nbJoueurCo;i++){
+        if(lstJoueur[i].canAttack())
+            playLeft++;
+    }
+
+    cout<<playLeft<<" joueurs doivent encore jouer avant le tour suivant"<<endl;
+
+    if(playLeft==0){
+        cout<<"Nouveau tour !"<<endl;
+        for(int i = 0;i<nbJoueurCo;i++){
+            Joueur j = lstJoueur[i];
+            if(j.areAllBoatsDestroyed())
+                continue;
+            j.canAttack(true);
+        }
     }
 
 }

@@ -22,6 +22,8 @@ public:
     void sendToChat(QString msg);
     ~Game();
     int getNbJoueur();
+    void kick(QString name);
+    void cleanConnection();
 
     static void setInstance(Game * gme);
     static Game *getInstance();

@@ -21,7 +21,9 @@ public:
     Connexion();
     void sendtoclient(const QString message);
     void sendToOneClient(QString message, int whichClient);
-
+    void sendToOneClient(QString message, QString name);
+    void kick(QString name);
+    void kickClean();
 
 private slots:  //les slots de gestion des évènements
     void connexion();

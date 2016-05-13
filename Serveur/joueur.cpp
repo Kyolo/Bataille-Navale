@@ -7,6 +7,7 @@ Joueur::Joueur(Bateau *bateau, QString name, int nbBateau){
     this->lstBoat = bateau;
     this->nbBoat = nbBateau;
     this->pseudo = name;
+    this->atck = false;
 }
 
 bool Joueur::attack(uchar x, uchar y){
@@ -51,4 +52,12 @@ char Joueur::getStatusAt(uchar x, uchar y){
 //S'il n'y a rien, on renvoie NONE
     return Bateau::NONE;
 
+}
+
+bool Joueur::canAttack(){
+    return atck;
+}
+
+void Joueur::canAttack(bool a){
+    this->atck = a;
 }

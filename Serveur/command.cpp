@@ -26,7 +26,7 @@ void CommandManager::useCommand(QString command, QStringList args ){
         Game::getInstance()->forceQuit();
         return;
     }else if(command=="say"){
-        Game::getInstance()->sendToChat("Serveur : "+args.join(" "));
+        Game::getInstance()->sendToChat("<i><b>Serveur</b></i> : "+args.join(" "));
         return;
     } else if(command=="help"){
         if(args.length()==0){
@@ -37,6 +37,7 @@ void CommandManager::useCommand(QString command, QStringList args ){
             cout<<"\tstop : Force l'arret du serveur et provoque l'abandon forcé des joueurs"<<endl;
             cout<<"\tlist : Affiche la liste des joueurs connectés"<<endl;
             cout<<"\tkick <joueur> : Expulse le joueur désigné"<<endl;
+            cout<<"\tkick-clean : Déconnecte tout les clients qui ne sont pas des joueurs"<<endl;
         } else {
 
         }
@@ -67,10 +68,16 @@ void CommandManager::useCommand(QString command, QStringList args ){
         }
         return;
     } else if(command=="kick"&&args.length()>0){
+        cout<<"Les joueurs :"<<endl;
         for(int i = 0;i<args.size();i++){
-            Game::getInstance()->playerLost(args[i]);
+            cout<<"\t"<<args[i].toStdString()<<endl;
+            Game::getInstance()->kick(args[i]);
         }
+        cout<<"ont été kick"<<endl;
         return;
+    } else if(command=="kick-clean"&&args.length()==0){
+        cout<<"Nettoyage des clients"<<endl;
+        Game::getInstance()->cleanConnection();
     }
 
     cerr<<"Commande inconnue"<<endl;
