@@ -35,22 +35,30 @@ bool Bateau::isDestroyed(){
  * @return Si oui ou non le bateau a été touché
  */
 bool Bateau::hit(uchar x, uchar y){
-    if(!this->bHorizontal){
-        for(uchar i=0;i<bTaille;i++){
-            if((x==this->bX+i)&&this->statut[i]){
-                this->statut[i]=false;
-                return true;
-            }
-        }
-    } else {
-        for(uchar i=0;i<bTaille;i++){
-            if((y==this->bY+i)&&statut[i]){
+    if(this->bHorizontal)
+    {
+        for(int i=0; i<bTaille;i++)
+        {
+            if(x==bX+i && y==bY)
+            {
                 statut[i]=false;
                 return true;
             }
         }
+        return false;
     }
-    return false;
+    else
+    {
+        for(int i=0; i<bTaille;i++)
+        {
+            if(x==bX && y==bY+i)
+            {
+                statut[i]=false;
+                return true;
+            }
+        }
+        return false;
+    }
 }
 
 
@@ -63,26 +71,35 @@ void Bateau::destroy(){
 }
 
 char Bateau::getStatusAt(uchar x, uchar y){
-    if(!this->bHorizontal){
-        for(uchar i=0;i<bTaille;i++){
-            if((x==this->bX+i)){
+    if(this->bHorizontal)
+    {
+        for(int i=0; i<bTaille;i++)
+        {
+            if(x==bX+i && y==bY)
+            {
                 if(statut[i])
-                    return SAFE;
+                return SAFE;
                 else
-                    return DESTROYED;
+                return DESTROYED;
             }
+
         }
-    } else {
-        for(uchar i=0;i<bTaille;i++){
-            if((y==this->bY+i)){
-                if(statut[i])
-                    return SAFE;
-                else
-                    return DESTROYED;
-            }
-        }
+        return NONE;
     }
-    return NONE;
+    else
+    {
+        for(int i=0; i<bTaille;i++)
+        {
+            if(x==bX && y==bY+i)
+            {
+                if(statut[i])
+                return SAFE;
+                else
+                return DESTROYED;
+            }
+        }
+        return NONE;
+    }
 }
 
 
