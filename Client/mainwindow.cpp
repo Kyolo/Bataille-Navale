@@ -38,6 +38,7 @@ MainWindow::MainWindow(QWidget *parent) :
      ui->labelJoueursConnectes->append("Joueurs connectés :\n");
      ui->ButtonDone->setVisible(false);
      ui->RAZBateaux->setVisible(false);
+     ui->nameBox->setVisible(false);
      state=0;
 
     for (int a=0; a<16; a++)
@@ -178,7 +179,6 @@ void MainWindow::on_actionNewGame_triggered()
     ui->bateau42->setVisible(true);
     connexion->send(NewName+me->playerName);
     adversaires = TableauAdversaire();
-    //ui->validBoatPosition->setGeometry(initialPosBoatX,initialPosBoatY,475,95);
     }
 
 //**************************************************************
@@ -193,8 +193,6 @@ void MainWindow::on_actionAbandon_triggered()
          ui->actionNewGame->setEnabled(true);
          ui->actionAbandon->setEnabled(false);
          ui->graphicsView->setEnabled(false);
-         fond = scene->addPixmap(QPixmap(":/mer.gif"));
-         QMessageBox::information(this, "Fin de la partie", "Vous avez abandonné la partie");
          ui->graphicsView->setVisible(false);
          ui->fondBateaux->setVisible(false);
          ui->RAZBateaux->setVisible(false);
@@ -206,7 +204,12 @@ void MainWindow::on_actionAbandon_triggered()
          ui->bateau33->setVisible(false);
          ui->bateau41->setVisible(false);
          ui->bateau42->setVisible(false);
-
+         ui->labelJoueursConnectes->setText("Joueurs connectés :\n");
+         ui->labelExplicNameBox->setText("");
+         ui->labelExplicNameBox->setVisible(false);
+         ui->nameBox->setVisible(false);
+         ui->ButtonDone->setVisible(false);
+         QMessageBox::information(this, "Fin de la partie", "Vous avez abandonné la partie");
        }
     }
 //**********Entrer du texte dans le tchat*******************************
@@ -518,7 +521,7 @@ void MainWindow::updateBoatGeometry(int boat, int x, int y)
         y=y-33;
         switch(boat){
         case 0:
-                  ui->bateau21->setGeometry(x, y, labelRects[boat].width(), labelRects[boat].height());
+            ui->bateau21->setGeometry(x, y, labelRects[boat].width(), labelRects[boat].height());
             break;
         case 1:
             ui->bateau22->setGeometry(x, y, 50, 25);
@@ -632,6 +635,7 @@ void MainWindow::on_ButtonDone_clicked()
         ui->bateau31->setCursor(Qt::ArrowCursor);
         ui->bateau32->setCursor(Qt::ArrowCursor);
         ui->bateau33->setCursor(Qt::ArrowCursor);
+
         ui->bateau41->setCursor(Qt::ArrowCursor);
         ui->bateau42->setCursor(Qt::ArrowCursor);
         ui->bateau5->setCursor(Qt::ArrowCursor);
@@ -639,6 +643,8 @@ void MainWindow::on_ButtonDone_clicked()
         ui->RAZBateaux->setVisible(false);
         ui->fondBateaux->setVisible(false);
         ui->textChat->append("Serveur : Attente du deuxième joueur...");
+        ui->labelExplicNameBox->setText("Choix de la grille à afficher :");
+        ui->nameBox->setVisible(true);
         break;
 
     case 1:
