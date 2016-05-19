@@ -135,6 +135,7 @@ void MainWindow::on_actionNewGame_triggered()
     connect(connexion, SIGNAL(gmeStart()), this, SLOT(GameStarted()));
     connect(ui->nameBox, SIGNAL(currentTextChanged(QString)), this, SLOT(ComboBoxChanged(QString)));
     connecte=1;
+    state=0;
     ui->textChat->setText("");
     ui->textChat->setEnabled(true);
     ui->lineEditChat->setText("");
@@ -262,6 +263,7 @@ void MainWindow::AttackReceived(QString nom, uchar y, uchar x, bool etat)
 void MainWindow::GameStarted()
 {
     started=true;
+    QMessageBox::information(this,"Début de partie", "La partie commence...\nFeu ouvert !\nBonne chance à tous !");
 }
 
 void MainWindow::ComboBoxChanged(QString name)
