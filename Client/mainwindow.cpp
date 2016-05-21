@@ -136,6 +136,15 @@ void MainWindow::on_actionNewGame_triggered()
     connect(ui->nameBox, SIGNAL(currentTextChanged(QString)), this, SLOT(ComboBoxChanged(QString)));
     connecte=1;
     state=0;
+    ui->nameBox->clear();
+    ui->bateau21->setCursor(Qt::ClosedHandCursor);
+    ui->bateau22->setCursor(Qt::ClosedHandCursor);
+    ui->bateau31->setCursor(Qt::ClosedHandCursor);
+    ui->bateau32->setCursor(Qt::ClosedHandCursor);
+    ui->bateau33->setCursor(Qt::ClosedHandCursor);
+    ui->bateau41->setCursor(Qt::ClosedHandCursor);
+    ui->bateau42->setCursor(Qt::ClosedHandCursor);
+    ui->bateau5->setCursor(Qt::ClosedHandCursor);
     ui->textChat->setText("");
     ui->textChat->setEnabled(true);
     ui->lineEditChat->setText("");
@@ -263,7 +272,8 @@ void MainWindow::AttackReceived(QString nom, uchar y, uchar x, bool etat)
 void MainWindow::GameStarted()
 {
     started=true;
-    QMessageBox::information(this,"Début de partie", "La partie commence...\nFeu ouvert !\nBonne chance à tous !");
+    QMessageBox::information(this,"   Début de partie    ", "    La partie commence...     \n     Feu ouvert !\n     Bonne chance à tous !     ");
+    ui->textChat->append("Serveur : Tous les joueurs sont prêts, la partie commence...");
 }
 
 void MainWindow::ComboBoxChanged(QString name)
@@ -322,15 +332,18 @@ void MainWindow::ComboBoxChanged(QString name)
         if(id!=-1)
         {
             for (int a=0; a<16; a++)
+
             {
                 for (int b=0; b<16; b++)
                 {
                     if(adversaires.adv[id].getState(a,b)==0)
                     {
+                        labelResult[a][b].setPixmap(QPixmap(""));
                         labelResult[a][b].setPixmap(QPixmap(":/TirCoule.png"));
                     }
                     else if(adversaires.adv[id].getState(a,b)==1)
                     {
+                        labelResult[a][b].setPixmap(QPixmap(""));
                         labelResult[a][b].setPixmap(QPixmap(":/TirBateau.png"));
                     }
                     else if(adversaires.adv[id].getState(a,b)==2)
@@ -339,6 +352,7 @@ void MainWindow::ComboBoxChanged(QString name)
                     }
                 }
             }
+            ui->graphicsView->repaint();
         }
     }
 }
@@ -557,9 +571,13 @@ void MainWindow::turnImage(int boat, int x, int y)
         y=y-33;//correction des pixels de la barre de menu
         switch(boat){
         case 0:
-            if(labelRects[boat].width()>labelRects[boat].height())
+            if( isHorizontal[boat])
             {
                  ui->bateau21->setGeometry(x, y, labelRects[boat].height(),labelRects[boat].width());
+                 int height=labelRects[boat].height();
+                         int width=labelRects[boat].width();
+                         labelRects[boat].setHeight(width);
+                         labelRects[boat].setWidth(height);
                  ui->bateau21->setPixmap(QPixmap(":/bateau2Vertical.png"));
                  isHorizontal[boat]=false;
             }
@@ -567,14 +585,56 @@ void MainWindow::turnImage(int boat, int x, int y)
             {
                 ui->bateau21->setGeometry(x, y, labelRects[boat].height(), labelRects[boat].width());
                 ui->bateau21->setPixmap(QPixmap(":/bateau2.png"));
+                int height=labelRects[boat].height();
+                        int width=labelRects[boat].width();
+                        labelRects[boat].setHeight(width);
+                        labelRects[boat].setWidth(height);
                 isHorizontal[boat]=true;
             }
             break;
         case 1:
-            ui->bateau22->setGeometry(x, y, 50, 25);
+            if( isHorizontal[boat])
+            {
+                 ui->bateau22->setGeometry(x, y, labelRects[boat].height(),labelRects[boat].width());
+                 int height=labelRects[boat].height();
+                         int width=labelRects[boat].width();
+                         labelRects[boat].setHeight(width);
+                         labelRects[boat].setWidth(height);
+                 ui->bateau22->setPixmap(QPixmap(":/bateau2Vertical.png"));
+                 isHorizontal[boat]=false;
+            }
+            else
+            {
+                ui->bateau22->setGeometry(x, y, labelRects[boat].height(), labelRects[boat].width());
+                ui->bateau22->setPixmap(QPixmap(":/bateau2.png"));
+                int height=labelRects[boat].height();
+                        int width=labelRects[boat].width();
+                        labelRects[boat].setHeight(width);
+                        labelRects[boat].setWidth(height);
+                isHorizontal[boat]=true;
+            }
             break;
         case 2:
-            ui->bateau31->setGeometry(x, y, 75, 25);
+            if( isHorizontal[boat])
+            {
+                 ui->bateau31->setGeometry(x, y, labelRects[boat].height(),labelRects[boat].width());
+                 int height=labelRects[boat].height();
+                         int width=labelRects[boat].width();
+                         labelRects[boat].setHeight(width);
+                         labelRects[boat].setWidth(height);
+                 ui->bateau31->setPixmap(QPixmap(":/bateau3Vertical.png"));
+                 isHorizontal[boat]=false;
+            }
+            else
+            {
+                ui->bateau31->setGeometry(x, y, labelRects[boat].height(), labelRects[boat].width());
+                ui->bateau31->setPixmap(QPixmap(":/bateau3.png"));
+                int height=labelRects[boat].height();
+                        int width=labelRects[boat].width();
+                        labelRects[boat].setHeight(width);
+                        labelRects[boat].setWidth(height);
+                isHorizontal[boat]=true;
+            }
             break;
         case 3:
             ui->bateau32->setGeometry(x, y, 75, 25);
@@ -585,7 +645,7 @@ void MainWindow::turnImage(int boat, int x, int y)
         case 5:
             ui->bateau41->setGeometry(x, y, 100, 25);
             break;
-        case 6:
+        case 6:                                                     //#REKT
             ui->bateau42->setGeometry(x, y, 100, 25);
             break;
         case 7:
