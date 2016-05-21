@@ -272,7 +272,7 @@ void MainWindow::AttackReceived(QString nom, uchar y, uchar x, bool etat)
 void MainWindow::GameStarted()
 {
     started=true;
-    QMessageBox::information(this,"   Début de partie    ", "    La partie commence...     \n     Feu ouvert !\n     Bonne chance à tous !     ");
+    //QMessageBox::information(this,"   Début de partie    ", "    La partie commence...     \n     Feu ouvert !\n     Bonne chance à tous !     ");
     ui->textChat->append("Serveur : Tous les joueurs sont prêts, la partie commence...");
 }
 
@@ -540,25 +540,25 @@ void MainWindow::updateBoatGeometry(int boat, int x, int y)
             ui->bateau21->setGeometry(x, y, labelRects[boat].width(), labelRects[boat].height());
             break;
         case 1:
-            ui->bateau22->setGeometry(x, y, 50, 25);
+            ui->bateau22->setGeometry(x, y, labelRects[boat].width(), labelRects[boat].height());
             break;
         case 2:
-            ui->bateau31->setGeometry(x, y, 75, 25);
+            ui->bateau31->setGeometry(x, y, labelRects[boat].width(), labelRects[boat].height());
             break;
         case 3:
-            ui->bateau32->setGeometry(x, y, 75, 25);
+            ui->bateau32->setGeometry(x, y, labelRects[boat].width(), labelRects[boat].height());
             break;
         case 4:
-            ui->bateau33->setGeometry(x, y, 75, 25);
+            ui->bateau33->setGeometry(x, y, labelRects[boat].width(), labelRects[boat].height());
             break;
         case 5:
-            ui->bateau41->setGeometry(x, y, 100, 25);
+            ui->bateau41->setGeometry(x, y, labelRects[boat].width(), labelRects[boat].height());
             break;
         case 6:
-            ui->bateau42->setGeometry(x, y, 100, 25);
+            ui->bateau42->setGeometry(x, y, labelRects[boat].width(), labelRects[boat].height());
             break;
         case 7:
-            ui->bateau5->setGeometry(x, y, 125, 25);
+            ui->bateau5->setGeometry(x, y, labelRects[boat].width(), labelRects[boat].height());
             break;
         }
     }
@@ -637,19 +637,114 @@ void MainWindow::turnImage(int boat, int x, int y)
             }
             break;
         case 3:
-            ui->bateau32->setGeometry(x, y, 75, 25);
+            if( isHorizontal[boat])
+            {
+                 ui->bateau32->setGeometry(x, y, labelRects[boat].height(),labelRects[boat].width());
+                 int height=labelRects[boat].height();
+                         int width=labelRects[boat].width();
+                         labelRects[boat].setHeight(width);
+                         labelRects[boat].setWidth(height);
+                 ui->bateau32->setPixmap(QPixmap(":/bateau3Vertical.png"));
+                 isHorizontal[boat]=false;
+            }
+            else
+            {
+                ui->bateau32->setGeometry(x, y, labelRects[boat].height(), labelRects[boat].width());
+                ui->bateau32->setPixmap(QPixmap(":/bateau3.png"));
+                int height=labelRects[boat].height();
+                        int width=labelRects[boat].width();
+                        labelRects[boat].setHeight(width);
+                        labelRects[boat].setWidth(height);
+                isHorizontal[boat]=true;
+            }
             break;
         case 4:
-            ui->bateau33->setGeometry(x, y, 75, 25);
+            if( isHorizontal[boat])
+            {
+                 ui->bateau33->setGeometry(x, y, labelRects[boat].height(),labelRects[boat].width());
+                 int height=labelRects[boat].height();
+                         int width=labelRects[boat].width();
+                         labelRects[boat].setHeight(width);
+                         labelRects[boat].setWidth(height);
+                 ui->bateau33->setPixmap(QPixmap(":/bateau3Vertical.png"));
+                 isHorizontal[boat]=false;
+            }
+            else
+            {
+                ui->bateau33->setGeometry(x, y, labelRects[boat].height(), labelRects[boat].width());
+                ui->bateau33->setPixmap(QPixmap(":/bateau3.png"));
+                int height=labelRects[boat].height();
+                        int width=labelRects[boat].width();
+                        labelRects[boat].setHeight(width);
+                        labelRects[boat].setWidth(height);
+                isHorizontal[boat]=true;
+            }
             break;
         case 5:
-            ui->bateau41->setGeometry(x, y, 100, 25);
+            if( isHorizontal[boat])
+            {
+                 ui->bateau41->setGeometry(x, y, labelRects[boat].height(),labelRects[boat].width());
+                 int height=labelRects[boat].height();
+                         int width=labelRects[boat].width();
+                         labelRects[boat].setHeight(width);
+                         labelRects[boat].setWidth(height);
+                 ui->bateau41->setPixmap(QPixmap(":/bateau4Vertical.png"));
+                 isHorizontal[boat]=false;
+            }
+            else
+            {
+                ui->bateau41->setGeometry(x, y, labelRects[boat].height(), labelRects[boat].width());
+                ui->bateau41->setPixmap(QPixmap(":/bateau4.png"));
+                int height=labelRects[boat].height();
+                        int width=labelRects[boat].width();
+                        labelRects[boat].setHeight(width);
+                        labelRects[boat].setWidth(height);
+                isHorizontal[boat]=true;
+            }
             break;
         case 6:                                                     //#REKT
-            ui->bateau42->setGeometry(x, y, 100, 25);
+            if( isHorizontal[boat])
+            {
+                 ui->bateau42->setGeometry(x, y, labelRects[boat].height(),labelRects[boat].width());
+                 int height=labelRects[boat].height();
+                         int width=labelRects[boat].width();
+                         labelRects[boat].setHeight(width);
+                         labelRects[boat].setWidth(height);
+                 ui->bateau42->setPixmap(QPixmap(":/bateau4Vertical.png"));
+                 isHorizontal[boat]=false;
+            }
+            else
+            {
+                ui->bateau42->setGeometry(x, y, labelRects[boat].height(), labelRects[boat].width());
+                ui->bateau42->setPixmap(QPixmap(":/bateau4.png"));
+                int height=labelRects[boat].height();
+                        int width=labelRects[boat].width();
+                        labelRects[boat].setHeight(width);
+                        labelRects[boat].setWidth(height);
+                isHorizontal[boat]=true;
+            }
             break;
         case 7:
-            ui->bateau5->setGeometry(x, y, 125, 25);
+            if( isHorizontal[boat])
+            {
+                 ui->bateau5->setGeometry(x, y, labelRects[boat].height(),labelRects[boat].width());
+                 int height=labelRects[boat].height();
+                         int width=labelRects[boat].width();
+                         labelRects[boat].setHeight(width);
+                         labelRects[boat].setWidth(height);
+                 ui->bateau5->setPixmap(QPixmap(":/bateau5Vertical.png"));
+                 isHorizontal[boat]=false;
+            }
+            else
+            {
+                ui->bateau5->setGeometry(x, y, labelRects[boat].height(), labelRects[boat].width());
+                ui->bateau5->setPixmap(QPixmap(":/bateau5.png"));
+                int height=labelRects[boat].height();
+                        int width=labelRects[boat].width();
+                        labelRects[boat].setHeight(width);
+                        labelRects[boat].setWidth(height);
+                isHorizontal[boat]=true;
+            }
             break;
             updateLabelsPositions();
         }
