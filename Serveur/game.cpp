@@ -106,7 +106,6 @@ int Game::getNbJoueur(){
 
 void Game::kick(QString name){
     giveUp(name);
-    co->kick(name);
     sendToChat("<i>"+name+"</i> a été kické(e)");
 }
 
@@ -143,6 +142,11 @@ void Game::onAttack(QString from, QString to, uchar x, uchar y){
     if(!this->getPlayerByName(from).canAttack())
         return;
 
+    //Qu'il ne s'attaque pas lui-même
+    if(from==to){
+        co->sendToOneClient(Header::Message+QString("Serveur : Le suicide <b>n'est pas une bonne façon de gagner</b>"),from);
+        return;
+    }
 
     cout<<from.toStdString()<<" attaque "<<to.toStdString()<<" en ("<<QString::number(x).toStdString()<<","<<QString::number(y).toStdString()<<") : ";
 
@@ -154,7 +158,7 @@ void Game::onAttack(QString from, QString to, uchar x, uchar y){
     emit attackResult(to,x,y,hit);
     emit attackResult(from,x,y,hit);
 
-    this->getPlayerByName(from).canAttack(false);
+    this->getPlayerByName(from).canAttack(false);//Le joueur ne plus attaqué, il vient de le fare
 
     //Si le joueur attaqué a perdu
     if(this->getPlayerByName(to).areAllBoatsDestroyed()){
@@ -177,6 +181,7 @@ void Game::onAttack(QString from, QString to, uchar x, uchar y){
         return;
     }
 
+    //On regarde le nombre de joueur pouvant encore jouer
     int playLeft = 0;
     for(int i = 0;i<nbJoueurCo;i++){
         if(lstJoueur[i].canAttack())
@@ -187,11 +192,12 @@ void Game::onAttack(QString from, QString to, uchar x, uchar y){
 
     if(playLeft==0){
         cout<<"Nouveau tour !"<<endl;
+        sendToChat("Serveur : Tour suivant, vous pouvez rejouer !");
         for(int i = 0;i<nbJoueurCo;i++){
-            Joueur j = lstJoueur[i];
-            if(j.areAllBoatsDestroyed())
-                continue;
-            j.canAttack(true);
+            Joueur * j = &lstJoueur[i];
+            if(j->areAllBoatsDestroyed())//Si tout les bateaux du joueurs sont détruit, il n'a pas le droit de recommencer
+                continue;//Et on passe au suivant
+            j->canAttack(true);
         }
     }
 
