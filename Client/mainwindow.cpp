@@ -409,15 +409,19 @@ void MainWindow::mousePressEvent(QMouseEvent *e)
                int AttackX=((int)pt.x()-GWposX-1)/27;
                int AttackY=((int)pt.y()-32-GWposY-1)/27;
 
-               if(adversaires.adv[adversaires.getByName(ui->nameBox->currentText())].getState(AttackY, AttackX)==2)
+               if(adversaires.adv[adversaires.getByName(ui->nameBox->currentText())].getState(AttackY, AttackX)==2 && nomJoueur!= ui->nameBox->currentText())
                {
                    cout<<"attack x"<<AttackX<<"     attack y"<<AttackY<<endl;
                    connexion->send((QString)PlayerAttack+":"+nomJoueur+":"+ui->nameBox->currentText()+":"+QString::number(AttackX)+":"+QString::number(AttackY));
                }
-                else
+                else if (nomJoueur== ui->nameBox->currentText())
                {
-                   QMessageBox::warning(this, "Attention !", "Vous avez deja attaqué ce joueur a cet endroit",QMessageBox::Ok);
+                   QMessageBox::warning(this, "Attention !", "Le suicide ne semble pas etre une bonne stratégie !!!",QMessageBox::Ok);
                }
+               else if (!adversaires.adv[adversaires.getByName(ui->nameBox->currentText())].getState(AttackY, AttackX)==2)
+              {
+                  QMessageBox::warning(this, "Attention !", "Vous avez deja attaqué ce joueur a cet endroit",QMessageBox::Ok);
+              }
             }
         }
         break;
