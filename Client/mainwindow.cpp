@@ -12,6 +12,8 @@
 #include <QPixmap>
 #include <stdio.h>
 #include <iostream>
+//#include <QtMultimedia/QSound>
+//#include <QtMultimedia/QAudioOutput>
 
 #include "comunicationconstants.h"
 
@@ -232,6 +234,7 @@ void MainWindow::on_pushButtonOKTchat_clicked ()
 void MainWindow::writeInTchat(QString message)
 {
     ui->textChat->append(message);
+  // QSound::play("sonTchat.wav");
 }
 
 void MainWindow::rename()
