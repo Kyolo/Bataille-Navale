@@ -158,6 +158,7 @@ void Connexion::attackResult(QString who, uchar wherex, uchar wherey, bool in_th
 
 void Connexion::playerLost(QString who){
     this->sendtoclient(QString(Header::PlayerLost)+":"+who);
+    this->kick(who);
 }
 
 void Connexion::playerWon(QString winner){
