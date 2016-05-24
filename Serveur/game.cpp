@@ -126,6 +126,9 @@ void Game::newPlayer(Joueur j){
     nbJoueurEnLice++;
     if(nbJoueurCo==nbJoueurMax){
         cout<<"Tout les joueurs sont connectés et prêt, début de la partie"<<endl;
+        for(int i = 0;i<nbJoueurCo;i++){
+            lstJoueur[i].canAttack(true);
+        }
         emit gameStarted();
     }
 }

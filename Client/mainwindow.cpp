@@ -575,15 +575,15 @@ void MainWindow::turnImage(int boat, int x, int y)
             {
                  ui->bateau21->setGeometry(x, y, labelRects[boat].height(),labelRects[boat].width());
                  int height=labelRects[boat].height();
-                         int width=labelRects[boat].width();
-                         labelRects[boat].setHeight(width);
-                         labelRects[boat].setWidth(height);
+                 int width=labelRects[boat].width();
+                 labelRects[boat].setHeight(width);
+                 labelRects[boat].setWidth(height);
                  ui->bateau21->setPixmap(QPixmap(":/bateau2Vertical.png"));
                  isHorizontal[boat]=false;
             }
             else
             {
-                ui->bateau21->setGeometry(x, y, labelRects[boat].height(), labelRects[boat].width());
+                ui->bateau21->setGeometry(x, y, labelRects[boat].width(), labelRects[boat].height());
                 ui->bateau21->setPixmap(QPixmap(":/bateau2.png"));
                 int height=labelRects[boat].height();
                         int width=labelRects[boat].width();
@@ -605,7 +605,7 @@ void MainWindow::turnImage(int boat, int x, int y)
             }
             else
             {
-                ui->bateau22->setGeometry(x, y, labelRects[boat].height(), labelRects[boat].width());
+                ui->bateau22->setGeometry(x, y,labelRects[boat].width(), labelRects[boat].height());
                 ui->bateau22->setPixmap(QPixmap(":/bateau2.png"));
                 int height=labelRects[boat].height();
                         int width=labelRects[boat].width();
@@ -627,7 +627,7 @@ void MainWindow::turnImage(int boat, int x, int y)
             }
             else
             {
-                ui->bateau31->setGeometry(x, y, labelRects[boat].height(), labelRects[boat].width());
+                ui->bateau31->setGeometry(x, y, labelRects[boat].width(), labelRects[boat].height());
                 ui->bateau31->setPixmap(QPixmap(":/bateau3.png"));
                 int height=labelRects[boat].height();
                         int width=labelRects[boat].width();
@@ -649,7 +649,7 @@ void MainWindow::turnImage(int boat, int x, int y)
             }
             else
             {
-                ui->bateau32->setGeometry(x, y, labelRects[boat].height(), labelRects[boat].width());
+                ui->bateau32->setGeometry(x, y, labelRects[boat].width(), labelRects[boat].height());
                 ui->bateau32->setPixmap(QPixmap(":/bateau3.png"));
                 int height=labelRects[boat].height();
                         int width=labelRects[boat].width();
@@ -671,7 +671,7 @@ void MainWindow::turnImage(int boat, int x, int y)
             }
             else
             {
-                ui->bateau33->setGeometry(x, y, labelRects[boat].height(), labelRects[boat].width());
+                ui->bateau33->setGeometry(x, y, labelRects[boat].width(), labelRects[boat].height());
                 ui->bateau33->setPixmap(QPixmap(":/bateau3.png"));
                 int height=labelRects[boat].height();
                         int width=labelRects[boat].width();
@@ -693,7 +693,7 @@ void MainWindow::turnImage(int boat, int x, int y)
             }
             else
             {
-                ui->bateau41->setGeometry(x, y, labelRects[boat].height(), labelRects[boat].width());
+                ui->bateau41->setGeometry(x, y, labelRects[boat].width(), labelRects[boat].height());
                 ui->bateau41->setPixmap(QPixmap(":/bateau4.png"));
                 int height=labelRects[boat].height();
                         int width=labelRects[boat].width();
@@ -715,7 +715,7 @@ void MainWindow::turnImage(int boat, int x, int y)
             }
             else
             {
-                ui->bateau42->setGeometry(x, y, labelRects[boat].height(), labelRects[boat].width());
+                ui->bateau42->setGeometry(x, y, labelRects[boat].width(), labelRects[boat].height());
                 ui->bateau42->setPixmap(QPixmap(":/bateau4.png"));
                 int height=labelRects[boat].height();
                         int width=labelRects[boat].width();
@@ -737,7 +737,7 @@ void MainWindow::turnImage(int boat, int x, int y)
             }
             else
             {
-                ui->bateau5->setGeometry(x, y, labelRects[boat].height(), labelRects[boat].width());
+                ui->bateau5->setGeometry(x, y, labelRects[boat].width(), labelRects[boat].height());
                 ui->bateau5->setPixmap(QPixmap(":/bateau5.png"));
                 int height=labelRects[boat].height();
                         int width=labelRects[boat].width();
