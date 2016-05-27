@@ -114,6 +114,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 void MainWindow::on_actionNewGame_triggered()
     {
     bool ok;
+    ui->labelInfosPartie->setText("Suivez les indications ...");
     nomJoueur = QInputDialog::getText(this, tr("Nom du joueur"), tr("Votre nom :"), QLineEdit::Normal,QDir::home().dirName(), &ok);
     nomJoueur.replace(QString(":"),QString("_"));
     me=new Joueur(nomJoueur);
@@ -137,6 +138,7 @@ void MainWindow::on_actionNewGame_triggered()
     connect(connexion, SIGNAL(gmeStart()), this, SLOT(GameStarted()));
     connect(ui->nameBox, SIGNAL(currentTextChanged(QString)), this, SLOT(ComboBoxChanged(QString)));
     connecte=1;
+    ui->ImageConnexionStatus->setPixmap(QPixmap(":/ledVerte.png"));
     state=0;
     ui->nameBox->clear();
     ui->bateau21->setCursor(Qt::ClosedHandCursor);
@@ -153,6 +155,7 @@ void MainWindow::on_actionNewGame_triggered()
     ui->lineEditChat->setEnabled(true);
     ui->pushButtonOKTchat->setEnabled(true);
     ui->labelTchatDisable->setText("");
+    ui->labelInfosPartie->setText("C'est l'heure de placer vos bateaux !");
     QMessageBox::information(this, "Bataille navale", "Veuillez maintenant placer vos bateaux sur la grille !\nN'oubliez pas de valider votre choix à la fin de l'opération.");
     ui->fondBateaux->setGeometry(initialPosBoatX,initialPosBoatY,475,100);
     ui->bateau5->setGeometry(initialPosBoatX+15,initialPosBoatY+10,125,25);
@@ -201,6 +204,7 @@ void MainWindow::on_actionAbandon_triggered()
     int reponseAbandon = QMessageBox::information(this, "Abandon de la partie ?", "Voulez vraiment abandonner la partie en cours ?\nToutes vos données seront perdues.", QMessageBox::Yes | QMessageBox::No);
        if (reponseAbandon == QMessageBox::Yes)
        {
+         ui->labelInfosPartie->setText("Partie abandonnée !");
          connexion->send(GiveUpHeader+me->getName());
          ui->actionNewGame->setEnabled(true);
          ui->actionAbandon->setEnabled(false);
@@ -277,6 +281,7 @@ void MainWindow::GameStarted()
     started=true;
     //QMessageBox::information(this,"   Début de partie    ", "    La partie commence...     \n     Feu ouvert !\n     Bonne chance à tous !     ");
     ui->textChat->append("Serveur : Tous les joueurs sont prêts, la partie commence...");
+    ui->labelInfosPartie->setText("Partie en cours...");
 }
 
 void MainWindow::ComboBoxChanged(QString name)
@@ -793,6 +798,7 @@ void MainWindow::on_ButtonDone_clicked()
     {
     case 0:
         cout <<"tout va bien"<<endl;
+        ui->labelInfosPartie->setText("Attente du deuxième joueur !");
         connexion->send(NewPlayer+me->writeMessage());
         state=1;
         ui->bateau21->setCursor(Qt::ArrowCursor);

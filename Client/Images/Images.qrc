@@ -16,5 +16,6 @@
         <file>TirBateau.jpg</file>
         <file>TirBateau.png</file>
         <file>TirCoule.png</file>
+        <file>ledVerte.png</file>
     </qresource>
 </RCC>
