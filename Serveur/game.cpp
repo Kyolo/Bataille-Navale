@@ -159,7 +159,6 @@ void Game::onAttack(QString from, QString to, uchar x, uchar y){
 
     //Et on envoit les résultat aux deux joueurs concernés
     emit attackResult(to,x,y,hit);
-    emit attackResult(from,x,y,hit);
 
     this->getPlayerByName(from).canAttack(false);//Le joueur ne plus attaqué, il vient de le fare
 
