@@ -339,6 +339,7 @@ void MainWindow::ComboBoxChanged(QString name)
             {
                 for (int b=0; b<16; b++)
                 {
+                    labelResult[a][b].raise();
                     if(adversaires.adv[id].getState(a,b)==0)
                     {
                         labelResult[a][b].setPixmap(QPixmap(""));

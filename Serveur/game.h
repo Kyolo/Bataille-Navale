@@ -16,7 +16,7 @@ class Game: public QObject
 public:
     Game(int nbPlr = DEFAULT_PLR_NUMBER);
     void start();
-    Joueur getPlayerByName(QString name);
+    Joueur *getPlayerByName(QString name);
     Joueur *getAllPlayer();
     void forceQuit();
     void sendToChat(QString msg);

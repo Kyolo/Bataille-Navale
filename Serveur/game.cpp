@@ -47,10 +47,10 @@ void Game::start(){
  * @param name : Le nom du joueur
  * @return l'objet joueur correspondant ou NULL le cas échéant.
  */
-Joueur Game::getPlayerByName(QString name){
+Joueur * Game::getPlayerByName(QString name){
     for(int i = 0;i<nbJoueurCo;i++){
         if(lstJoueur[i].getName()==name)
-            return lstJoueur[i];
+            return &lstJoueur[i];
     }
 
     return NULL;
@@ -142,7 +142,7 @@ void Game::newPlayer(Joueur j){
 void Game::onAttack(QString from, QString to, uchar x, uchar y){
 
     //On vérifie que le joueur peut attaquer
-    if(!this->getPlayerByName(from).canAttack())
+    if(!this->getPlayerByName(from)->canAttack())
         return;
 
     //Qu'il ne s'attaque pas lui-même
@@ -154,16 +154,16 @@ void Game::onAttack(QString from, QString to, uchar x, uchar y){
     cout<<from.toStdString()<<" attaque "<<to.toStdString()<<" en ("<<QString::number(x).toStdString()<<","<<QString::number(y).toStdString()<<") : ";
 
     //On attaque le joueur correspondant à la case correspondante
-    bool hit = this->getPlayerByName(to).attack(x,y);
+    bool hit = this->getPlayerByName(to)->attack(x,y);
     cout<<(hit?"Touché !":"Dans l'eau")<<endl;
 
     //Et on envoit les résultat aux deux joueurs concernés
     emit attackResult(to,x,y,hit);
 
-    this->getPlayerByName(from).canAttack(false);//Le joueur ne plus attaqué, il vient de le fare
+    this->getPlayerByName(from)->canAttack(false);//Le joueur ne plus attaquer, il vient de le fare
 
     //Si le joueur attaqué a perdu
-    if(this->getPlayerByName(to).areAllBoatsDestroyed()){
+    if(this->getPlayerByName(to)->areAllBoatsDestroyed()){
         cout<<to.toStdString().c_str()<<" a perdu"<<endl;
         emit playerLost(to);//On prévient les autres joueurs
         nbJoueurEnLice--;//Et on décrémente le nombre de joueur en lice
@@ -211,6 +211,6 @@ void Game::onAttack(QString from, QString to, uchar x, uchar y){
  */
 void Game::giveUp(QString who){
     cout<<who.toStdString().c_str()<<" a abandonné(e) la partie"<<endl;
-    this->getPlayerByName(who).giveUp();
+    this->getPlayerByName(who)->giveUp();
     emit playerLost(who);
 }

@@ -45,13 +45,13 @@ void CommandManager::useCommand(QString command, QStringList args ){
     }
     else if(command=="disp"&&args.length()>0){
         for(int i=0;i<args.length();i++){
-            Joueur j = Game::getInstance()->getPlayerByName(args[i]);
-            cout<<"Grille du joueur "<<j.getName().toStdString()<<" :"<<endl;
+            Joueur * j = Game::getInstance()->getPlayerByName(args[i]);
+            cout<<"Grille du joueur "<<j->getName().toStdString()<<" :"<<endl;
             cout<<"+"<<QString(16,'-').toStdString()<<"+"<<endl;
             for(int y = 0;y<16;y++){
                 cout<<"|";
                 for(int x = 0;x<16;x++){
-                    cout<<j.getStatusAt(x,y);
+                    cout<<j->getStatusAt(x,y);
                 }
                 cout<<"|"<<endl;
             }
