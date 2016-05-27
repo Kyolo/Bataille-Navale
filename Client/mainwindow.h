@@ -81,6 +81,7 @@ private slots:
     void AttackReceived(QString, uchar, uchar, bool);
     void GameStarted();
     void ComboBoxChanged(QString name);
+    void gestionTours();
 };
 
 

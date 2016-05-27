@@ -151,6 +151,7 @@ void MainWindow::on_actionNewGame_triggered()
     ui->bateau42->setCursor(Qt::ClosedHandCursor);
     ui->bateau5->setCursor(Qt::ClosedHandCursor);
     ui->textChat->setText("");
+    ui->labelTour->setText("");
     ui->textChat->setEnabled(true);
     ui->lineEditChat->setText("");
     ui->lineEditChat->setEnabled(true);
@@ -213,6 +214,7 @@ void MainWindow::on_actionAbandon_triggered()
          ui->graphicsView->setVisible(false);
          ui->fondBateaux->setVisible(false);
          ui->RAZBateaux->setVisible(false);
+         ui->labelTour->setText("");
          ui->bateau5->setVisible(false);
          ui->bateau21->setVisible(false);
          ui->bateau22->setVisible(false);
@@ -399,6 +401,7 @@ void MainWindow::on_actionRactiveTchat_triggered()
 void MainWindow::serverError(QString error)
 {
     ui->ImageConnexionStatus->setPixmap(QPixmap (":/ledRouge.png"));
+    ui->labelInfosPartie->setText("Le serveur a été déconnecté !");
     QMessageBox::critical(this, "Erreur",error, QMessageBox::Ok);
 }
 //**********************Clic de la souris********************
@@ -421,7 +424,7 @@ void MainWindow::mousePressEvent(QMouseEvent *e)
                int AttackY=((int)pt.y()-32-GWposY-1)/27;
 
                if(adversaires.adv[adversaires.getByName(ui->nameBox->currentText())].getState(AttackY, AttackX)==2 && nomJoueur!= ui->nameBox->currentText())
-               {
+               {   ui->labelTour->setText("C'est au tour de votre adversaire !");
                    cout<<"attack x"<<AttackX<<"     attack y"<<AttackY<<endl;
                    connexion->send((QString)PlayerAttack+":"+nomJoueur+":"+ui->nameBox->currentText()+":"+QString::number(AttackX)+":"+QString::number(AttackY));
                }
@@ -865,4 +868,9 @@ void MainWindow::updatePlayerBoats()
             }
         }
     }
+}
+
+void MainWindow::gestionTours ()
+{ ui->labelTour->setText("C'est à votre tour de jouer !");
+
 }
