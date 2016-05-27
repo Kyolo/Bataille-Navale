@@ -25,6 +25,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
      ui->setupUi(this);
      ui->labelImageFond->setPixmap(QPixmap (":/carteFondFlou.jpg"));
+     ui->ImageConnexionStatus->setPixmap(QPixmap (":/ledRouge.png"));
      ui->graphicsView->setGeometry(GWposX,GWposY,434,434);
      QRect rect(GWposX+1,GWposY+1,434,434);
      ui->gridLayout->setGeometry(rect);
@@ -128,6 +129,7 @@ void MainWindow::on_actionNewGame_triggered()
     qDebug()<<adresseIP;
     QString portConnexion = QInputDialog::getText(this, tr("Port de connexion"), tr("Veuillez entrer le port pour vous connecter : "), QLineEdit::Normal);
     qDebug()<<portConnexion;
+    ui->ImageConnexionStatus->setPixmap(QPixmap(":/ledVerte.png"));
     connexion = new client(adresseIP.toStdString(), portConnexion.toInt());
     ui->actionConnexion->setEnabled(false);
     connect(connexion, SIGNAL(serverError(QString)), this,SLOT(serverError(QString)));
@@ -138,7 +140,6 @@ void MainWindow::on_actionNewGame_triggered()
     connect(connexion, SIGNAL(gmeStart()), this, SLOT(GameStarted()));
     connect(ui->nameBox, SIGNAL(currentTextChanged(QString)), this, SLOT(ComboBoxChanged(QString)));
     connecte=1;
-    ui->ImageConnexionStatus->setPixmap(QPixmap(":/ledVerte.png"));
     state=0;
     ui->nameBox->clear();
     ui->bateau21->setCursor(Qt::ClosedHandCursor);
@@ -281,7 +282,7 @@ void MainWindow::GameStarted()
     started=true;
     //QMessageBox::information(this,"   Début de partie    ", "    La partie commence...     \n     Feu ouvert !\n     Bonne chance à tous !     ");
     ui->textChat->append("Serveur : Tous les joueurs sont prêts, la partie commence...");
-    ui->labelInfosPartie->setText("Partie en cours...");
+    ui->labelInfosPartie->setText("Partie en cours...             ");
 }
 
 void MainWindow::ComboBoxChanged(QString name)
@@ -397,6 +398,7 @@ void MainWindow::on_actionRactiveTchat_triggered()
 //Gestion des erreurs de communication Reseau
 void MainWindow::serverError(QString error)
 {
+    ui->ImageConnexionStatus->setPixmap(QPixmap (":/ledRouge.png"));
     QMessageBox::critical(this, "Erreur",error, QMessageBox::Ok);
 }
 //**********************Clic de la souris********************
