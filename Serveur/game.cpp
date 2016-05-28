@@ -194,7 +194,8 @@ void Game::onAttack(QString from, QString to, uchar x, uchar y){
 
     if(playLeft==0){
         cout<<"Nouveau tour !"<<endl;
-        sendToChat("Serveur : Tour suivant, vous pouvez rejouer !");
+        //sendToChat("Serveur : Tour suivant, vous pouvez rejouer !");
+        co->sendtoclient(Header::NewRound);
         for(int i = 0;i<nbJoueurCo;i++){
             Joueur * j = &lstJoueur[i];
             if(j->areAllBoatsDestroyed())//Si tout les bateaux du joueurs sont détruit, il n'a pas le droit de recommencer

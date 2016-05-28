@@ -33,6 +33,7 @@ signals:
     void signalPlayerWin(QString);
     void gmeStart();
     void newAdversaire(QString);
+    void GestTours();
 };
 
 #endif // CLIENT_H

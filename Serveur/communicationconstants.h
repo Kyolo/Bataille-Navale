@@ -15,6 +15,7 @@ const static QChar GameStarted='g';
 const static QChar GameFinished='h';
 const static QChar NewName='i';
 const static QChar NewNameError='j';
+const static QChar NewRound='k';
 }
 
 #endif // COMMUNICATIONCONSTANTS_H

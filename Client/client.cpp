@@ -117,5 +117,7 @@ void client::msgGestion(QString message)
         emit gmeStart();
     } else if(message[0]==NewPlayer){
         emit newAdversaire((QString)(message.split(":").at(1)));
+    }else if(message[0]==NewRound){
+       emit GestTours();
     }
 }

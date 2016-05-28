@@ -82,8 +82,8 @@ private slots:
     void GameStarted();
     void ComboBoxChanged(QString name);
     void gestionTours();
-    void gameWon ();
-    void gameLost ();
+    void gameWon (QString name);
+    void gameLost (QString name);
 };
 
 

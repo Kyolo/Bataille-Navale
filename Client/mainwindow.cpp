@@ -139,6 +139,9 @@ void MainWindow::on_actionNewGame_triggered()
     connect(connexion, SIGNAL(AttackReceived(QString,uchar,uchar,bool)), this, SLOT(AttackReceived(QString,uchar,uchar,bool)));
     connect(connexion, SIGNAL(gmeStart()), this, SLOT(GameStarted()));
     connect(ui->nameBox, SIGNAL(currentTextChanged(QString)), this, SLOT(ComboBoxChanged(QString)));
+    connect(connexion, SIGNAL(GestTours()), this, SLOT(gestionTours()));
+    connect(connexion, SIGNAL(signalPlayerLost(QString)), this, SLOT(gameLost(QString)));
+    connect(connexion, SIGNAL(signalPlayerWin(QString)), this, SLOT(gameWon(QString)));
     connecte=1;
     state=0;
     ui->nameBox->clear();
@@ -875,10 +878,13 @@ void MainWindow::gestionTours ()
 }
 
 
-void MainWindow::gameWon()
-{ui->labelInfosPartie->setText("Partie gagnée !");
- ui->labelTour->setText("Vous avez gagné la partie !");
- int reponseNewGame = QMessageBox::question(this, "Nouvelle partie", "Félicitations, vous avez gagné la partie !\nVoulez vous recommencer une nouvelle partie?", QMessageBox::Yes | QMessageBox::No);
+void MainWindow::gameWon(QString name)
+{
+   if(name==nomJoueur)
+   {
+    ui->labelInfosPartie->setText("Partie gagnée !");
+    ui->labelTour->setText("Vous avez gagné la partie !");
+    int reponseNewGame = QMessageBox::question(this, "Nouvelle partie", "Félicitations, vous avez gagné la partie !\nVoulez vous recommencer une nouvelle partie?", QMessageBox::Yes | QMessageBox::No);
     if (reponseNewGame == QMessageBox::Yes)
     {MainWindow::on_actionNewGame_triggered();
 
@@ -887,19 +893,23 @@ void MainWindow::gameWon()
     {
 
     }
+    }
 }
 
-void MainWindow::gameLost()
-{ui->labelInfosPartie->setText("Partie perdue !");
-    ui->labelTour->setText("Vous avez perdu la partie !");
-    int reponseNewGame = QMessageBox::question(this, "Nouvelle partie", "Vous avez malheuresement perdu la partie !\nVoulez vous recommencer une nouvelle partie?", QMessageBox::Yes | QMessageBox::No);
-       if (reponseNewGame == QMessageBox::Yes)
-       {MainWindow::on_actionNewGame_triggered();
+void MainWindow::gameLost(QString name)
+{
+    if(name==nomJoueur)
+    {
+        ui->labelInfosPartie->setText("Partie perdue !");
+        ui->labelTour->setText("Vous avez perdu la partie !");
+        int reponseNewGame = QMessageBox::question(this, "Nouvelle partie", "Vous avez malheuresement perdu la partie !\nVoulez vous recommencer une nouvelle partie?", QMessageBox::Yes | QMessageBox::No);
+           if (reponseNewGame == QMessageBox::Yes)
+           {MainWindow::on_actionNewGame_triggered();
 
-       }
-       else if (reponseNewGame == QMessageBox::No)
-       {
+           }
+           else if (reponseNewGame == QMessageBox::No)
+           {
 
-       }
-
+           }
+    }
 }
