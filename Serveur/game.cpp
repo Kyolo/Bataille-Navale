@@ -211,7 +211,12 @@ void Game::onAttack(QString from, QString to, uchar x, uchar y){
  * @param who : le couard qui abandonne
  */
 void Game::giveUp(QString who){
-    cout<<who.toStdString().c_str()<<" a abandonné(e) la partie"<<endl;
-    this->getPlayerByName(who)->giveUp();
+    cout<<who.toStdString().c_str()<<" a abandonné(e) la partie";
+    Joueur * j = this->getPlayerByName(who);
+    if(j==NULL){
+        cout<<" mais il/elle n'existe pas. Attendez une minute..."<<endl;
+        return;
+    }
+    cout<<endl;
     emit playerLost(who);
 }

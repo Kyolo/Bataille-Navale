@@ -46,6 +46,10 @@ void CommandManager::useCommand(QString command, QStringList args ){
     else if(command=="disp"&&args.length()>0){
         for(int i=0;i<args.length();i++){
             Joueur * j = Game::getInstance()->getPlayerByName(args[i]);
+            if(j==NULL){
+                cout<<"Joueur inconnu"<<endl;
+                return;
+            }
             cout<<"Grille du joueur "<<j->getName().toStdString()<<" :"<<endl;
             cout<<"+"<<QString(16,'-').toStdString()<<"+"<<endl;
             for(int y = 0;y<16;y++){
