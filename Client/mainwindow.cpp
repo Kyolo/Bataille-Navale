@@ -24,43 +24,50 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
      ui->setupUi(this);
-     ui->labelImageFond->setPixmap(QPixmap (":/carteFondFlou.jpg"));
-     ui->ImageConnexionStatus->setPixmap(QPixmap (":/ledRouge.png"));
-     ui->graphicsView->setGeometry(GWposX,GWposY,434,434);
-     QRect rect(GWposX+1,GWposY+1,434,434);
-     ui->gridLayout->setGeometry(rect);
-     scene = new QGraphicsScene(this);
-        scene->setSceneRect(QRectF(0,0,434,434));
-        ui->graphicsView->setScene(scene);
-        ui->textChat->setText(""); // descativation du chat tant que pas connecté
-     ui->textChat->setEnabled(false);
-     ui->lineEditChat->setText("");
-     ui->lineEditChat->setEnabled(false);
-     ui->pushButtonOKTchat->setEnabled(false);
-     ui->labelTchatDisable->setText("Tchat désactivé! \n \n Veuillez d'abord \n vous connecter !");
-     ui->labelJoueursConnectes->append("Joueurs connectés :\n");
-     ui->ButtonDone->setVisible(false);
-     ui->RAZBateaux->setVisible(false);
-     ui->nameBox->setVisible(false);
-     state=0;
+     MainWindow::RAZIG();
 
-    for (int a=0; a<16; a++)
-    {
-        for( int b=0; b<16; b++)
-        {
-            labelResult[a][b].setMaximumHeight(27);
-             labelResult[a][b].setMinimumHeight(27);
-              labelResult[a][b].setMaximumWidth(27);
-               labelResult[a][b].setMinimumWidth(27);
-            ui->gridLayout->addWidget(&labelResult[a][b], a, b);
-        }
-    }
-    ui->graphicsView->setLayout(ui->gridLayout);
 }
 MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+void MainWindow::RAZIG()
+{ ui->labelImageFond->setPixmap(QPixmap (":/carteFondFlou.jpg"));
+    ui->ImageConnexionStatus->setPixmap(QPixmap (":/ledRouge.png"));
+    ui->graphicsView->setGeometry(GWposX,GWposY,434,434);
+    QRect rect(GWposX+1,GWposY+1,434,434);
+    ui->gridLayout->setGeometry(rect);
+    scene = new QGraphicsScene(this);
+       scene->setSceneRect(QRectF(0,0,434,434));
+       ui->graphicsView->setScene(scene);
+       ui->textChat->setText(""); // descativation du chat tant que pas connecté
+    ui->textChat->setEnabled(false);
+    ui->lineEditChat->setText("");
+    ui->lineEditChat->setEnabled(false);
+    ui->pushButtonOKTchat->setEnabled(false);
+    ui->labelTchatDisable->setText("Tchat désactivé! \n \n Veuillez d'abord \n vous connecter !");
+    ui->labelJoueursConnectes->append("Joueurs connectés :\n");
+    ui->ButtonDone->setVisible(false);
+    ui->RAZBateaux->setVisible(false);
+    ui->nameBox->setVisible(false);
+    state=0;
+
+   for (int a=0; a<16; a++)
+   {
+       for( int b=0; b<16; b++)
+       {
+           labelResult[a][b].setMaximumHeight(27);
+            labelResult[a][b].setMinimumHeight(27);
+             labelResult[a][b].setMaximumWidth(27);
+              labelResult[a][b].setMinimumWidth(27);
+           ui->gridLayout->addWidget(&labelResult[a][b], a, b);
+       }
+   }
+   ui->graphicsView->setLayout(ui->gridLayout);
+
+}
+
 //**********************************************************************************
 
 //*****Quitter*********************************************************
@@ -891,7 +898,7 @@ void MainWindow::gameWon(QString name)
     }
     else if (reponseNewGame == QMessageBox::No)
     {
-
+    MainWindow::RAZIG();
     }
     }
 }
@@ -909,7 +916,7 @@ void MainWindow::gameLost(QString name)
            }
            else if (reponseNewGame == QMessageBox::No)
            {
-
+            MainWindow::RAZIG();
            }
     }
 }

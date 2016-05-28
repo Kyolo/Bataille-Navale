@@ -37,6 +37,7 @@ public slots:
  void mouseMoveEvent(QMouseEvent *e);
  void mouseDoubleClickEvent(QMouseEvent *e);
  void mouseReleaseEvent(QMouseEvent *e);
+ void RAZIG ();
 
 private:
 
