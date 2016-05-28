@@ -282,7 +282,6 @@ void MainWindow::AttackReceived(QString nom, uchar y, uchar x, bool etat)
 void MainWindow::GameStarted()
 {
     started=true;
-    //QMessageBox::information(this,"   Début de partie    ", "    La partie commence...     \n     Feu ouvert !\n     Bonne chance à tous !     ");
     ui->textChat->append("Serveur : Tous les joueurs sont prêts, la partie commence...");
     ui->labelInfosPartie->setText("Partie en cours...             ");
 }
@@ -872,5 +871,35 @@ void MainWindow::updatePlayerBoats()
 
 void MainWindow::gestionTours ()
 { ui->labelTour->setText("C'est à votre tour de jouer !");
+
+}
+
+
+void MainWindow::gameWon()
+{ui->labelInfosPartie->setText("Partie gagnée !");
+ ui->labelTour->setText("Vous avez gagné la partie !");
+ int reponseNewGame = QMessageBox::question(this, "Nouvelle partie", "Félicitations, vous avez gagné la partie !\nVoulez vous recommencer une nouvelle partie?", QMessageBox::Yes | QMessageBox::No);
+    if (reponseNewGame == QMessageBox::Yes)
+    {MainWindow::on_actionNewGame_triggered();
+
+    }
+    else if (reponseNewGame == QMessageBox::No)
+    {
+
+    }
+}
+
+void MainWindow::gameLost()
+{ui->labelInfosPartie->setText("Partie perdue !");
+    ui->labelTour->setText("Vous avez perdu la partie !");
+    int reponseNewGame = QMessageBox::question(this, "Nouvelle partie", "Vous avez malheuresement perdu la partie !\nVoulez vous recommencer une nouvelle partie?", QMessageBox::Yes | QMessageBox::No);
+       if (reponseNewGame == QMessageBox::Yes)
+       {MainWindow::on_actionNewGame_triggered();
+
+       }
+       else if (reponseNewGame == QMessageBox::No)
+       {
+
+       }
 
 }
