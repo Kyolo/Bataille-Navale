@@ -281,10 +281,12 @@ void MainWindow::AttackReceived(QString nom, uchar y, uchar x, bool etat)
       if(etat==1)
       {
          labelResult[x][y].setPixmap(QPixmap(":/TirBateau.png"));
+         ui->labelInfosPartie->setText("Partie en cours...");
       }
       if(etat==0)
       {
         labelResult[x][y].setPixmap(QPixmap(":/TirCoule.png"));
+        ui->labelInfosPartie->setText("Partie en cours...");
       }
   }
 }
@@ -361,11 +363,13 @@ void MainWindow::ComboBoxChanged(QString name)
                     {
                         labelResult[a][b].setPixmap(QPixmap(""));
                         labelResult[a][b].setPixmap(QPixmap(":/TirCoule.png"));
+                        ui->labelInfosPartie->setText("Vous n'avez pas été touché !");
                     }
                     else if(adversaires.adv[id].getState(a,b)==1)
                     {
                         labelResult[a][b].setPixmap(QPixmap(""));
                         labelResult[a][b].setPixmap(QPixmap(":/TirBateau.png"));
+                        ui->labelInfosPartie->setText("Vous venez d'être touché !");
                     }
                     else if(adversaires.adv[id].getState(a,b)==2)
                     {
