@@ -26,6 +26,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
      ui->setupUi(this);
      MainWindow::RAZIG();
+     sonTchat=new QSound (":/sonTchat.wav");
 
 }
 MainWindow::~MainWindow()
@@ -252,7 +253,7 @@ void MainWindow::on_pushButtonOKTchat_clicked ()
 void MainWindow::writeInTchat(QString message)
 {
     ui->textChat->append(message);
-  // QSound::play("sonTchat.wav");
+    sonTchat->play();
 }
 
 void MainWindow::rename()

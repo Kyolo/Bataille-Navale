@@ -6,7 +6,7 @@
 
 QT       += core gui network multimedia
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets multimedia
 
 TARGET = IGbataillenavale
 TEMPLATE = app
@@ -27,7 +27,8 @@ HEADERS  += mainwindow.h \
 FORMS    += mainwindow.ui
 
 RESOURCES += \
-    Images/images.qrc
+    Images/images.qrc \
+    Sons/sons.qrc
 
 DISTFILES += \
     Sons/sonchat.wav \
