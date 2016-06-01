@@ -71,6 +71,8 @@ private:
     bool started=false;
     QLabel labelResult[16][16];
     QSound *sonTchat;
+    QSound *explosion;
+    QSound *tirDansLeau;
 
 protected:
     void closeEvent(QCloseEvent *event);
