@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>sonTchat.wav</file>
+        <file>sonExplosion.wav</file>
+        <file>sonTirCoule.wav</file>
+    </qresource>
+</RCC>

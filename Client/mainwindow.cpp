@@ -26,6 +26,9 @@ MainWindow::MainWindow(QWidget *parent) :
 {
      ui->setupUi(this);
      MainWindow::RAZIG();
+     sonTchat=new QSound (":/sonTchat.wav");
+     explosion=new QSound (":/sonExplosion.wav");
+     tirDansLeau=new QSound (":/sonTirCoule.wav");
 
 }
 MainWindow::~MainWindow()
@@ -253,7 +256,7 @@ void MainWindow::on_pushButtonOKTchat_clicked ()
 void MainWindow::writeInTchat(QString message)
 {
     ui->textChat->append(message);
-  // QSound::play("sonTchat.wav");
+    sonTchat->play();
 }
 
 void MainWindow::rename()
@@ -284,11 +287,15 @@ void MainWindow::AttackReceived(QString nom, uchar y, uchar x, bool etat)
       {
          labelResult[x][y].setPixmap(QPixmap(":/TirBateau.png"));
          ui->labelInfosPartie->setText("Partie en cours...");
+         explosion->play();
+         //explosion
       }
       if(etat==0)
       {
         labelResult[x][y].setPixmap(QPixmap(":/TirCoule.png"));
         ui->labelInfosPartie->setText("Partie en cours...");
+        tirDansLeau->play();
+        //tir coulé
       }
   }
 }
