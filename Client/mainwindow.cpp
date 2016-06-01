@@ -12,6 +12,7 @@
 #include <QPixmap>
 #include <stdio.h>
 #include <iostream>
+#include <QSound>
 //#include <QtMultimedia/QSound>
 //#include <QtMultimedia/QAudioOutput>
 

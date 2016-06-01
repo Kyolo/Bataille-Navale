@@ -10,7 +10,7 @@
 #include "joueur.h"
 #include "adversaire.h"
 #include <QLabel>
-
+#include <QSound>
 
 namespace Ui {
 class MainWindow;
@@ -69,6 +69,7 @@ private:
     TableauAdversaire adversaires;
     bool started=false;
     QLabel labelResult[16][16];
+    QSound *sonTchat;
 
 protected:
     void closeEvent(QCloseEvent *event);
