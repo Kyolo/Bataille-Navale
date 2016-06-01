@@ -62,6 +62,7 @@ void MainWindow::RAZIG()
             labelResult[a][b].setMinimumHeight(27);
              labelResult[a][b].setMaximumWidth(27);
               labelResult[a][b].setMinimumWidth(27);
+              labelResult [a][b].raise();
            ui->gridLayout->addWidget(&labelResult[a][b], a, b);
        }
    }
