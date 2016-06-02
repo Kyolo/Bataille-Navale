@@ -69,7 +69,10 @@ void MainWindow::RAZIG()
            ui->gridLayout->addWidget(&labelResult[a][b], a, b);
        }
    }
-   ui->graphicsView->setLayout(ui->gridLayout);
+  // ui->graphicsView->setLayout(ui->gridLayout);
+   ui->GWResult->setGeometry(rect);
+   ui->GWResult->raise();
+   ui->GWResult->setLayout(ui->gridLayout);
 
 }
 
