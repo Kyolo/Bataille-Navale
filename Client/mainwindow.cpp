@@ -27,6 +27,11 @@ MainWindow::MainWindow(QWidget *parent) :
      sonTchat=new QSound (":/sonTchat.wav");
      explosion=new QSound (":/sonExplosion.wav");
      tirDansLeau=new QSound (":/sonTirCoule.wav");
+     sonClic=new QSound (":/sonClique.wav");
+     sonVictoire=new QSound (":/sonVictoire.wav");
+     sonDefaite=new QSound (":/sonDefaite.wav");
+     sonDebutPartie=new QSound (":/sonDebutPartie.wav");
+     sonDone=new QSound (":/sonDone.wav");
 
 }
 MainWindow::~MainWindow()
@@ -38,6 +43,7 @@ void MainWindow::RAZIG()
 { ui->labelImageFond->setPixmap(QPixmap (":/carteFondFlou.jpg"));
     ui->ImageConnexionStatus->setPixmap(QPixmap (":/ledRouge.png"));
     ui->graphicsView->setGeometry(GWposX,GWposY,434,434);
+    ui->GWResult->setGeometry(GWposX,GWposY,434,434);
     QRect rect(GWposX+1,GWposY+1,434,434);
     ui->gridLayout->setGeometry(rect);
     scene = new QGraphicsScene(this);
@@ -68,7 +74,6 @@ void MainWindow::RAZIG()
        }
    }
   // ui->graphicsView->setLayout(ui->gridLayout);
-   ui->GWResult->setGeometry(rect);
    ui->GWResult->raise();
    ui->GWResult->setLayout(ui->gridLayout);
 
@@ -306,6 +311,7 @@ void MainWindow::GameStarted()
     started=true;
     ui->textChat->append("Serveur : Tous les joueurs sont prêts, la partie commence...");
     ui->labelInfosPartie->setText("Partie en cours...             ");
+    sonDebutPartie->play();
 }
 
 void MainWindow::ComboBoxChanged(QString name)
@@ -507,7 +513,8 @@ cout << "at war"<<endl;
                     boatClicked=i;
                     if(labelRects[i].width()+GWposX+1+(pressedX)*27<=534&&labelRects[i].height()+GWposY+1+(pressedY)*27<=487)
                     {
-                        updateBoatGeometry(boatClicked,GWposX+1+(pressedX)*27,GWposY+33+1+(pressedY)*27 );
+                        updateBoatGeometry(boatClicked,GWposX+1+(pressedX)*27,GWposY+33+1+(pressedY)*27);
+                               sonClic->play();
                     }
                 }
             }
@@ -541,6 +548,7 @@ void MainWindow::mouseDoubleClickEvent(QMouseEvent *e)
         {
             boatClicked=i;
             turnImage(i, posX, posY);
+
         }
     }
 }
@@ -828,6 +836,7 @@ void MainWindow::on_ButtonDone_clicked()
         cout <<"tout va bien"<<endl;
         ui->labelInfosPartie->setText("Attente du deuxième joueur !");
         connexion->send(NewPlayer+me->writeMessage());
+        sonDone->play();
         state=1;
         ui->bateau21->setCursor(Qt::ArrowCursor);
         ui->bateau22->setCursor(Qt::ArrowCursor);
@@ -905,6 +914,7 @@ void MainWindow::gameWon(QString name)
    {
     ui->labelInfosPartie->setText("Partie gagnée !");
     ui->labelTour->setText("Vous avez gagné la partie !");
+    sonVictoire->play();
     int reponseNewGame = QMessageBox::question(this, "Nouvelle partie", "Félicitations, vous avez gagné la partie !\nVoulez vous recommencer une nouvelle partie?", QMessageBox::Yes | QMessageBox::No);
     if (reponseNewGame == QMessageBox::Yes)
     {MainWindow::on_actionNewGame_triggered();
@@ -920,7 +930,7 @@ void MainWindow::gameWon(QString name)
 void MainWindow::gameLost(QString name)
 {
     if(name==nomJoueur)
-    {
+    {   sonDefaite->play();
         ui->labelInfosPartie->setText("Partie perdue !");
         ui->labelTour->setText("Vous avez perdu la partie !");
         int reponseNewGame = QMessageBox::question(this, "Nouvelle partie", "Vous avez malheuresement perdu la partie !\nVoulez vous recommencer une nouvelle partie?", QMessageBox::Yes | QMessageBox::No);

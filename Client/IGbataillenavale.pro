@@ -36,4 +36,8 @@ DISTFILES += \
     Images/carteFond.jpg \
     Images/carteFondFlou.jpg \
     Images/Damiereau.jpg \
-    Images/imageTransparente.png
+    Images/imageTransparente.png \
+    Sons/sonClique.wav \
+    Sons/sonDebutPartie.wav \
+    Sons/sonDefaite.wav \
+    Sons/sonVictoire.wav

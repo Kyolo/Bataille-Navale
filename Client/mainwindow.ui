@@ -6556,6 +6556,15 @@ e</string>
       </disabled>
      </palette>
     </property>
+    <property name="frameShape">
+     <enum>QFrame::NoFrame</enum>
+    </property>
+    <property name="verticalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOff</enum>
+    </property>
+    <property name="horizontalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOff</enum>
+    </property>
    </widget>
    <zorder>labelImageFond</zorder>
    <zorder>fondBateaux</zorder>
@@ -6595,7 +6604,7 @@ e</string>
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>30</height>
+     <height>31</height>
     </rect>
    </property>
    <property name="palette">
