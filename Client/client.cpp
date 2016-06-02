@@ -107,7 +107,8 @@ void client::msgGestion(QString message)
         }
     }else if(message[0]==PlayerAttack){
         QStringList par = message.split(":");
-        emit AttackReceived(par[1],(uchar)((QString)par[2]).toInt(),(uchar)((QString)par[3]).toInt(),(bool)((QString)par[4]).toInt());
+        emit AttackReceived(par[1],(uchar)((QString)par[2]).toInt(),
+           (uchar)((QString)par[3]).toInt(),(bool)((QString)par[4]).toInt());
     } else if(message[0]==PlayerLost){
         emit signalPlayerLost((QString)(message.split(":").at(1)));
     }else if(message[0]==PlayerWin){

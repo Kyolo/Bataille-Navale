@@ -32,7 +32,9 @@ MainWindow::MainWindow(QWidget *parent) :
      sonDefaite=new QSound (":/sonDefaite.wav");
      sonDebutPartie=new QSound (":/sonDebutPartie.wav");
      sonDone=new QSound (":/sonDone.wav");
-
+     XpCriticalError = new QSound(":/arret critique XP.wav");
+     Eau2 = new QSound(":/sonEau2.wav");
+     Bombe2 = new QSound(":/sonExplosion2.wav");
 }
 MainWindow::~MainWindow()
 {
@@ -262,7 +264,7 @@ void MainWindow::on_pushButtonOKTchat_clicked ()
 void MainWindow::writeInTchat(QString message)
 {
     ui->textChat->append(message);
-    sonTchat->play();
+    XpCriticalError->play();
 }
 
 void MainWindow::rename()
@@ -287,7 +289,7 @@ void MainWindow::AttackReceived(QString nom, uchar y, uchar x, bool etat)
 {
   int id=adversaires.getByName(nom);
   adversaires.adv[id].setState(x,y,etat);
-  if(ui->nameBox->currentText()==nom)
+  if(ui->nameBox->currentText()==nom && nomJoueur!=nom)
   {
       if(etat==1)
       {
@@ -302,6 +304,17 @@ void MainWindow::AttackReceived(QString nom, uchar y, uchar x, bool etat)
         ui->labelInfosPartie->setText("Partie en cours...");
         tirDansLeau->play();
         //tir coulé
+      }
+  }
+  if(nomJoueur==nom)
+  {
+      if(etat==1)
+      {
+        Bombe2->play();
+      }
+      if(etat==0)
+      {
+          Eau2->play();
       }
   }
 }

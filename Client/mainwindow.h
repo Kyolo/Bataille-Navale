@@ -78,6 +78,9 @@ private:
     QSound *sonVictoire;
     QSound *sonDefaite;
     QSound *sonDone;
+    QSound *XpCriticalError;
+    QSound *Eau2;
+    QSound *Bombe2;
 
 protected:
     void closeEvent(QCloseEvent *event);
