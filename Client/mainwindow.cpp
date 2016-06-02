@@ -13,8 +13,6 @@
 #include <stdio.h>
 #include <iostream>
 #include <QSound>
-//#include <QtMultimedia/QSound>
-//#include <QtMultimedia/QAudioOutput>
 
 #include "comunicationconstants.h"
 
@@ -896,8 +894,8 @@ void MainWindow::updatePlayerBoats()
 }
 
 void MainWindow::gestionTours ()
-{ ui->labelTour->setText("C'est à votre tour de jouer !");
-
+{
+    ui->labelTour->setText("C'est à votre tour de jouer !");
 }
 
 
