@@ -73,6 +73,11 @@ private:
     QSound *sonTchat;
     QSound *explosion;
     QSound *tirDansLeau;
+    QSound *sonClic;
+    QSound *sonDebutPartie;
+    QSound *sonVictoire;
+    QSound *sonDefaite;
+    QSound *sonDone;
 
 protected:
     void closeEvent(QCloseEvent *event);

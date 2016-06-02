@@ -3,5 +3,10 @@
         <file>sonTchat.wav</file>
         <file>sonExplosion.wav</file>
         <file>sonTirCoule.wav</file>
+        <file>sonClique.wav</file>
+        <file>sonVictoire.wav</file>
+        <file>sonDefaite.wav</file>
+        <file>sonDebutPartie.wav</file>
+        <file>sonDone.wav</file>
     </qresource>
 </RCC>
