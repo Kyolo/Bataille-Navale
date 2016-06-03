@@ -167,6 +167,7 @@ void Game::onAttack(QString from, QString to, uchar x, uchar y){
     //Si le joueur attaqué a perdu
     if(this->getPlayerByName(to)->areAllBoatsDestroyed()){
         cout<<to.toStdString().c_str()<<" a perdu"<<endl;
+        this->getPlayerByName(to)->canAttack(false);
         emit playerLost(to);//On prévient les autres joueurs
         nbJoueurEnLice--;//Et on décrémente le nombre de joueur en lice
     }
