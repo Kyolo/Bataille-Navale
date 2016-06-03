@@ -156,7 +156,8 @@ void MainWindow::on_actionNewGame_triggered()
     connect(connexion, SIGNAL(tchatRecive(QString)), this , SLOT(writeInTchat(QString)));
     connect(connexion, SIGNAL(rename()), this, SLOT(rename()));
     connect(connexion, SIGNAL(NewNameSignal(QString)), this , SLOT(NewNameSlot(QString)));
-    connect(connexion, SIGNAL(AttackReceived(QString,uchar,uchar,bool)), this, SLOT(AttackReceived(QString,uchar,uchar,bool)));
+    connect(connexion, SIGNAL(AttackReceived(QString,uchar,uchar,bool)), this,
+            SLOT(AttackReceived(QString,uchar,uchar,bool)));
     connect(connexion, SIGNAL(gmeStart()), this, SLOT(GameStarted()));
     connect(ui->nameBox, SIGNAL(currentTextChanged(QString)), this, SLOT(ComboBoxChanged(QString)));
     connect(connexion, SIGNAL(GestTours()), this, SLOT(gestionTours()));

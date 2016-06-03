@@ -24,8 +24,10 @@ Game::Game(int nbPlr){
     //****************************On relie le moteur au systeme de connexion***************************************
     QObject::connect(co,SIGNAL(connexionNvJoueur(Joueur)),this,SLOT(newPlayer(Joueur)));
     QObject::connect(this,SIGNAL(gameStarted()),co,SLOT(gameStarted()));
-    QObject::connect(co,SIGNAL(attaque(QString,QString,uchar,uchar)),this,SLOT(onAttack(QString,QString,uchar,uchar)));
-    QObject::connect(this,SIGNAL(attackResult(QString,uchar,uchar,bool)),co,SLOT(attackResult(QString,uchar,uchar,bool)));
+    QObject::connect(co,SIGNAL(attaque(QString,QString,uchar,uchar)),this,
+                     SLOT(onAttack(QString,QString,uchar,uchar)));
+    QObject::connect(this,SIGNAL(attackResult(QString,uchar,uchar,bool)),co,
+                     SLOT(attackResult(QString,uchar,uchar,bool)));
     QObject::connect(this,SIGNAL(playerLost(QString)),co,SLOT(playerLost(QString)));
     QObject::connect(co,SIGNAL(playerGiveUp(QString)),this,SLOT(giveUp(QString)));
     QObject::connect(this,SIGNAL(gameFinished(QString)),co,SLOT(playerWon(QString)));
@@ -179,7 +181,8 @@ void Game::onAttack(QString from, QString to, uchar x, uchar y){
         }
         cout<<winner.toStdString().c_str()<<" a gagné !"<<endl;
         //Et on préviens les autres qu'on a finit
-        emit gameFinished(winner);
+        this->co->sendtoclient(QString(Header::PlayerWin)+":"+winner);
+        //emit gameFinished(winner);
         return;
     }
 

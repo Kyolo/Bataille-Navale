@@ -125,11 +125,11 @@ void Connexion::kick(QString name)
 {
     if(!clients.keys().contains(name))
         return;
-    QTcpSocket * socket = clients[name];
-    socket->close();
+    QTcpSocket * socket = clients.value(name);
+    socket->disconnectFromHost();
+
     client.removeOne(socket);
     clients.values().removeOne(socket);
-    socket->deleteLater();
 }
 
 void Connexion::kickClean()
@@ -139,9 +139,8 @@ void Connexion::kickClean()
     for(int i = 0;i<client.size();i++){
         if(!players.contains(client[i])){
             QTcpSocket * socket = client[i];
-            socket->close();
+            socket->disconnectFromHost();
             client.removeOne(socket);
-            socket->deleteLater();
         }
     }
 
@@ -158,7 +157,6 @@ void Connexion::attackResult(QString who, uchar wherex, uchar wherey, bool in_th
 
 void Connexion::playerLost(QString who){
     this->sendtoclient(QString(Header::PlayerLost)+":"+who);
-    this->kick(who);
 }
 
 void Connexion::playerWon(QString winner){
