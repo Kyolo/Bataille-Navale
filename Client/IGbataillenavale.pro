@@ -16,15 +16,18 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     client.cpp \
     joueur.cpp \
-    adversaire.cpp
+    adversaire.cpp \
+    dialog.cpp
 
 HEADERS  += mainwindow.h \
     client.h \
     comunicationconstants.h \
     joueur.h \
-    adversaire.h
+    adversaire.h \
+    dialog.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    dialog.ui
 
 RESOURCES += \
     Images/images.qrc \

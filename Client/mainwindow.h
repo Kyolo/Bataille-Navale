@@ -33,6 +33,10 @@ public slots:
  void on_actionRactiveTchat_triggered ();
  void on_RAZBateaux_clicked ();
  void on_ButtonDone_clicked();
+ void on_helpDebut_triggered ();
+ void on_helpDeroul_triggered ();
+ void on_helpAttaque_triggered ();
+ void on_helpFin_triggered ();
  void mousePressEvent(QMouseEvent *e);
  void mouseMoveEvent(QMouseEvent *e);
  void mouseDoubleClickEvent(QMouseEvent *e);

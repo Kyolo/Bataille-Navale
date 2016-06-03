@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <QSound>
+#include <dialog.h>
 
 #include "comunicationconstants.h"
 
@@ -964,4 +965,39 @@ void MainWindow::gameLost(QString name)
 
            }
     }
+}
+
+
+//aide
+
+void MainWindow::on_helpDebut_triggered()
+{
+    Dialog * help = new Dialog(this);
+    help->setWindowModality(Qt::NonModal);
+    help->setText("AIDE : \nVeuillez cliquer sur ctrl+n pour lancer une partie ou aller dans \"jeu\" puis appuyer sur \"Nouvelle partie\".\nIl vous suffira ensuite d'entrer votre nom, l'adresse IP du serveur et le port.\nIl ne manquera plus qu'à placer vos bateaux. Il vous sera alors nécessaire de cliquer sur le bouton \"DONE\" (à droite de la zone d'apparition des bateaux).");
+    help->show();
+}
+
+void MainWindow::on_helpAttaque_triggered()
+{Dialog * help = new Dialog(this);
+ help->setWindowModality(Qt::NonModal);
+ help->setText("AIDE : \nPour attquer votre adversaire, il vous suffit de selectionner son nom dans le menu déroulant en haut de l'interface. Sa grille s'affichera alors et vous pourrez cliquer sur la case que vous voulez attaquer à moins que ce soit à son tour de jouer.\nPour voir l'état de votre propre grille, il vous suffit de selectionner votre nom dans le menu déroulant." );
+ help->show();
+
+}
+
+void MainWindow::on_helpDeroul_triggered()
+{Dialog * help = new Dialog(this);
+    help->setWindowModality(Qt::NonModal);
+    help->setText("AIDE : \nLa partie se déroule en plusieurs phases :\n-La connexion au serveur\n-Le placement des bateaux\n-Le combat\n-La fin de partie dès que quelqu'un n'a plus de bateau");
+    help->show();
+
+}
+
+void MainWindow::on_helpFin_triggered()
+{Dialog * help = new Dialog(this);
+    help->setWindowModality(Qt::NonModal);
+    help->setText("AIDE : \nLa partie se termine dès que quelqu'un n'a plus de bateaux.\nIl vous sera alors nécessaire de fermer les interfaces graphiques et le serveur et de les relancer.");
+    help->show();
+
 }
