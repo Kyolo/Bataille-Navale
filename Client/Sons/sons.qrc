@@ -9,7 +9,7 @@
         <file>sonDebutPartie.wav</file>
         <file>sonDone.wav</file>
         <file>arret critique XP.wav</file>
-        <file>sonEau2.wav</file>
         <file>sonExplosion2.wav</file>
+        <file>sonEau2.wav</file>
     </qresource>
 </RCC>

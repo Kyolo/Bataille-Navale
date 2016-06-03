@@ -264,11 +264,12 @@ void MainWindow::on_pushButtonOKTchat_clicked ()
 void MainWindow::writeInTchat(QString message)
 {
     ui->textChat->append(message);
-    XpCriticalError->play();
+    sonTchat->play();
 }
 
 void MainWindow::rename()
 {
+    XpCriticalError->play();
     nomJoueur = QInputDialog::getText(this, tr("Nom du joueur"), tr("Veuillez changer votre nom. Un autre joueur possede deja celui-ci. :"), QLineEdit::Normal,QDir::home().dirName());
     me->playerName=nomJoueur;
     connexion->send(NewName+me->playerName);
@@ -325,6 +326,7 @@ void MainWindow::GameStarted()
     ui->textChat->append("Serveur : Tous les joueurs sont prêts, la partie commence...");
     ui->labelInfosPartie->setText("Partie en cours...             ");
     sonDebutPartie->play();
+    ui->nameBox->setCurrentText(nomJoueur);
 }
 
 void MainWindow::ComboBoxChanged(QString name)
@@ -444,6 +446,7 @@ void MainWindow::serverError(QString error)
 {
     ui->ImageConnexionStatus->setPixmap(QPixmap (":/ledRouge.png"));
     ui->labelInfosPartie->setText("Le serveur a été déconnecté !");
+    XpCriticalError->play();
     QMessageBox::critical(this, "Erreur",error, QMessageBox::Ok);
 }
 //**********************Clic de la souris********************
@@ -472,10 +475,12 @@ void MainWindow::mousePressEvent(QMouseEvent *e)
                }
                 else if (nomJoueur== ui->nameBox->currentText())
                {
+                   XpCriticalError->play();
                    QMessageBox::warning(this, "Attention !", "Le suicide ne semble pas etre une bonne stratégie !!!",QMessageBox::Ok);
                }
                else if (!adversaires.adv[adversaires.getByName(ui->nameBox->currentText())].getState(AttackY, AttackX)==2)
               {
+                   XpCriticalError->play();
                   QMessageBox::warning(this, "Attention !", "Vous avez deja attaqué ce joueur a cet endroit",QMessageBox::Ok);
               }
             }
@@ -869,9 +874,11 @@ void MainWindow::on_ButtonDone_clicked()
         break;
 
     case 1:
+        XpCriticalError->play();
         QMessageBox::critical(this, "Erreur", "Des bateaux se superposent", QMessageBox::Ok);
     break;
     case 2:
+        XpCriticalError->play();
         QMessageBox::critical(this, "Erreur", "Tous les bateaux ne sont pas placés", QMessageBox::Ok);
     break;
 }
