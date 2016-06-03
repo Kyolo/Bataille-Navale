@@ -943,7 +943,7 @@ void MainWindow::gameWon(QString name)
     }
     else if (reponseNewGame == QMessageBox::No)
     {
-    MainWindow::RAZIG();
+
     }
     }
 }
@@ -961,7 +961,7 @@ void MainWindow::gameLost(QString name)
            }
            else if (reponseNewGame == QMessageBox::No)
            {
-            MainWindow::RAZIG();
+
            }
     }
 }
